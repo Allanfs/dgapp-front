@@ -1,13 +1,7 @@
 <template>
-  <v-app>
-    <!-- barra superior -->
-    <v-toolbar>
-      <v-toolbar-side-icon></v-toolbar-side-icon>
-      <v-toolbar-title>Dom Gilittu's</v-toolbar-title>
-    </v-toolbar>
-    <!-- TODO sidebar -->
-    
-    <!-- conteudo exibido -->
+  <v-app class="grey lighten-4">
+    <Navbar />
+
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -16,17 +10,15 @@
 </template>
 
 <script>
-import Navigation from './components/Navigation.vue'
+import Navbar from './components/Navbar'
 
 export default {
-  name: 'app',
+  components: { Navbar },
+  name: 'App',
   data () {
     return {
-      drawer: null
+      
     }
   }
 }
 </script>
-
-<style>
-</style>
