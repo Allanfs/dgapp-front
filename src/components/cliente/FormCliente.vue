@@ -25,12 +25,32 @@
             </v-flex>
         </v-layout>
         <v-card flat class="pa-3">
-            <v-layout row wrap>
+            <v-layout row wrap @click="click">
                 <v-flex xs12 md6>
-                    <div class="caption grey--text">Endereço + Número</div>
+                    <div class="caption grey--text">Endereço</div>
+                    <div>Rua Capitão Severino Cesárino da Nóbrega, 176</div>
                 </v-flex>
                 <v-flex xs6 sm4 md2>
-                    
+                    <div class="caption grey--text">Complemento</div>
+                    <div>Apt 102, Ed. Pinheiros</div>
+                </v-flex>
+                <v-flex xs6 sm4 md2>
+                    <div class="caption grey--text">Bairro</div>
+                    <div>Centro</div>
+                </v-flex>
+            </v-layout>
+            <v-layout row wrap>
+                <v-flex xs12 md6>
+                    <div class="caption grey--text">Endereço</div>
+                    <div>Rua Capitão Severino Cesárino da Nóbrega, 176</div>
+                </v-flex>
+                <v-flex xs6 sm4 md2>
+                    <div class="caption grey--text">Complemento</div>
+                    <div>Apt 102, Ed. Pinheiros</div>
+                </v-flex>
+                <v-flex xs6 sm4 md2>
+                    <div class="caption grey--text">Bairro</div>
+                    <div>Centro</div>
                 </v-flex>
             </v-layout>
         </v-card>
@@ -45,6 +65,11 @@ export default {
         return {
             cliente: {
             }
+        }
+    },
+    methods: {
+        click (){
+            console.log('clicou')
         }
     }
 }
