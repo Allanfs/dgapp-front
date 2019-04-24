@@ -14,32 +14,35 @@
       </v-btn>
     </v-toolbar>
 
-    <v-navigation-drawer app v-model="drawer" class="primary">
+    <v-navigation-drawer app v-model="drawer" class="info">
 
       <v-list dense>
 
         <v-list-group>
-           <template slot="activator">
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>Cadastrar</v-list-tile-title>
-                </v-list-tile-content>
-              </v-list-tile>
-            </template>
-            
-            <v-list-tile  v-for="link in links" :key="link.text" router :to="link.route">
-              <!-- icone -->
-              <v-list-tile-action>
-                <v-icon class="white--text">{{link.icon}}</v-icon>
-              </v-list-tile-action>
-              <!-- texto -->
+          <!-- cabeçalho da seção -->
+          <template slot="activator">
+            <v-list-tile>
               <v-list-tile-content>
-                <v-list-tile-title color="red" class="white--text">
-                  {{link.text}}
-                </v-list-tile-title>
+                <v-list-tile-title class="white--text">Cadastrar</v-list-tile-title>
               </v-list-tile-content>
-              
             </v-list-tile>
+          </template>
+          
+          <v-list-tile  v-for="link in links" :key="link.text" router :to="link.route">
+            
+            <!-- icone -->
+            <v-list-tile-action>
+              <v-icon class="white--text">{{link.icon}}</v-icon>
+            </v-list-tile-action>
+            
+            <!-- texto -->
+            <v-list-tile-content>
+              <v-list-tile-title color="red" class="white--text">
+                {{link.text}}
+              </v-list-tile-title>
+            </v-list-tile-content>
+            
+          </v-list-tile>
 
         </v-list-group>
         
