@@ -57,7 +57,7 @@
 export default {
   data() {
     return {
-      drawer: false,
+      drawer: true,
       links: [
         { icon: 'dashboard', text: 'Categoria', route: '/adicionar/categoria'},
         { icon: 'person', text: 'Cliente', route: '/adicionar/cliente'},

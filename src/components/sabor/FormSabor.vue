@@ -1,7 +1,7 @@
 <template>
     <v-form class="px-3">
         <v-text-field v-model="sabor.nome" label="Nome"></v-text-field>
-        <v-text-field v-model="sabor.preco" type="number" label="Preço de Venda"></v-text-field>
+        <v-text-field v-model="sabor.preco" type="number" label="Preço de Venda" prefix="$"></v-text-field>
         <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
 
         <!-- aqui deve haver um v-for para exibir os recheios cadastrados -->
