@@ -1,7 +1,7 @@
 <template>
     <div>
-        <v-container fluid>
-            <v-card hover disabled >
+        <v-container fluid grid-list-md>
+            <v-card  disabled >
                 <v-card-title>
                     <h2>Cadastrar Recheio</h2>
                 </v-card-title>
@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-import FormRecheio from '../sabor/FormSabor.vue'
+import FormRecheio from '../cliente/FormCliente.vue'
 
 export default {
     components: {
