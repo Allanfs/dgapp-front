@@ -1,0 +1,85 @@
+<template>
+    <v-dialog  v-model="dialog" max-width="60%">
+        <v-btn slot="activator" class="info">
+                <v-icon small left>add</v-icon>
+                Adicionar Endereço
+        </v-btn>
+            <v-card>
+                <v-container grid-list-md>
+
+                    <v-card-title>
+                        <h2>Adicionar Endereço</h2>
+                    </v-card-title>
+
+                    <v-card-text>
+                        <v-form >
+                            <v-layout row wrap >
+                                <v-flex xs12 sm10 md5>
+                                    <v-text-field v-model="endereco.logradouro" label="Rua"></v-text-field>
+
+                                </v-flex>
+                                <v-flex xs12 sm2 md3>
+                                    <v-text-field v-model="endereco.numero" label="Número"></v-text-field>
+
+                                </v-flex>
+
+                                <v-flex xs12 sm3 md4>
+                                    <v-text-field v-model="endereco.bairro" label="Bairro" value=""></v-text-field>
+
+                                </v-flex>
+                            </v-layout>
+                        </v-form>
+                    </v-card-text>
+
+                    <v-card-actions>
+                        <v-btn color="blue darken-1" flat @click="salvar" :disabled="camposObrigatorios">Salvar</v-btn>
+                        <v-btn color="blue darken-1" flat @click="dialog = false">Cancelar</v-btn>
+                    </v-card-actions>
+
+                </v-container>
+            </v-card>
+
+    </v-dialog>
+</template>
+<script>
+export default {
+    name: 'form-endereco',
+    data () {
+        return {
+            endereco: {
+                logradouro: '',
+                bairro: 'Centro',
+                numero: '',
+                complemento: '',
+            },
+            dialog: false
+        }
+    },
+    methods: {
+        salvar () {
+            this.dialog = false
+            console.log(this.endereco)
+            let newEndereco = this.endereco
+            this.$emit('inputEndereco', {nome: 'enderecos', payload: newEndereco})
+            this.endereco = {
+                logradouro: '',
+                bairro: 'Centro',
+                numero: '',
+                complemento: '',
+            }
+            // this.$emit('input', this.)
+        }
+        
+    },
+    computed: {
+        camposObrigatorios () {
+            if (this.endereco.logradouro === '') {
+                return true
+            }else{
+                return false
+            }
+        }
+    }
+}
+</script>
+

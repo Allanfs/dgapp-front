@@ -32,33 +32,26 @@
                 <v-card  flat class="pa-3">
                     <v-layout>
                         <v-flex>
-                            <popup 
-                            header="Adicionar Telefone" 
-                            btntexto="Adicionar Telefone" 
-                            icon="add" 
-                            classe="info">
-                                <telefone/>
-                            </popup>
-
-                            <!-- <v-btn  flat class="info" @click="adicionar('telefone')">
-                                <v-icon left small>add</v-icon>
-                                Adicionar Telefone
-                            </v-btn> -->
+                            <telefone @inputTelefone="adicionar"/>
                         </v-flex>
                     </v-layout>
                 </v-card>
 
                 <!-- listagem de telefone-->
-                <v-card flat class="pa-3">
+                <v-card flat class="pa-3"
+                        v-for="(telefone, idc) in cliente.telefones" :key="idc"
+                        >
                     <v-layout row wrap @click="click">
                         <v-flex xs12 md2>
                             <div class="caption grey--text">Número</div>
-                            <div>3235-6050</div>
+                            <div>{{telefone.numero}}</div>
                         </v-flex>
+
                         <v-flex xs6 sm4 md2>
                             <div class="caption grey--text">É whatsapp</div>
-                            <div>Sim</div>
+                            <div>{{telefone.whatsapp}}</div>
                         </v-flex>
+
                     </v-layout>
                     <v-divider></v-divider>
                 </v-card>
@@ -66,37 +59,33 @@
         </v-card>
 
         <v-card>
-            <v-container fluid class="my-5">
+            <v-container fluid class="my-5" >
                 
                 <!-- botão para adicionar -->
                 <v-card  flat class="pa-3">
                     <v-layout>
-                        <v-flex @click="click">
-                            <popup 
-                            header="Adicionar Endereço" 
-                            btntexto="Adicionar Endereço" 
-                            icon="add" 
-                            classe="info">
-                                <endereco/>
-                            </popup>
+                        <v-flex>
+                            <endereco @inputEndereco="adicionar"/>
                         </v-flex>
                     </v-layout>
                 </v-card>
 
                 <!-- listagem de endereço-->
-                <v-card flat class="pa-3">
+                <v-card flat class="pa-3"
+                        v-for="(endereco, idc) in cliente.enderecos" :key="idc"
+                        >
                     <v-layout row wrap @click="click">
                         <v-flex xs12 md6>
                             <div class="caption grey--text">Endereço</div>
-                            <div>Rua Capitão Severino Cesárino da Nóbrega, 176</div>
+                            <div>{{endereco.logradouro}}, {{endereco.numero}}</div>
                         </v-flex>
                         <v-flex xs6 sm4 md2>
                             <div class="caption grey--text">Complemento</div>
-                            <div>Apt 102, Ed. Pinheiros</div>
+                            <div>{{endereco.complemento}}</div>
                         </v-flex>
                         <v-flex xs6 sm4 md2>
                             <div class="caption grey--text">Bairro</div>
-                            <div>Centro</div>
+                            <div>{{endereco.bairro}}</div>
                         </v-flex>
                     </v-layout>
                     <v-divider></v-divider>
@@ -108,21 +97,21 @@
 </template>
 <script>
 import ListarEAdicionarDadoVue from '../utils/ListarEAdicionarDado.vue'
-import PopupVue from '../Popup.vue'
-import FormEnderecoVue from '../endereco/FormEndereco.vue'
-import FormTelefoneVue from '../telefone/FormTelefone.vue'
+import FormEnderecoVue from '../endereco/FormEnderecoPopup.vue'
+import FormTelefoneVue from '../telefone/FormTelefonePopup.vue'
 
 export default {
     name: 'form-cliente',
     components: {
         'listar-add' : ListarEAdicionarDadoVue,
-        'popup': PopupVue,
         'endereco': FormEnderecoVue,
         'telefone': FormTelefoneVue
     },
     data () {
         return {
             cliente: {
+                telefones: [],
+                enderecos: []
             },
             dialog: false
         }
@@ -131,9 +120,17 @@ export default {
         click (){
             
         },
-        adicionar () {
-            // abre pop-up para inserir endereço
-            // adicionar o endereço cadastrado na lista de endereços
+        /**
+         * Obj:
+         * 
+         *  nome: nome da propriedade que receberá o valor
+         * 
+         * 
+         *  payload: valor que será atribuido
+         */
+        adicionar (obj) {
+            this.cliente[obj.nome].push(obj.payload)
+            
         },
         endereco (nome) {
             // aqui ele pode pegar um componente importado
