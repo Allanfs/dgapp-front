@@ -1,4 +1,6 @@
-# todo-ninja
+# DG App UI
+
+Front-end da aplicação DGApp desenvolvida com Vuerify (Vue.js + Material Design)
 
 ## Project setup
 ```
