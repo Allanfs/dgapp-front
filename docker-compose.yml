@@ -9,5 +9,5 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - "http_proxy=http://allan.fernandes:Ee6D22d%40@prxdf.prevnet:3128"
+      - "http_proxy="
     entrypoint: "npm run serve"
