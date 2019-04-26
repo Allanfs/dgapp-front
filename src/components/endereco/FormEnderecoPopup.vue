@@ -33,7 +33,7 @@
 
                     <v-card-actions>
                         <v-btn color="blue darken-1" flat @click="salvar" :disabled="camposObrigatorios">Salvar</v-btn>
-                        <v-btn color="blue darken-1" flat @click="dialog = false">Cancelar</v-btn>
+                        <v-btn color="blue darken-1" flat @click="dialog = !dialog">Cancelar</v-btn>
                     </v-card-actions>
 
                 </v-container>
