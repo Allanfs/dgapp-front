@@ -1,0 +1,17 @@
+{
+	// colocar em ~/.config/CODE/User/snippets
+	"Vuex module template": {
+		"prefix": "vmod",
+		"body": ["const state = {}",
+		"const getters = {}",
+		"const actions = {}",
+		"const mutations = {}",
+		"\nexport default {",
+		"\tstate,",
+		"\tgetters,",
+		"\tactions,",
+		"\tmutations",
+		"};"],
+		"description": "Cria um template para criar module do vuex, contendo state, getters, actions e mutations."
+	}
+}
