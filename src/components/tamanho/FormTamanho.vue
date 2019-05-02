@@ -1,6 +1,5 @@
 <template>
     <v-form class="px-3">
-        <v-container fluid>
         <v-text-field v-model="tamanho.nome" label="Nome"></v-text-field>
             <v-layout row wrap>
 
@@ -17,7 +16,6 @@
         <v-text-field v-model="tamanho.preco" type="number" label="Preço de Venda" prefix="$"></v-text-field>
         <v-checkbox v-model="tamanho.disponivel" label="Disponivel"></v-checkbox>
 
-        </v-container>
     </v-form>
 </template>
 <script>

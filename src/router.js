@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import AddRecheio from './components/recheio/AddRecheio.vue'
+import AddTamanho from './components/tamanho/AddTamanho.vue'
+import AddProduto from './components/produto/AddProduto.vue'
 
 Vue.use(Router)
 
@@ -26,6 +28,16 @@ export default new Router({
       path: '/adicionar/recheio',
       name: 'recheio',
       component: AddRecheio
+    },
+    {
+      path: '/adicionar/tamanho',
+      name: 'tamanho',
+      component: AddTamanho
+    },
+    {
+      path: '/adicionar/produto',
+      name: 'produto',
+      component: AddProduto
     }
   ]
 })
