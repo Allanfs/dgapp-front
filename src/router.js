@@ -4,6 +4,8 @@ import Home from './views/Home.vue'
 import AddRecheio from './components/recheio/AddRecheio.vue'
 import AddTamanho from './components/tamanho/AddTamanho.vue'
 import AddProduto from './components/produto/AddProduto.vue'
+import AddCliente from './components/cliente/AddCliente.vue'
+import AddSabor from './components/sabor/AddSabor.vue'
 
 Vue.use(Router)
 
@@ -38,6 +40,16 @@ export default new Router({
       path: '/adicionar/produto',
       name: 'produto',
       component: AddProduto
+    },
+    {
+      path: '/adicionar/cliente',
+      name: 'cliente',
+      component: AddCliente
+    },
+    {
+      path: '/adicionar/sabor',
+      name: 'sabor',
+      component: AddSabor
     }
   ]
 })

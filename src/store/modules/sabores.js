@@ -48,7 +48,7 @@ const state = {
     ]
 }
 /**
- * Métodos de acesso ao estado
+ * Métodos de acesso ao estado.
  * Análogo a um método getter
  */
 const getters = {
@@ -60,7 +60,7 @@ const getters = {
  */
 const actions = {}
 /**
- * O que difato modifica o estado
+ * O que de fato modifica o estado.
  * Análogo a um método setter
  */
 const mutations = {}
