@@ -60,17 +60,21 @@ export default {
     methods: {
         ...mapMutations(['toggle']),
         salvar () {
-            this.dialog = false
+            
+            // verificar se o id do endereco está settado
+            // se estiver significa que é uma edição de um já existente
+            // se não, cria um novo
+
             console.log(this.endereco)
-            let newEndereco = this.endereco
-            this.$emit('inputEndereco', {nome: 'enderecos', payload: newEndereco})
+            this.dialog = false
+            // let newEndereco = this.endereco
+            // this.$emit('inputEndereco', {nome: 'enderecos', payload: newEndereco})
             this.endereco = {
                 logradouro: '',
                 bairro: 'Centro',
                 numero: '',
                 complemento: '',
             }
-            // this.$emit('input', this.)
         }
     },
     computed: {
@@ -87,12 +91,27 @@ export default {
          */
         dialog: {
             get: function (){
+                this.endereco = this.$store.getters.getItem
                 return this.$store.getters.isAberto
             },
             set: function (novoValor) {
                 this.$store.commit('toggle')
+                /**
+                 *  Identifico qual o valor de state,
+                 * se está falso, anteriormente esteve verdadeiro
+                 * logo, existe algum valor no store de item,
+                 * e é preciso esvazia-lo.
+                 *  Se estou fechando o popup então não deve mais 
+                 * haver nenhum valor exibido nele
+                 */
+                if(this.$store.getters.isAberto === false) {
+                    this.endereco = {}
+                    this.$store.commit('setItem', {})
+                }
             }
         }
+    },
+    created() {
     }
 }
 </script>

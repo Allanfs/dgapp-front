@@ -5,10 +5,12 @@
 */
 
 const state = {
-    aberto: false
+    aberto: false,
+    item: {}
 }
 const getters = {
-    isAberto: state => state.aberto
+    isAberto: state => state.aberto,
+    getItem: state => state.item
 }
 const actions = {}
 const mutations = {
@@ -17,6 +19,12 @@ const mutations = {
      */
     toggle: (state) => {
         state.aberto = !state.aberto
+    },
+    /**
+     * Salva um objeto no state
+     */
+    setItem: (state, objeto) => {
+        state.item = objeto
     }
 }
 

@@ -68,7 +68,6 @@ import FormEnderecoPopupVue from './FormEnderecoPopup.vue'
       'form-endereco': FormEnderecoPopupVue
     },
     data: () => ({
-      dialog: false,
       editedIndex: -1,
       editedItem: {},
       defaultItem: {}
@@ -96,10 +95,24 @@ import FormEnderecoPopupVue from './FormEnderecoPopup.vue'
       },
 
       editItem (item) {
-        console.log(item)
+        /*
+         identificar qual o index que este item possui 
+         no propItens, que é a propriedade recebida
+         em props
+        */
         this.editedIndex = this.propItens.indexOf(item)
+        /*
+          atribuo valor do editedItem
+          este será editado no formulário
+        */
         this.editedItem = Object.assign({}, item)
-        this.dialog = true
+        /*
+          salva o item no state
+        */
+       this.$store.commit('setItem', item)
+        /*
+          exibo o dialogo
+         */
         this.$store.commit('toggle')
       },
 
@@ -109,7 +122,6 @@ import FormEnderecoPopupVue from './FormEnderecoPopup.vue'
       },
 
       close () {
-        this.dialog = false
         setTimeout(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
           this.editedIndex = -1
