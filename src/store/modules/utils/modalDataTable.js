@@ -4,10 +4,21 @@
     table.
 */
 
-const state = {}
-const getters = {}
+const state = {
+    aberto: false
+}
+const getters = {
+    isAberto: state => state.aberto
+}
 const actions = {}
-const mutations = {}
+const mutations = {
+    /**
+     * Altera o estado entre true ou false
+     */
+    toggle: (state) => {
+        state.aberto = !state.aberto
+    }
+}
 
 export default {
     state,

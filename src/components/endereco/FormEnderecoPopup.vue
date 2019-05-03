@@ -2,7 +2,7 @@
     <v-dialog  v-model="dialog" max-width="60%">
         <v-btn slot="activator" class="info">
                 <v-icon small left>add</v-icon>
-                Adicionar Endereço
+                Adicionar Endereço 
         </v-btn>
             <v-card>
                 <v-container grid-list-md>
@@ -42,6 +42,9 @@
     </v-dialog>
 </template>
 <script>
+
+import { mapGetters, mapMutations } from 'vuex'
+
 export default {
     name: 'form-endereco',
     data () {
@@ -51,11 +54,11 @@ export default {
                 bairro: 'Centro',
                 numero: '',
                 complemento: '',
-            },
-            dialog: false
+            }
         }
     },
     methods: {
+        ...mapMutations(['toggle']),
         salvar () {
             this.dialog = false
             console.log(this.endereco)
@@ -69,7 +72,6 @@ export default {
             }
             // this.$emit('input', this.)
         }
-        
     },
     computed: {
         camposObrigatorios () {
@@ -77,6 +79,18 @@ export default {
                 return true
             }else{
                 return false
+            }
+        },
+        /**
+         * Propriedade que define se o dialogo será exibido
+         * ou não
+         */
+        dialog: {
+            get: function (){
+                return this.$store.getters.isAberto
+            },
+            set: function (novoValor) {
+                this.$store.commit('toggle')
             }
         }
     }

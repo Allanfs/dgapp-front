@@ -8,11 +8,9 @@
         vertical
       ></v-divider>
 
-      <!-- <v-spacer></v-spacer> -->
-
       <!-- popup -->
       <slot name="formAdd">
-        <form-endereco  @cancelar="dialog = !dialog"></form-endereco>
+        <form-endereco   ></form-endereco>
       </slot>
 
     </v-toolbar>
@@ -98,9 +96,11 @@ import FormEnderecoPopupVue from './FormEnderecoPopup.vue'
       },
 
       editItem (item) {
+        console.log(item)
         this.editedIndex = this.propItens.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
+        this.$store.commit('toggle')
       },
 
       deleteItem (item) {
