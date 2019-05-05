@@ -49,11 +49,11 @@
 </template>
 
 <script>
-import { itens } from './navbarItens.js'
+import { lista } from './navbarItens.js'
 export default {
   data() {
     return {
-      itens: itens,
+      itens: lista,
       drawer: true
     }
   }

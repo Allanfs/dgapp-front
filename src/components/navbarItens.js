@@ -11,7 +11,7 @@
     ]
   }
 */
-export const itens = [
+export const lista = [
   {
     titulo: 'Cadastrar',
     subitens: [

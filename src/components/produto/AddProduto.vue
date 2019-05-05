@@ -7,7 +7,13 @@
         </v-card-title>
 
         <v-card-text>
-          <form-produto titulo="Produto"></form-produto>
+          <v-form class="px-3">
+            <v-text-field label="Nome" v-model="produto.nome" ></v-text-field>
+            <v-text-field label="Preço de Venda" prefix="$" v-model="produto.precoVenda" type="number" ></v-text-field>
+            <v-text-field label="Preço de Custo" prefix="$" v-model="produto.precoCusto" type="number" ></v-text-field>
+            <v-text-field label="Descrição" v-model="produto.descricao"></v-text-field>
+            <v-checkbox label="Ativo" v-model="produto.ativo"></v-checkbox>
+          </v-form>
         </v-card-text>
 
         <v-card-actions class="pb-3 pl-3">
@@ -19,20 +25,25 @@
   </div>
 </template>
 <script>
-import FormProduto from "./FormProduto.vue";
-
+const modelo = {
+  nome: "",
+  precoVenda: "",
+  precoCusto: "",
+  descricao: "",
+  ativo: true
+}
 export default {
   name: "add-produto",
-  components: {
-    "form-produto": FormProduto
-  },
   data() {
     return {
-      header: []
+      produto: modelo
     };
   },
   methods: {
-    save() {}
+    save () {
+      // fazer chamada ao action do vuex
+      this.produto = modelo;
+    }
   }
 };
 </script>

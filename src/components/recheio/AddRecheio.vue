@@ -7,7 +7,11 @@
         </v-card-title>
 
         <v-card-text>
-          <form-recheio v-model="recheio"></form-recheio>
+          <v-form class="px-3">
+            <v-text-field v-model="recheio.nome" label="Nome"></v-text-field>
+            <v-checkbox v-model="recheio.especial" label="Especial"></v-checkbox>
+            <v-checkbox v-model="recheio.disponivel" label="Disponível"></v-checkbox>
+          </v-form>
         </v-card-text>
 
         <v-card-actions class="pb-3 pl-3">
@@ -19,28 +23,29 @@
   </div>
 </template>
 <script>
-import FormRecheio from './FormRecheio.vue'
 // import recheioDao from '../../store/api/services/recheio.js'
-import recheioDao from '@/store/api/services/recheio.js'
+import recheioDao from "@/store/api/services/recheio.js";
+
+const modelo = {
+  nome: "",
+  especial: false,
+  disponivel: true
+};
 
 export default {
-  name: 'add-recheio',
-  data() {
+  name: "add-recheio",
+  data () {
     return {
-      recheio:{},
-      header: []
+      recheio: modelo
     };
   },
-  components: {
-    "form-recheio": FormRecheio
-  },
   methods: {
-    save() {
-      console.log(this.recheio)
-      recheioDao.salvar(this.recheio)
+    save () {
+      // fazer chamada ao action do vuex
+      recheioDao.salvar(this.recheio);
+      this.recheio = modelo;
     }
   }
-  
 };
 </script>
 
