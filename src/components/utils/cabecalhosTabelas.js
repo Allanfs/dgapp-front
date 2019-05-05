@@ -39,7 +39,9 @@ export const HTELEFONE = [
         text: 'Número',
         align: 'left',
         sortable: false,
-        value: 'numero'
+        value: 'numero',
+        width: "10%"
+
     },
     {
         text: 'Whatsapp',

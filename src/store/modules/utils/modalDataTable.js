@@ -1,3 +1,4 @@
+import * as types from '../mutations.js'
 /*
     State responsável por permitir a comunicação
     entre o dialog e o botão de edição em um data-
@@ -19,10 +20,10 @@ const mutations = {
     /**
      * Altera o estado entre true ou false
      */
-    toggleEndereço: (state) => {
+    [types.TOGGLE_ENDERECO]: (state) => {
         state.enderecoAberto = !state.enderecoAberto
     },
-    toggleTelefone: (state) => {
+    [types.TOGGLE_TELEFONE]: (state) => {
         state.telefoneAberto = !state.telefoneAberto
     },
     /**
