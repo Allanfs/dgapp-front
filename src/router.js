@@ -1,8 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+
 import AddRecheio from './components/recheio/AddRecheio.vue'
+import ListarRecheio from './components/recheio/ListarRecheio.vue'
+
 import AddTamanho from './components/tamanho/AddTamanho.vue'
+import ListarTamanho from './components/tamanho/ListarTamanho.vue'
+
 import AddProduto from './components/produto/AddProduto.vue'
 import AddCliente from './components/cliente/AddCliente.vue'
 import AddSabor from './components/sabor/AddSabor.vue'
@@ -49,7 +54,17 @@ export default new Router({
     {
       path: '/adicionar/sabor',
       name: 'sabor',
-      component: AddSabor
+      component: AddSabor,
+    },
+    {
+      path: '/listar/recheio',
+      name: 'listarSabor',
+      component: ListarRecheio,
+    },
+    {
+      path: '/listar/tamanho',
+      name: 'listarTamanho',
+      component: ListarTamanho,
     }
   ]
 })

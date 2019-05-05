@@ -59,3 +59,26 @@ export const HTELEFONE = [
         width: "10%"
     }
 ]
+export const HRECHEIO = [
+    {
+        text: 'Nome',
+        align: 'left',
+        sortable: false,
+        value: '',
+        width: "10%"
+    },
+    {
+        text: 'Especial',
+        align: 'left',
+        sortable: false,
+        value: '',
+        width: "10%"
+    },
+    {
+        text: 'Ativo',
+        align: 'left',
+        sortable: false,
+        value: '',
+        width: "10%"
+    },
+]

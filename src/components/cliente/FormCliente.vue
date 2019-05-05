@@ -45,7 +45,6 @@
   </v-form>
 </template>
 <script>
-import ListarEAdicionarDadoVue from "../utils/ListarEAdicionarDado.vue";
 import CrudTable from "../utils/CrudTable.vue";
 import FormEnderecoVue from "../endereco/FormEnderecoPopup.vue";
 import FormTelefoneVue from "../telefone/FormTelefonePopup.vue";
@@ -59,7 +58,6 @@ export default {
     this.cabecalhoTelefone = HTELEFONE;
   },
   components: {
-    "listar-add": ListarEAdicionarDadoVue,
     "crud-table": CrudTable,
     endereco: FormEnderecoVue,
     telefone: FormTelefoneVue
