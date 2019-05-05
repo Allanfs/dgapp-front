@@ -14,6 +14,7 @@
       </v-flex>
     </v-layout>
 
+    <!-- redes sociais -->
     <v-layout row wrap>
       <v-flex xs12 sm2>
         <v-text-field v-model="cliente.instagram" label="Instagram" prefix="@"></v-text-field>
@@ -24,76 +25,37 @@
     </v-layout>
 
     <v-card>
-      <v-container fluid class="my-5">
-        <!-- botão para adicionar -->
-        <v-card flat class="pa-3">
-          <v-layout>
-            <v-flex>
-              <telefone @inputTelefone="adicionar"/>
-            </v-flex>
-          </v-layout>
-        </v-card>
-
-        <!-- listagem de telefone-->
-        <v-card flat class="pa-3" v-for="(telefone, idc) in cliente.telefones" :key="idc">
-          <v-layout row wrap @click="click">
-            <v-flex xs12 md2>
-              <div class="caption grey--text">Número</div>
-              <div>{{telefone.numero}}</div>
-            </v-flex>
-
-            <v-flex xs6 sm4 md2>
-              <div class="caption grey--text">É whatsapp</div>
-              <div>{{telefone.whatsapp}}</div>
-            </v-flex>
-          </v-layout>
-          <v-divider></v-divider>
-        </v-card>
-      </v-container>
+      <!-- aqui será inserido os telefones que este cliente possui cadastrado -->
+      <crud-table titulo="Telefone" :headers="cabecalhoTelefone" :propItens="[{}]">
+        <template v-slot:formAdd>
+          <telefone></telefone>
+        </template>
+      </crud-table>
     </v-card>
 
     <v-card>
-      <v-container fluid class="my-5">
-        <!-- botão para adicionar -->
-        <v-card flat class="pa-3">
-          <v-layout>
-            <v-flex>
-              <endereco @inputEndereco="adicionar"/>
-            </v-flex>
-          </v-layout>
-        </v-card>
-
-        <!-- listagem de endereço-->
-        <v-card flat class="pa-3" v-for="(endereco, idc) in cliente.enderecos" :key="idc">
-          <v-layout row wrap @click="click">
-            <v-flex xs12 md6>
-              <div class="caption grey--text">Endereço</div>
-              <div>{{endereco.logradouro}}, {{endereco.numero}}</div>
-            </v-flex>
-            <v-flex xs6 sm4 md2>
-              <div class="caption grey--text">Complemento</div>
-              <div>{{endereco.complemento}}</div>
-            </v-flex>
-            <v-flex xs6 sm4 md2>
-              <div class="caption grey--text">Bairro</div>
-              <div>{{endereco.bairro}}</div>
-            </v-flex>
-          </v-layout>
-          <v-divider></v-divider>
-        </v-card>
-      </v-container>
+      <!-- aqui será inserido os endereços que este cliente possui cadastrado -->
+      <crud-table titulo="Endereço" :headers="cabecalhoEndereco" :propItens="[{}]"></crud-table>
     </v-card>
   </v-form>
 </template>
 <script>
 import ListarEAdicionarDadoVue from "../utils/ListarEAdicionarDado.vue";
+import CrudTable from "../utils/CrudTable.vue";
 import FormEnderecoVue from "../endereco/FormEnderecoPopup.vue";
 import FormTelefoneVue from "../telefone/FormTelefonePopup.vue";
 
+import { HENDERECO, HTELEFONE } from "../utils/cabecalhosTabelas.js";
+
 export default {
   name: "form-cliente",
+  created() {
+    this.cabecalhoEndereco = HENDERECO
+    this.cabecalhoTelefone = HTELEFONE
+  },
   components: {
     "listar-add": ListarEAdicionarDadoVue,
+    "crud-table": CrudTable,
     endereco: FormEnderecoVue,
     telefone: FormTelefoneVue
   },

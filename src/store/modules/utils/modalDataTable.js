@@ -5,11 +5,13 @@
 */
 
 const state = {
-    aberto: false,
+    enderecoAberto: false,
+    telefoneAberto: false,
     item: {}
 }
 const getters = {
-    isAberto: state => state.aberto,
+    isEnderecoAberto: state => state.enderecoAberto,
+    isTelefoneAberto: state => state.telefoneAberto,
     getItem: state => state.item
 }
 const actions = {}
@@ -17,8 +19,11 @@ const mutations = {
     /**
      * Altera o estado entre true ou false
      */
-    toggle: (state) => {
-        state.aberto = !state.aberto
+    toggleEndereço: (state) => {
+        state.enderecoAberto = !state.enderecoAberto
+    },
+    toggleTelefone: (state) => {
+        state.telefoneAberto = !state.telefoneAberto
     },
     /**
      * Salva um objeto no state

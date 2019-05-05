@@ -33,7 +33,6 @@
   </v-dialog>
 </template>
 <script>
-import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "form-endereco",
@@ -48,7 +47,6 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["toggle"]),
     salvar() {
       // verificar se o id do endereco está settado
       // se estiver significa que é uma edição de um já existente
@@ -81,10 +79,10 @@ export default {
     dialog: {
       get: function() {
         this.endereco = this.$store.getters.getItem;
-        return this.$store.getters.isAberto;
+        return this.$store.getters.isEnderecoAberto;
       },
       set: function(novoValor) {
-        this.$store.commit("toggle");
+        this.$store.commit("toggleEndereço");
         /**
          *  Identifico qual o valor de state,
          * se está falso, anteriormente esteve verdadeiro
@@ -93,7 +91,7 @@ export default {
          *  Se estou fechando o popup então não deve mais
          * haver nenhum valor exibido nele
          */
-        if (this.$store.getters.isAberto === false) {
+        if (this.$store.getters.isEnderecoAberto === false) {
           this.endereco = {};
           this.$store.commit("setItem", {});
         }

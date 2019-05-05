@@ -7,11 +7,7 @@
         </v-card-title>
 
         <v-card-text>
-          <form-recheio
-            titulo="Endereço"
-            :propItens="[{logradouro: 'Rua', numero: '13', complemento: 'vazio', bairro: 'centro'}]"
-            :headers="header"
-          ></form-recheio>
+          <form-recheio></form-recheio>
         </v-card-text>
 
         <v-card-actions class="pb-3 pl-3">
@@ -23,9 +19,7 @@
   </div>
 </template>
 <script>
-// import FormRecheio from '../cliente/FormCliente.vue'
-import FormRecheio from "../endereco/CrudEndereco.vue";
-import { HENDERECO } from "../utils/cabecalhosTabelas.js";
+import FormRecheio from './FormRecheio.vue'
 
 export default {
   data() {
@@ -35,9 +29,6 @@ export default {
   },
   components: {
     "form-recheio": FormRecheio
-  },
-  created() {
-    this.header = HENDERECO;
   }
 };
 </script>
