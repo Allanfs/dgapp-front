@@ -11,7 +11,7 @@
         </v-card-text>
 
         <v-card-actions class="pb-3 pl-3">
-          <v-btn class="success">Salvar</v-btn>
+          <v-btn class="success" @click="save">Salvar</v-btn>
           <v-btn class="error">Cancelar</v-btn>
         </v-card-actions>
       </v-card>
@@ -19,17 +19,20 @@
   </div>
 </template>
 <script>
-// import FormProduto from '../cliente/FormCliente.vue'
 import FormProduto from "./FormProduto.vue";
 
 export default {
+  name: "add-produto",
+  components: {
+    "form-produto": FormProduto
+  },
   data() {
     return {
       header: []
     };
   },
-  components: {
-    "form-produto": FormProduto
+  methods: {
+    save() {}
   }
 };
 </script>

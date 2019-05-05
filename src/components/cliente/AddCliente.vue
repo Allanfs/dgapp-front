@@ -11,7 +11,7 @@
         </v-card-text>
 
         <v-card-actions class="pb-3 pl-3">
-          <v-btn class="success">Salvar</v-btn>
+          <v-btn class="success" @click="save">Salvar</v-btn>
           <v-btn class="error">Cancelar</v-btn>
         </v-card-actions>
       </v-card>
@@ -22,6 +22,7 @@
 import FormCliente from "./FormCliente.vue";
 
 export default {
+  name: 'add-cliente',
   data() {
     return {
       header: []
@@ -29,6 +30,9 @@ export default {
   },
   components: {
     "form-cliente": FormCliente
+  },
+  methods: {
+    save() {}
   }
 };
 </script>

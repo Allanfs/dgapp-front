@@ -2,25 +2,30 @@
   <v-form>
     <v-layout>
       <v-flex xs12 sm6>
-        <v-text-field v-model="cliente.nome" label="Nome"></v-text-field>
+        <v-text-field @input="inputando" v-model="cliente.nome" label="Nome"></v-text-field>
       </v-flex>
       <!-- <v-spacer></v-spacer> -->
       <v-flex xs12 sm2>
-        <v-text-field v-model="cliente.cpf" label="CPF" mask="###.###.###-##"></v-text-field>
+        <v-text-field @input="inputando" v-model="cliente.cpf" label="CPF" mask="###.###.###-##"></v-text-field>
       </v-flex>
       <!-- <v-spacer></v-spacer> -->
       <v-flex xs12 sm2>
-        <v-text-field v-model="cliente.nascimento" type="date" label="Data Nascimento"></v-text-field>
+        <v-text-field
+          @input="inputando"
+          v-model="cliente.nascimento"
+          type="date"
+          label="Data Nascimento"
+        ></v-text-field>
       </v-flex>
     </v-layout>
 
     <!-- redes sociais -->
     <v-layout row wrap>
       <v-flex xs12 sm2>
-        <v-text-field v-model="cliente.instagram" label="Instagram" prefix="@"></v-text-field>
+        <v-text-field @input="inputando" v-model="cliente.instagram" label="Instagram" prefix="@"></v-text-field>
       </v-flex>
       <v-flex xs12 sm2>
-        <v-text-field v-model="cliente.facebook" label="Facebook" prefix="/"></v-text-field>
+        <v-text-field @input="inputando" v-model="cliente.facebook" label="Facebook" prefix="/"></v-text-field>
       </v-flex>
     </v-layout>
 
@@ -50,8 +55,8 @@ import { HENDERECO, HTELEFONE } from "../utils/cabecalhosTabelas.js";
 export default {
   name: "form-cliente",
   created() {
-    this.cabecalhoEndereco = HENDERECO
-    this.cabecalhoTelefone = HTELEFONE
+    this.cabecalhoEndereco = HENDERECO;
+    this.cabecalhoTelefone = HTELEFONE;
   },
   components: {
     "listar-add": ListarEAdicionarDadoVue,
@@ -69,12 +74,17 @@ export default {
     };
   },
   methods: {
-    click() {},
+    /**
+     * Informa ao componente pai que houve input
+     * e envia o objeto como payload
+     */
+    inputando() {
+      this.$emit("input", this.cliente);
+    },
     /**
      * Obj:
      *
      *  nome: nome da propriedade que receberá o valor
-     *
      *
      *  payload: valor que será atribuido
      */

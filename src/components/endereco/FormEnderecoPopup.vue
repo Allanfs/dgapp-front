@@ -25,7 +25,7 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="blue darken-1" flat @click="salvar" :disabled="camposObrigatorios">Salvar</v-btn>
+          <v-btn color="blue darken-1" flat @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
           <v-btn color="blue darken-1" flat @click="dialog = !dialog">Cancelar</v-btn>
         </v-card-actions>
       </v-container>
@@ -47,7 +47,7 @@ export default {
     };
   },
   methods: {
-    salvar() {
+    save() {
       // verificar se o id do endereco está settado
       // se estiver significa que é uma edição de um já existente
       // se não, cria um novo
