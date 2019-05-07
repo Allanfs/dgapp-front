@@ -33,8 +33,6 @@
   </div>
 </template>
 <script>
-// import recheioDao from '../../store/api/services/recheio.js'
-import recheioDao from "@/store/api/services/recheio.js";
 import {REMOVER_ALERTA} from '@/store/modules/mutations'
 
 const modelo = {

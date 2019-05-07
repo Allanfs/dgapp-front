@@ -1,6 +1,13 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
+      <v-alert
+        :value="mensagemAlerta.visivel"
+        @input="mensagemAlerta =false"
+        :type="mensagemAlerta.type"
+        dismissible
+        transition="fade-transition"
+      >{{mensagemAlerta.mensagem}}</v-alert>
       <v-card disabled>
         <v-card-title>
            <v-toolbar color="primary" dark flat>
@@ -36,6 +43,9 @@
   </div>
 </template>
 <script>
+
+import {REMOVER_ALERTA} from '@/store/modules/mutations'
+
 const modelo = {
   nome: "",
   preco: "",
@@ -47,9 +57,19 @@ export default {
       tamanho: modelo
     };
   },
+  computed: {
+    mensagemAlerta: {
+      get: function () {
+        return this.$store.getters.getAlerta
+      },
+      set: function (value) { 
+        this.$store.commit(REMOVER_ALERTA, null, {root: true})
+      }
+    }
+  },
   methods: {
     save () {
-      // fazer chamada ao action do vuex
+      this.$store.dispatch('tamanho/salvar', this.tamanho)
       this.tamanho = modelo;
     }
   }

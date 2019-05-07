@@ -1,6 +1,13 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
+      <v-alert
+        :value="mensagemAlerta.visivel"
+        @input="mensagemAlerta =false"
+        :type="mensagemAlerta.type"
+        dismissible
+        transition="fade-transition"
+      >{{mensagemAlerta.mensagem}}</v-alert>
       <v-card disabled>
         <v-card-title>
           <v-toolbar color="primary" dark flat>
@@ -33,8 +40,21 @@ export default {
   components: {
     "form-sabor": FormSabor
   },
+  computed: {
+    mensagemAlerta: {
+      get: function () {
+        return this.$store.getters.getAlerta
+      },
+      set: function (value) { 
+        this.$store.commit(REMOVER_ALERTA, null, {root: true})
+      }
+    }
+  },
   methods: {
-    save() {}
+    save() {
+      this.$store.dispatch('sabor/salvar', this.sabor)
+      this.sabor = {}
+    }
   }
 };
 </script>
