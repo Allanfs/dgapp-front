@@ -8,32 +8,41 @@ import { ALERTAR, REMOVER_ALERTA } from '@/store/modules/mutations.js'
 const state = {
   alerta: {
     type: "",
-    mensagem: ""
-  },
-  visivel: false
-};
-const getters = {
-  getAlerta(state) {
-    return state.alerta;
-  },
-  visivel (state) {
-    return state.visivel
+    mensagem: "",
+    visivel: false
   }
 };
+
+const getters = {
+  getAlerta: state => state.alerta
+};
+
 const actions = {};
+
 const mutations = {
-  [ALERTAR] (state, payload) {
-    console.log("Mutation " + ALERTAR);
-    state.alerta = payload;
+  [ALERTAR](state, payload) {
+
+    if (payload === null) {
+
+      state.alerta = { 
+        type: 'success', 
+        visivel: true, 
+        mensagem: 'Salvo com sucesso' 
+      }
+
+    }else{
+
+      state.alerta = payload;
+      
+    }
 
   },
-  [REMOVER_ALERTA] () {
-    console.log("Mutation " + REMOVER_ALERTA);
+  [REMOVER_ALERTA]() {
     state.alerta = {
       type: "",
-      mensagem: ""
+      mensagem: "",
+      visivel: false
     };
-    state.visivel = false
   }
 };
 

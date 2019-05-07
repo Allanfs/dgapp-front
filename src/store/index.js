@@ -3,15 +3,20 @@ import Vue from 'vue'
 
 // imports do projeto
 import recheio from './modules/recheio.js'
+import sabor from './modules/sabor.js'
+import tamanho from './modules/tamanho.js'
+import produto from './modules/produto.js'
+
 import modalDataTable from './modules/utils/modalDataTable'
 import globalMutations from './globalMutations'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+
+    // utilizando namespacing para tratar modulos independentes
+    // https://vuex.vuejs.org/ptbr/guide/modules.html#namespacing
     modules: {
-        // utilizando namespacing para tratar modulos independentes
-        // https://vuex.vuejs.org/ptbr/guide/modules.html#namespacing
         recheio: {
             namespaced: true,
             state: recheio.state,
@@ -19,6 +24,28 @@ export default new Vuex.Store({
             getters: recheio.getters,       // -> getters['recheio/...']
             mutations: recheio.mutations    // -> commit('recheio/...')
         },
+        sabor: {
+            namespaced: true,
+            state: sabor.state,
+            actions: sabor.actions,
+            getters: sabor.getters,
+            mutations: sabor.mutations
+        },
+        tamanho: {
+            namespaced: true,
+            state: tamanho.state,
+            actions: tamanho.actions,
+            getters: tamanho.getters,
+            mutations: tamanho.mutations
+        },
+        produto: {
+            namespaced: true,
+            state: produto.state,
+            actions: produto.actions,
+            getters: produto.getters,
+            mutations: produto.mutations
+        },
+        
         modalDataTable,
         globalMutations
     },
