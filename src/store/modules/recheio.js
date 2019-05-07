@@ -1,13 +1,10 @@
-import vuex from 'vuex'
 import recheioDao from "../../store/api/services/recheio.js";
-import { geralMutations, ALERTAR } from './mutations'
-
-
+import { ALERTAR } from './mutations'
 
 const state = {}
-const getters = {
 
-}
+const getters = {}
+
 const actions = {
   salvar(state, recheio, getters, rootGetters) {
     // recheioDao.salvar(recheio).then(response => {
@@ -34,10 +31,8 @@ const actions = {
     // mutations[ALERTAR]({type: 'success', visivel: true, mensagem: 'oi'})
   }
 }
-const mutations = {
-  // ...geralMutations.mutations
 
-}
+const mutations = {}
 
 export default {
   state,

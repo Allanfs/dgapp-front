@@ -2,9 +2,9 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 
 // imports do projeto
-import modalDataTable from './modules/utils/modalDataTable'
 import recheio from './modules/recheio.js'
-import geralMutation from './modules/mutations.js'
+import modalDataTable from './modules/utils/modalDataTable'
+import globalMutations from './globalMutations'
 
 Vue.use(Vuex)
 
@@ -20,7 +20,7 @@ export default new Vuex.Store({
             mutations: recheio.mutations    // -> commit('recheio/...')
         },
         modalDataTable,
-        geralMutation
+        globalMutations
     },
     strict: true
 })
