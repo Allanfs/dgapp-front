@@ -26,11 +26,6 @@ export const lista = [
         route: '/adicionar/cliente'
       },
       {
-        icon: 'add_location',
-        text: 'Endereco',
-        route: '/adicionar/endereco'
-      },
-      {
         icon: 'playlist_add',
         text: 'Pedido',
         route: '/adicionar/pedido'
@@ -64,11 +59,6 @@ export const lista = [
         icon: 'hdr_strong',
         text: 'Tamanho',
         route: '/adicionar/tamanho'
-      },
-      {
-        icon: 'phone',
-        text: 'Telefone',
-        route: '/adicionar/telefone'
       }
     ]
   },
