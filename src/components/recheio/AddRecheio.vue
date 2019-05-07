@@ -1,9 +1,20 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
+      <!-- <v-alert
+        :value="mensagemAlerta"
+        @input="mensagemAlerta =false"
+        type="success"
+        dismissible
+        transition="fade-transition"
+      >Salvo com sucesso!</v-alert> -->
+
       <v-card disabled>
         <v-card-title>
-          <h2>Cadastrar Recheio</h2>
+          <v-toolbar color="primary" dark flat>
+            <v-toolbar-title>Cadastrar Recheio {{mensagemAlerta}}</v-toolbar-title>
+          </v-toolbar>
+          <!-- <h2>Cadastrar Recheio</h2> -->
         </v-card-title>
 
         <v-card-text>
@@ -15,8 +26,8 @@
         </v-card-text>
 
         <v-card-actions class="pb-3 pl-3">
-          <v-btn class="success" @click="save">Salvar</v-btn>
-          <v-btn class="error">Cancelar</v-btn>
+          <v-btn class="success" block @click="save">Salvar</v-btn>
+          <v-btn class="error" block>Cancelar</v-btn>
         </v-card-actions>
       </v-card>
     </v-container>
@@ -25,6 +36,7 @@
 <script>
 // import recheioDao from '../../store/api/services/recheio.js'
 import recheioDao from "@/store/api/services/recheio.js";
+import {REMOVER_ALERTA} from '@/store/modules/mutations'
 
 const modelo = {
   nome: "",
@@ -36,14 +48,22 @@ export default {
   name: "add-recheio",
   data () {
     return {
-      recheio: modelo
+      recheio: modelo,
     };
+  },
+  computed: {
+    mensagemAlerta () {
+      console.log(this.$store.getters)
+      return this.$store.getters.getAlerta
+    }
   },
   methods: {
     save () {
       // fazer chamada ao action do vuex
-      recheioDao.salvar(this.recheio);
+      // recheioDao.salvar(this.recheio);
+      this.$store.dispatch('salvar', this.recheio)
       this.recheio = modelo;
+      this.alerta=true
     }
   }
 };

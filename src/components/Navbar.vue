@@ -16,7 +16,7 @@
 
     <v-navigation-drawer app v-model="drawer" class="info">
 
-      <v-list dense v-for="item in itens" :key="item">
+      <v-list dense v-for="item in itens">
 
         <v-list-group>
 
@@ -28,7 +28,7 @@
             </v-list-tile>
           </template>
 
-          <v-list-tile v-for="subitem in item.subitens" :key="subitem" router :to="subitem.route">
+          <v-list-tile v-for="subitem in item.subitens" router :to="subitem.route">
             
             <v-list-tile-action>
               <v-icon class="white--text">{{subitem.icon}}</v-icon>
