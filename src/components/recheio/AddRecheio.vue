@@ -14,7 +14,6 @@
           <v-toolbar color="primary" dark flat>
             <v-toolbar-title>Cadastrar Recheio</v-toolbar-title>
           </v-toolbar>
-          <!-- <h2>Cadastrar Recheio</h2> -->
         </v-card-title>
 
         <v-card-text>
