@@ -1,18 +1,18 @@
 <template>
   <div>
     <v-container fluid grid-list-md>
-      <!-- <v-alert
-        :value="mensagemAlerta"
+      <v-alert
+        :value="mensagemAlerta.visivel"
         @input="mensagemAlerta =false"
-        type="success"
+        :type="mensagemAlerta.type"
         dismissible
         transition="fade-transition"
-      >Salvo com sucesso!</v-alert> -->
+      >{{mensagemAlerta.mensagem}}</v-alert>
 
       <v-card disabled>
         <v-card-title>
           <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Cadastrar Recheio {{mensagemAlerta}}</v-toolbar-title>
+            <v-toolbar-title>Cadastrar Recheio</v-toolbar-title>
           </v-toolbar>
           <!-- <h2>Cadastrar Recheio</h2> -->
         </v-card-title>
@@ -52,18 +52,19 @@ export default {
     };
   },
   computed: {
-    mensagemAlerta () {
-      console.log(this.$store.getters)
-      return this.$store.getters.getAlerta
+    mensagemAlerta: {
+      get: function () {
+        return this.$store.getters.getAlerta
+      },
+      set: function (value) { 
+        this.$store.commit(REMOVER_ALERTA, null, {root: true})
+      }
     }
   },
   methods: {
     save () {
-      // fazer chamada ao action do vuex
-      // recheioDao.salvar(this.recheio);
-      this.$store.dispatch('salvar', this.recheio)
+      this.$store.dispatch('recheio/salvar', this.recheio)
       this.recheio = modelo;
-      this.alerta=true
     }
   }
 };

@@ -1,6 +1,3 @@
-import { mapMutations } from 'vuex'
-import recheioDao from "../../store/api/services/recheio.js";
-import { mGetters, ALERTAR } from './mutations'
 /**
  * Guarda a informação entre estados
  */
@@ -64,39 +61,19 @@ const state = {
  */
 const getters = {
   allSabores: state => state.sabores,
-  ...geralMutations.getters
 };
 /**
  * Métodos usados para realizar
  * requisições externas.
  */
 const actions = {
-  salvar(state, recheio) {
-    // recheioDao.salvar(recheio).then(response => {
-    //   mutations.alertar({
-    //     type: "success",
-    //     mensagem: "Salvo com sucesso!",
-    //     visivel: true
-    //   });
-    // }).catch( error => {
-
-    //   mutations.alertar({
-    //     type: "error",
-    //     mensagem: "Não foi possível realizar a operação",
-    //     visivel: true
-    //   });
-      
-    // });
-    commit('')
-    mutations[ALERTAR]({type: 'success', visivel: true, mensagem: 'oi'})
-  }
+  
 };
 /**
  * O que de fato modifica o estado.
  * Análogo a um método setter
  */
 const mutations = {
-  // ...geralMutations.mutations
 }
 
 

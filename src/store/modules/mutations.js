@@ -21,9 +21,10 @@ const getters = {
 };
 const actions = {};
 const mutations = {
-  [ALERTAR] (obj) {
+  [ALERTAR] (state, payload) {
     console.log("Mutation " + ALERTAR);
-    state.alerta = obj;
+    state.alerta = payload;
+
   },
   [REMOVER_ALERTA] () {
     console.log("Mutation " + REMOVER_ALERTA);
@@ -35,7 +36,7 @@ const mutations = {
   }
 };
 
-export const geralMutations = {
+export default {
   state,
   getters,
   actions,
