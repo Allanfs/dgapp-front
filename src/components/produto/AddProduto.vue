@@ -40,6 +40,8 @@
   </div>
 </template>
 <script>
+import {REMOVER_ALERTA} from '@/store/modules/mutations'
+
 const modelo = {
   nome: "",
   precoVenda: "",
@@ -69,6 +71,9 @@ export default {
       this.$store.dispatch('produto/salvar', this.produto)
       this.produto = modelo;
     }
+  },
+  destroyed() {
+    this.$store.commit(REMOVER_ALERTA, null, {root: true})
   }
 };
 </script>

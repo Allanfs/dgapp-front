@@ -63,6 +63,9 @@ export default {
       this.$store.dispatch('recheio/salvar', this.recheio)
       this.recheio = modelo;
     }
+  },
+  destroyed() {
+    this.$store.commit(REMOVER_ALERTA, null, {root: true})
   }
 };
 </script>

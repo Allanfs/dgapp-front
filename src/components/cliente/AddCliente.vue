@@ -27,12 +27,12 @@
 </template>
 <script>
 import FormCliente from "./FormCliente.vue";
+import {REMOVER_ALERTA} from '@/store/modules/mutations'
 
 export default {
   name: 'add-cliente',
   data() {
     return {
-      header: []
     };
   },
   components: {
@@ -54,6 +54,9 @@ export default {
       this.cliente = {}
 
     }
+  },
+  destroyed() {
+    this.$store.commit(REMOVER_ALERTA, null, {root: true})
   }
 };
 </script>

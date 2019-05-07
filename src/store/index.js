@@ -6,6 +6,7 @@ import recheio from './modules/recheio.js'
 import sabor from './modules/sabor.js'
 import tamanho from './modules/tamanho.js'
 import produto from './modules/produto.js'
+import cliente from './modules/cliente.js'
 
 import modalDataTable from './modules/utils/modalDataTable'
 import globalMutations from './globalMutations'
@@ -45,7 +46,13 @@ export default new Vuex.Store({
             getters: produto.getters,
             mutations: produto.mutations
         },
-        
+        cliente: {
+            namespaced: true,
+            state: cliente.state,
+            actions: cliente.actions,
+            getters: cliente.getters,
+            mutations: cliente.mutations
+        },
         modalDataTable,
         globalMutations
     },

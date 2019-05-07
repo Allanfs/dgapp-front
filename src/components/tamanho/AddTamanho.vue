@@ -72,6 +72,9 @@ export default {
       this.$store.dispatch('tamanho/salvar', this.tamanho)
       this.tamanho = modelo;
     }
+  },
+  destroyed() {
+    this.$store.commit(REMOVER_ALERTA, null, {root: true})
   }
 };
 </script>

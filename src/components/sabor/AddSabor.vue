@@ -29,12 +29,12 @@
 </template>
 <script>
 import FormSabor from "./FormSabor.vue";
+import {REMOVER_ALERTA} from '@/store/modules/mutations'
 
 export default {
   name: "add-sabor",
   data() {
     return {
-      header: []
     };
   },
   components: {
@@ -55,6 +55,9 @@ export default {
       this.$store.dispatch('sabor/salvar', this.sabor)
       this.sabor = {}
     }
+  },
+  destroyed() {
+    this.$store.commit(REMOVER_ALERTA, null, {root: true})
   }
 };
 </script>
