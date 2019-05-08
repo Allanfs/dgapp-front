@@ -55,7 +55,6 @@
   </div>
 </template>
 <script>
-import FormSabor from "./FormSabor.vue";
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 
 export default {
@@ -69,11 +68,6 @@ export default {
         recheiosSelecionados: []
       }
     };
-  },
-  components: {
-
-    "form-sabor": FormSabor
-    
   },
   computed: {
 
