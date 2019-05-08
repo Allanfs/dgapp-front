@@ -12,36 +12,42 @@
         </v-card-title>
         <v-card-text>
           <v-form>
-            <v-layout wrap>
+            <v-layout row wrap>
               <v-flex xs12 sm2 md1>
                 <v-text-field v-model="telefone.ddd" type="number" label="DDD"></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md3>
                 <v-text-field v-model="telefone.numero" label="Número*" mask="#####-####" required></v-text-field>
               </v-flex>
-            </v-layout>
-            <v-layout>
+              <v-flex xs12 sm5 md4>
+                <v-text-field v-model="telefone.observacao" label="Observação"></v-text-field>
+              </v-flex>
               <v-flex>
                 <v-checkbox v-model="telefone.whatsapp" label="É Whatsapp"></v-checkbox>
               </v-flex>
             </v-layout>
-            <v-layout>
-              <v-flex xs12 sm5 md4>
-                <v-text-field v-model="telefone.observacao" label="Observação"></v-text-field>
-              </v-flex>
-            </v-layout>
+            
           </v-form>
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="blue darken-1" flat @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
-          <v-btn color="blue darken-1" flat @click="dialog = !dialog">Cancelar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="dialog = !dialog">Cancelar</v-btn>
         </v-card-actions>
       </v-container>
     </v-card>
   </v-dialog>
 </template>
 <script>
+import { EDITAR_ITEM } from "@/store/modules/mutations";
+
+const modelo = {
+        ddd: "83",
+        numero: "",
+        whatsapp: false,
+        observacao: ""
+      };
+
 export default {
   name: "form-telefone-popup",
 
@@ -60,12 +66,7 @@ export default {
       this.dialog = false;
       console.log("FormTelefonePopup precisa ");
       let newTelefone = this.telefone;
-      this.telefone = {
-        ddd: "83",
-        numero: "",
-        whatsapp: false,
-        observacao: ""
-      };
+      this.telefone = modelo
     }
   },
   computed: {
@@ -93,7 +94,7 @@ export default {
          */
         if (this.$store.getters.isTelefoneAberto === false) {
           this.telefone = {};
-          this.$store.commit("setItem", {});
+          this.$store.commit(EDITAR_ITEM, {});
         }
       }
     }

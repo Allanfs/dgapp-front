@@ -33,6 +33,7 @@
 
 <script>
 import FormEnderecoPopupVue from "../endereco/FormEnderecoPopup.vue";
+import { EDITAR_ITEM } from "@/store/modules/mutations";
 export default {
   name: "crud-table",
   props: {
@@ -94,7 +95,7 @@ export default {
       /*
             salva o item no state
         */
-      this.$store.commit("setItem", item);
+      this.$store.commit(EDITAR_ITEM, item);
       /*
             exibo o dialogo
             */

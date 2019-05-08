@@ -9,5 +9,6 @@ export const REMOVER_ALERTA = "removerAlerta"
 
 export const TOGGLE_ENDERECO = "toggleEndereço";
 export const TOGGLE_TELEFONE = "toggleTelefone";
+export const EDITAR_ITEM     = "editItem";
 
 

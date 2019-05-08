@@ -1,4 +1,4 @@
-import {TOGGLE_TELEFONE, TOGGLE_ENDERECO} from '@/store/modules/mutations.js'
+import {TOGGLE_TELEFONE, TOGGLE_ENDERECO, EDITAR_ITEM} from '@/store/modules/mutations.js'
 /*
     State responsável por permitir a comunicação
     entre o dialog e o botão de edição em um data-
@@ -29,7 +29,7 @@ const mutations = {
     /**
      * Salva um objeto no state
      */
-    setItem: (state, objeto) => {
+    [EDITAR_ITEM]: (state, objeto) => {
         state.item = objeto
     }
 }

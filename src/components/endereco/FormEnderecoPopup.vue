@@ -21,18 +21,23 @@
               <v-flex xs12 sm3 md4>
                 <v-text-field v-model="endereco.bairro" label="Bairro" value></v-text-field>
               </v-flex>
+              <v-flex xs12 sm5 md12>
+                <v-text-field v-model="endereco.complemento" label="Complemento"></v-text-field>
+              </v-flex>
             </v-layout>
+            
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="blue darken-1" flat @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
-          <v-btn color="blue darken-1" flat @click="dialog = !dialog">Cancelar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="dialog = !dialog">Cancelar</v-btn>
         </v-card-actions>
       </v-container>
     </v-card>
   </v-dialog>
 </template>
 <script>
+import { EDITAR_ITEM } from "@/store/modules/mutations";
 
 export default {
   name: "form-endereco",
@@ -74,7 +79,7 @@ export default {
     },
     /**
      * Propriedade que define se o dialogo será exibido
-     * ou não
+     * ou não.
      */
     dialog: {
       get: function() {
@@ -93,7 +98,7 @@ export default {
          */
         if (this.$store.getters.isEnderecoAberto === false) {
           this.endereco = {};
-          this.$store.commit("setItem", {});
+          this.$store.commit(EDITAR_ITEM, {});
         }
       }
     }
