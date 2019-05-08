@@ -8,11 +8,23 @@
 
     <v-card-text>
       <v-form class="px-3">
-        <v-text-field v-model="sabor.nome" label="Nome"></v-text-field>
-        <v-text-field v-model="sabor.preco" type="number" label="Preço de Venda" prefix="$"></v-text-field>
+        <v-layout>
+          <v-flex>
+            <v-text-field v-model="sabor.nome" label="Nome"></v-text-field>
+
+          </v-flex>
+          <v-flex>
         <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
 
-        <v-card flat>
+          </v-flex>
+        </v-layout>
+
+        <v-card>
+          <v-card-title>
+            <div>
+              <h3 class="headline mb-0">Recheios</h3>
+            </div>
+          </v-card-title>
           <v-card-text>
             <v-container fluid>
               <v-layout row wrap>
@@ -29,6 +41,27 @@
                 </v-flex>
               </v-layout>
             </v-container>
+          </v-card-text>
+        </v-card>
+
+        <v-card>
+          <v-card-title>
+            <div>
+              <h3 class="headline mb-0">Preços</h3>
+            </div>
+          </v-card-title>
+          <v-card-text>
+            <!-- <v-container > -->
+            <v-layout row wrap v-for="tamanho in sabor.tamanhos" :key="tamanho">
+              <v-flex xs12 md2>
+                <v-text-field v-model="tamanho.nome" label="Tamanho" disabled></v-text-field>
+              </v-flex>
+              <v-flex xs12 md1>
+                <v-text-field type="number" label="Valor" v-model="tamanho.preco"></v-text-field>
+              </v-flex>
+            </v-layout>
+            <v-divider></v-divider>
+            <!-- </v-container> -->
           </v-card-text>
         </v-card>
       </v-form>
@@ -51,11 +84,16 @@ export default {
         nome: "",
         preco: "",
         especial: true,
-        recheiosSelecionados: []
+        recheiosSelecionados: [],
+        tamanhos: []
       }
     };
   },
   created() {
+    // obter apenas os nomes dos tamanhos.
+    // os preços apenas o Sabor irá settar
+    // tem uma sintaxe que faz isso muito bem, não lembro qual
+    this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
     // obtendo o parametro presente na rota
     // console.log(this.$route.params["id"]);
     // consultar o dado na API

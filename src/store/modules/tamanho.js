@@ -6,6 +6,38 @@ import { ALERTAR } from './mutations'
  * Guarda a informação entre estados
  */
 const state = {
+  tamanhos: [
+    {
+      nome: "Pequena",
+      preco: "10",
+      centimetros: 10,
+      disponivel: true
+    },
+    {
+      nome: "Média",
+      preco: "10",
+      centimetros: 15,
+      disponivel: true
+    },
+    {
+      nome: "Grande",
+      preco: "20",
+      centimetros: 20,
+      disponivel: true
+    },
+    {
+      nome: "Gigante",
+      preco: "25",
+      centimetros: 25,
+      disponivel: true
+    },
+    {
+      nome: "Extra-Gigante",
+      preco: "30",
+      centimetros: 30,
+      disponivel: false
+    }
+  ]
 };
 
 /**
@@ -13,6 +45,7 @@ const state = {
  * Análogo a um método getter
  */
 const getters = {
+  allTamanhos: (state) => state.tamanhos
 };
 
 /**

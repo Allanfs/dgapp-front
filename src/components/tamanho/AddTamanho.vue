@@ -41,6 +41,7 @@ import { REMOVER_ALERTA } from "@/store/modules/mutations";
 const modelo = {
   nome: "",
   preco: "",
+  centimetros: null,
   disponivel: true
 };
 export default {
