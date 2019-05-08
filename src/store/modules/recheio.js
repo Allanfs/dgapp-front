@@ -1,9 +1,74 @@
 import recheioDao from "../../store/api/services/recheio.js";
 import { ALERTAR } from './mutations'
 
-const state = {}
+const state = {
+  recheios: [
+    {
+      nome: 'Molho',
+      especial: false,
+      disponivel: true,
+      categoria: 'Básico'
+    },
+    {
+      nome: 'Mussarela',
+      especial: false,
+      disponivel: true,
+      categoria: 'Básico'
+    },
+    {
+      nome: 'Presunto',
+      especial: false,
+      disponivel: false,
+      categoria: 'Básico'
+    },
+    {
+      nome: 'Frango',
+      especial: false,
+      disponivel: true,
+      categoria: 'Básico'
+    },
+    {
+      nome: 'Camarão',
+      especial: true,
+      disponivel: false,
+      categoria: 'Especial'
+    },
+    {
+      nome: 'Peito de Peru',
+      especial: true,
+      disponivel: true,
+      categoria: 'Especial'
+    },
+    {
+      nome: 'Peperonni',
+      especial: true,
+      disponivel: true,
+      categoria: 'Especial'
+    },
+    {
+      nome: 'Chocolate Cremoso',
+      especial: false,
+      disponivel: true,
+      categoria: 'Doce'
+    },
+    {
+      nome: 'Chocolate Branco',
+      especial: false,
+      disponivel: true,
+      categoria: 'Doce'
+    },
+    {
+      nome: 'Coco ralado',
+      especial: false,
+      disponivel: true,
+      categoria: 'Doce'
+    }
+  ]
+}
 
-const getters = {}
+const getters = {
+  allRecheios: (state) => state.recheios
+}
 
 const actions = {
 
