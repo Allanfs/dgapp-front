@@ -17,13 +17,16 @@
 </template>
 
 <script>
+import { REMOVER_ALERTA } from "@/store/modules/mutations";
 export default {
-  mensagemAlerta: {
-    get: function() {
-      return this.$store.getters.getAlerta;
-    },
-    set: function(value) {
-      this.$store.commit(REMOVER_ALERTA, null, { root: true });
+  computed: {
+    mensagemAlerta: {
+      get: function() {
+        return this.$store.getters.getAlerta;
+      },
+      set: function(value) {
+        this.$store.commit(REMOVER_ALERTA, null, { root: true });
+      }
     }
   }
 };
