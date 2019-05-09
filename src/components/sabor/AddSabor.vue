@@ -11,20 +11,17 @@
         <v-layout>
           <v-flex>
             <v-text-field v-model="sabor.nome" label="Nome"></v-text-field>
-
           </v-flex>
           <v-flex>
-          <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
-
+            <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
           </v-flex>
         </v-layout>
 
-        </v-card> -->
-          <DataTableSelecionavel
+        <DataTableSelecionavel
           :headers="headers"
           :recheio="dado"
           v-model="sabor.recheiosSelecionados"
-          ></DataTableSelecionavel>
+        ></DataTableSelecionavel>
 
         <v-card>
           <v-card-title>
@@ -58,7 +55,7 @@
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 
-import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue"
+import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
   name: "add-sabor",
   components: {
@@ -92,8 +89,8 @@ export default {
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
     },
-    dado () {
-      return this.$store.getters['recheio/allRecheios']
+    dado() {
+      return this.$store.getters["recheio/allRecheios"];
     }
   },
   methods: {
