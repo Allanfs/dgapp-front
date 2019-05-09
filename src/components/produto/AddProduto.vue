@@ -29,6 +29,12 @@
         </v-layout>
         <v-text-field label="Descrição" v-model="produto.descricao"></v-text-field>
         <v-checkbox label="Ativo" v-model="produto.ativo"></v-checkbox>
+        <v-select
+          :items="categorias"
+          item-text="nome"
+          label="Categoria"
+          v-model="produto.categoriaProduto"
+        ></v-select>
       </v-form>
     </v-card-text>
 
@@ -46,13 +52,20 @@ const modelo = {
   precoVenda: "",
   precoCusto: "",
   descricao: "",
+  categoriaProduto: '',
   ativo: true
 };
 export default {
   name: "add-produto",
+  created() {
+    this.$store.getters['categoria/categoriasCadastradas']().then( (response) => {
+      this.categorias = response.data
+    })
+  },
   data() {
     return {
-      produto: modelo
+      produto: modelo,
+      categorias: []
     };
   },
   methods: {
