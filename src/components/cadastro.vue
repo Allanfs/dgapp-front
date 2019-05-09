@@ -11,7 +11,7 @@
 
       <!-- aqui será exibido o conteudo de cadastro,
       talvez até de listagem também-->
-      <router-view></router-view>
+      <router-view :param="parametroId"></router-view>
     </v-container>
   </div>
 </template>
@@ -20,6 +20,9 @@
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 export default {
   computed: {
+    parametroId() {
+      return this.$route.params["id"]
+    },
     mensagemAlerta: {
       get: function() {
         return this.$store.getters.getAlerta;

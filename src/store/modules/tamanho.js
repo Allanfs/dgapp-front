@@ -45,7 +45,10 @@ const state = {
  * Análogo a um método getter
  */
 const getters = {
-  allTamanhos: (state) => state.tamanhos
+  allTamanhos: (state) => state.tamanhos,
+  tamanhosCadastrados: function (state) {
+    return tamanhoDao.listar
+  }
 };
 
 /**

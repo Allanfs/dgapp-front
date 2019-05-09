@@ -66,6 +66,7 @@ const state = {
  */
 const getters = {
   allSabores: state => state.sabores,
+  saboresCadastrados: state => saborDao.listar
 };
 
 /**

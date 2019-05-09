@@ -20,7 +20,7 @@
         <DataTableSelecionavel
           :headers="headers"
           :recheio="dado"
-          v-model="sabor.recheiosSelecionados"
+          v-model="sabor.recheios"
         ></DataTableSelecionavel>
 
         <v-card>
@@ -58,17 +58,19 @@ import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
   name: "add-sabor",
+  props: ['param'],
   components: {
     DataTableSelecionavel
   },
   data() {
     return {
       headers: HSABOR,
+      dado: [],
       sabor: {
         nome: "",
         preco: "",
         especial: true,
-        recheiosSelecionados: [],
+        recheios: [],
         tamanhos: []
       }
     };
@@ -77,7 +79,17 @@ export default {
     // obter apenas os nomes dos tamanhos.
     // os preços apenas o Sabor irá settar
     // tem uma sintaxe que faz isso muito bem, não lembro qual
-    this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
+    // this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
+    // console.log(this.param)
+    this.$store.getters["recheio/recheiosCadastrados"]().then( (response) => {
+      this.dado = response.data
+    }).catch( error => {
+      console.log(error.error)
+    })
+    this.$store.getters["tamanho/tamanhosCadastrados"]().then( response => {
+      this.sabor.tamanhos = response.data
+    })
+
     // obtendo o parametro presente na rota
     // console.log(this.$route.params["id"]);
     // consultar o dado na API
@@ -88,9 +100,6 @@ export default {
     },
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
-    },
-    dado() {
-      return this.$store.getters["recheio/allRecheios"];
     }
   },
   methods: {

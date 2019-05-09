@@ -16,7 +16,7 @@
 
           <v-flex xs12 md6>
             <v-text-field
-              v-model="tamanho.fatias"
+              v-model="tamanho.numeroFatias"
               type="number"
               label="Número de Fatias"
               suffix="fatias"
@@ -38,22 +38,16 @@
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 
-const modelo = {
-  nome: "",
-  preco: "",
-  centimetros: null,
-  disponivel: true
-};
 export default {
   data() {
     return {
-      tamanho: modelo
+      tamanho: {}
     };
   },
   methods: {
     save() {
       this.$store.dispatch("tamanho/salvar", this.tamanho);
-      this.tamanho = modelo;
+      this.tamanho = {};
     }
   }
 };

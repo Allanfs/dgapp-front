@@ -67,7 +67,10 @@ const state = {
 }
 
 const getters = {
-  allRecheios: (state) => state.recheios
+  allRecheios: (state) => state.recheios,
+  recheiosCadastrados: function (state) {
+    return recheioDao.listar
+  }
 }
 
 const actions = {

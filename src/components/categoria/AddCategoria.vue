@@ -2,15 +2,13 @@
   <v-card disabled>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Recheio</v-toolbar-title>
+        <v-toolbar-title>Cadastrar Categoria</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
     <v-card-text>
       <v-form class="px-3">
-        <v-text-field v-model="recheio.nome" label="Nome"></v-text-field>
-        <v-checkbox v-model="recheio.especial" label="Especial"></v-checkbox>
-        <v-checkbox v-model="recheio.disponivel" label="Disponível"></v-checkbox>
+        <v-text-field v-model="categoria.nome" label="Nome"></v-text-field>
       </v-form>
     </v-card-text>
 
@@ -24,24 +22,15 @@
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 
 export default {
-  name: "add-recheio",
   data() {
     return {
-      recheio: {
-        nome: "",
-        especial: false,
-        disponivel: true
-      }
+      categoria: {}
     };
   },
   methods: {
     save() {
-      this.$store.dispatch("recheio/salvar", this.recheio);
-      this.recheio = {
-        nome: "",
-        especial: false,
-        disponivel: true
-      };
+      this.$store.dispatch("categoria/salvar", this.categoria);
+      this.categoria = {};
     }
   }
 };

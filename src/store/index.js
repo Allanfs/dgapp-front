@@ -7,6 +7,7 @@ import sabor from './modules/sabor.js'
 import tamanho from './modules/tamanho.js'
 import produto from './modules/produto.js'
 import cliente from './modules/cliente.js'
+import categoria from './modules/categoria.js'
 
 import modalDataTable from './modules/utils/modalDataTable'
 import globalMutations from './globalMutations'
@@ -52,6 +53,13 @@ export default new Vuex.Store({
             actions: cliente.actions,
             getters: cliente.getters,
             mutations: cliente.mutations
+        },
+        categoria: {
+            namespaced: true,
+            state: categoria.state,
+            actions: categoria.actions,
+            getters: categoria.getters,
+            mutations: categoria.mutations
         },
         modalDataTable,
         globalMutations

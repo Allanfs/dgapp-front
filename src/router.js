@@ -12,6 +12,9 @@ import AddProduto from "./components/produto/AddProduto.vue";
 import AddCliente from "./components/cliente/AddCliente.vue";
 import AddSabor from "./components/sabor/AddSabor.vue";
 
+import AddCategoria from "./components/categoria/AddCategoria.vue";
+
+
 import Cadastro from "@/components/cadastro.vue"
 Vue.use(Router);
 
@@ -24,6 +27,11 @@ export default new Router({
       name: "adicionar",
       component: Cadastro,
       children: [
+        {
+          name: "Cadastro Categoria",
+          path: "categoria",
+          component:AddCategoria
+        },
         {
           name: "Cadastrar Recheio",
           path: "recheio",
