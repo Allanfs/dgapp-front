@@ -14,35 +14,17 @@
 
           </v-flex>
           <v-flex>
-        <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
+          <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
 
           </v-flex>
         </v-layout>
 
-        <v-card>
-          <v-card-title>
-            <div>
-              <h3 class="headline mb-0">Recheios</h3>
-            </div>
-          </v-card-title>
-          <v-card-text>
-            <v-container fluid>
-              <v-layout row wrap>
-                <v-flex xs12 sm6 md4 v-for="categoria in categorias">
-                  <h4>{{categoria}}</h4>
-                  <span v-for="recheio in todosRecheios.filter( x => x.categoria === categoria)">
-                    <v-checkbox
-                      :disabled="!recheio.disponivel"
-                      v-model="sabor.recheiosSelecionados"
-                      :label="recheio.nome"
-                      :value="recheio.nome"
-                    ></v-checkbox>
-                  </span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-        </v-card>
+        </v-card> -->
+          <DataTableSelecionavel
+          :headers="headers"
+          :recheio="dado"
+          v-model="sabor.recheiosSelecionados"
+          ></DataTableSelecionavel>
 
         <v-card>
           <v-card-title>
@@ -51,8 +33,7 @@
             </div>
           </v-card-title>
           <v-card-text>
-            <!-- <v-container > -->
-            <v-layout row wrap v-for="tamanho in sabor.tamanhos" :key="tamanho">
+            <v-layout row wrap v-for="tamanho in sabor.tamanhos" :key="tamanho.nome">
               <v-flex xs12 md2>
                 <v-text-field v-model="tamanho.nome" label="Tamanho" disabled></v-text-field>
               </v-flex>
@@ -75,11 +56,17 @@
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 
+import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue"
 export default {
   name: "add-sabor",
+  components: {
+    DataTableSelecionavel
+  },
   data() {
     return {
+      headers: HSABOR,
       sabor: {
         nome: "",
         preco: "",
@@ -104,6 +91,9 @@ export default {
     },
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
+    },
+    dado () {
+      return this.$store.getters['recheio/allRecheios']
     }
   },
   methods: {

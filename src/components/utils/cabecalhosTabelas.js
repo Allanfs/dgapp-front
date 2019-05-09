@@ -82,3 +82,20 @@ export const HRECHEIO = [
         width: "10%"
     },
 ]
+
+export const HSABOR = [
+    {
+        text: 'Nome',
+        align: 'center',
+        sortable: true,
+        value: 'nome',
+        width: "90%"
+    },
+    {
+        text: 'Especial',
+        align: 'center',
+        sortable: true,
+        value: 'especial',
+        width: "10%"
+    }
+]
