@@ -1,28 +1,25 @@
 # DG App UI
 
-Front-end da aplicação DGApp desenvolvida com Vuerify (Vue.js + Material Design)
+Front-end da aplicação DGApp desenvolvida com [Vuerify](https://vuetifyjs.com/pt-BR) ([Vue.js](https://vuejs.org/) + [Material Design](https://material.io/))
 
-## Project setup
-```
-npm install
-```
+A aplicação atende ao requisito de prover uma interface visual baseada na web para o back-end da aplicação [neste link](https://github.com/Allanfs/dgapp). Permitindo realizar operações de cadastro, consulta, exclusão e atualização das entidades:
+* Tamanho
+* Recheio
+* Sabor
+* Cliente
+* Endereço
+* Telefone
+* Produto
+* Pedido
+* Categoria
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Ambiente
+**VueJs** - Desenvolvimento da aplicação
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**Vuex** - Gerenciamento de estado dos objetos na aplicação
 
-### Run your tests
-```
-npm run test
-```
+**Vue Router** - Gerenciamento de rotas e páginas acessáveis na aplicação
 
-### Lints and fixes files
-```
-npm run lint
-```
+**Axios** - Cliente HTTP baseado em Promise para navegador e node.js
+
+**Vuetify** - framework que integra o Material ao Vue
