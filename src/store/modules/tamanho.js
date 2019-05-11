@@ -51,6 +51,9 @@ const getters = {
   }
 };
 
+function ehVazio (valor) {
+  return (!valor || valor.trim() === "")
+}
 /**
  * Métodos usados para realizar
  * requisições externas.

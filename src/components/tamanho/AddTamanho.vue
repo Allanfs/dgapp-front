@@ -8,15 +8,15 @@
 
     <v-card-text>
       <v-form class="px-3">
-        <v-text-field v-model="tamanho.nome" label="Nome"></v-text-field>
+        <v-text-field v-model.trim="tamanho.nome" label="Nome" required ></v-text-field>
         <v-layout row wrap>
           <v-flex xs12 md6>
-            <v-text-field v-model="tamanho.centimetros" label="Centiímetros" suffix="cm"></v-text-field>
+            <v-text-field v-model.trim="tamanho.centimetros" label="Centiímetros" suffix="cm" required ></v-text-field>
           </v-flex>
 
           <v-flex xs12 md6>
             <v-text-field
-              v-model="tamanho.numeroFatias"
+              v-model.trim="tamanho.numeroFatias"
               type="number"
               label="Número de Fatias"
               suffix="fatias"
@@ -24,7 +24,7 @@
           </v-flex>
         </v-layout>
 
-        <v-text-field v-model="tamanho.preco" type="number" label="Preço de Venda" prefix="$"></v-text-field>
+        <v-text-field v-model.trim="tamanho.preco" type="number" label="Preço de Venda" prefix="$" required ></v-text-field>
         <v-checkbox v-model="tamanho.disponivel" label="Disponivel"></v-checkbox>
       </v-form>
     </v-card-text>

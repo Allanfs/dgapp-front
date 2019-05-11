@@ -2,6 +2,8 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 
+import AddPedido from "./components/pedido/AddPedido.vue";
+
 import AddRecheio from "./components/recheio/AddRecheio.vue";
 import ListarRecheio from "./components/recheio/ListarRecheio.vue";
 
@@ -27,6 +29,11 @@ export default new Router({
       name: "adicionar",
       component: Cadastro,
       children: [
+        {
+          name: "Cadastro Pedido",
+          path: "pedido",
+          component:AddPedido
+        },
         {
           name: "Cadastro Categoria",
           path: "categoria",

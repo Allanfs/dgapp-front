@@ -31,6 +31,17 @@ export default {
         this.$store.commit(REMOVER_ALERTA, null, { root: true });
       }
     }
-  }
+  },
+  watch:{
+    /**
+     * a cada mudança do $route
+     * o alerta é removido
+     */
+    $route (to, from){
+      if (this.mensagemAlerta.visivel) {
+        this.$store.commit(REMOVER_ALERTA, null, { root: true });
+      }
+    }
+} 
 };
 </script>
