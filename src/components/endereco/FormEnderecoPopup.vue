@@ -1,6 +1,6 @@
 <template>
   <!-- OBJETIVO: modal para cadastro de endereço -->
-  <v-dialog v-model="dialog" max-width="60%">
+  <v-dialog v-model="dialogo" max-width="60%">
     <v-btn slot="activator" class="info">
       <v-icon small left>add</v-icon>Adicionar Endereço
     </v-btn>
@@ -25,12 +25,17 @@
                 <v-text-field v-model="endereco.complemento" label="Complemento"></v-text-field>
               </v-flex>
             </v-layout>
-            
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="blue darken-1" flat block @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
-          <v-btn color="blue darken-1" flat block @click="dialog = !dialog">Cancelar</v-btn>
+          <v-btn
+            color="blue darken-1"
+            flat
+            block
+            @click="save"
+            :disabled="camposObrigatorios"
+          >Salvar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="dialogo = !dialogo">Cancelar</v-btn>
         </v-card-actions>
       </v-container>
     </v-card>
@@ -43,6 +48,7 @@ export default {
   name: "form-endereco",
   data() {
     return {
+      dialogo: false,
       endereco: {
         logradouro: "",
         bairro: "Centro",
@@ -57,10 +63,8 @@ export default {
       // se estiver significa que é uma edição de um já existente
       // se não, cria um novo
 
-      console.log(this.endereco);
-      this.dialog = false;
-      // let newEndereco = this.endereco
-      // this.$emit('inputEndereco', {nome: 'enderecos', payload: newEndereco})
+      this.dialogo = false;
+      this.$store.commit("cliente/incluirEndereco", this.endereco);
       this.endereco = {
         logradouro: "",
         bairro: "Centro",
@@ -76,34 +80,8 @@ export default {
       } else {
         return false;
       }
-    },
-    /**
-     * Propriedade que define se o dialogo será exibido
-     * ou não.
-     */
-    dialog: {
-      get: function() {
-        this.endereco = this.$store.getters.getItem;
-        return this.$store.getters.isEnderecoAberto;
-      },
-      set: function(novoValor) {
-        this.$store.commit("toggleEndereço");
-        /**
-         *  Identifico qual o valor de state,
-         * se está falso, anteriormente esteve verdadeiro
-         * logo, existe algum valor no store de item,
-         * e é preciso esvazia-lo.
-         *  Se estou fechando o popup então não deve mais
-         * haver nenhum valor exibido nele
-         */
-        if (this.$store.getters.isEnderecoAberto === false) {
-          this.endereco = {};
-          this.$store.commit(EDITAR_ITEM, {});
-        }
-      }
     }
-  },
-  created() {}
+  }
 };
 </script>
 

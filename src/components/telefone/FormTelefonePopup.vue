@@ -1,6 +1,6 @@
 <template>
   <!-- OBJETIVO: modal para cadastro de telefone -->
-  <v-dialog v-model="dialog" max-width="60%">
+  <v-dialog v-model="dialogo" max-width="60%">
     <v-btn slot="activator" class="info">
       <v-icon small left>add</v-icon>Adicionar Telefone
     </v-btn>
@@ -14,7 +14,7 @@
           <v-form>
             <v-layout row wrap>
               <v-flex xs12 sm2 md1>
-                <v-text-field v-model="telefone.ddd" type="number" label="DDD"></v-text-field>
+                <v-text-field v-model="telefone.ddd" type="number" label="DDD" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md3>
                 <v-text-field v-model="telefone.numero" label="Número*" mask="#####-####" required></v-text-field>
@@ -31,8 +31,8 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-btn color="blue darken-1" flat block @click="save" :disabled="camposObrigatorios">Salvar</v-btn>
-          <v-btn color="blue darken-1" flat block @click="dialog = !dialog">Cancelar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="save">Salvar</v-btn>
+          <v-btn color="blue darken-1" flat block @click="dialogo = !dialogo">Cancelar</v-btn>
         </v-card-actions>
       </v-container>
     </v-card>
@@ -41,18 +41,12 @@
 <script>
 import { EDITAR_ITEM } from "@/store/modules/mutations";
 
-const modelo = {
-        ddd: "83",
-        numero: "",
-        whatsapp: false,
-        observacao: ""
-      };
-
 export default {
   name: "form-telefone-popup",
 
   data() {
     return {
+      dialogo: false,
       telefone: {
         ddd: "83",
         numero: "",
@@ -63,10 +57,15 @@ export default {
   },
   methods: {
     save() {
-      this.dialog = false;
-      console.log("FormTelefonePopup precisa ");
-      let newTelefone = this.telefone;
-      this.telefone = modelo
+      this.dialogo=false;
+      this.$store.commit('cliente/incluirTelefone', this.telefone)
+      this.telefone = {
+        ddd: "83",
+        numero: "",
+        whatsapp: false,
+        observacao: ""
+      }
+      // console.log('valor no state',this.$store.getters["cliente/getTelefonesCliente"])
     }
   },
   computed: {
@@ -75,27 +74,6 @@ export default {
         return true;
       } else {
         return false;
-      }
-    },
-    dialog: {
-      get: function() {
-        this.telefone = this.$store.getters.getItem;
-        return this.$store.getters.isTelefoneAberto;
-      },
-      set: function(novoValor) {
-        this.$store.commit("toggleTelefone");
-        /**
-         *  Identifico qual o valor de state,
-         * se está falso, anteriormente esteve verdadeiro
-         * logo, existe algum valor no store de item,
-         * e é preciso esvazia-lo.
-         *  Se estou fechando o popup então não deve mais
-         * haver nenhum valor exibido nele
-         */
-        if (this.$store.getters.isTelefoneAberto === false) {
-          this.telefone = {};
-          this.$store.commit(EDITAR_ITEM, {});
-        }
       }
     }
   }
