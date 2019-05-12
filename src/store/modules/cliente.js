@@ -5,13 +5,19 @@ import { ALERTAR } from './mutations'
 /**
  * Guarda a informação entre estados
  */
-const state = {};
+const state = {
+  telefonesCliente: [],
+  enderecosCliente: []
+};
 
 /**
  * Métodos de acesso ao estado.
  * Análogo a um método getter
  */
-const getters = {};
+const getters = {
+  getTelefonesCliente: (state) => state.telefonesCliente,
+  getEnderecosCliente: (state) => state.enderecosCliente
+};
 
 /**
  * Métodos usados para realizar
@@ -50,7 +56,16 @@ const actions = {
  * O que de fato modifica o estado.
  * Análogo a um método setter
  */
-const mutations = {}
+const mutations = {
+  incluirTelefone(state, valor) {
+    state.telefonesCliente.push(valor)
+    
+  },
+  incluirEndereco(state, valor) {
+    state.enderecosCliente.push(valor)
+    
+  }
+}
 
 export default {
   state,

@@ -14,49 +14,41 @@ export const HENDERECO = [
     {
         text: 'Complemento',
         sortable: false,
-        value: 'numero'
+        value: 'complemento'
     },
     {
         text: 'Bairro',
         sortable: false,
         value: 'bairro'
-    },
-    {
-        text: 'Actions',
-        sortable: false
     }
 ]
 export const HTELEFONE = [
     {
         text: 'DDD',
         align: 'left',
-        sortable: false,
+        sortable: true,
         value: 'ddd',
-        width: "10%"
 
     },
     {
         text: 'Número',
         align: 'left',
-        sortable: false,
+        sortable: true,
         value: 'numero',
-        width: "10%"
 
     },
     {
         text: 'Whatsapp',
         align: 'left',
-        sortable: false,
-        value: 'ehWhatsapp',
-        width: "10%"
+        sortable: true,
+        value: 'whatsapp',
 
     },
     {
-        text: 'Ativo',
+        text: 'Observação',
         align: 'left',
         sortable: false,
-        value: 'ativo',
-        width: "10%"
+        value: 'observacao',
     }
 ]
 export const HRECHEIO = [

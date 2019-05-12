@@ -47,18 +47,22 @@
               </v-flex>
             </v-layout>
 
-            <v-card>
+            <v-card flat>
               <!-- aqui será inserido os telefones que este cliente possui cadastrado -->
-              <crud-table titulo="Telefone" :headers="cabecalhoTelefone" :propItens="[{}]">
+              <crud-table titulo="Telefone" :headers="cabecalhoTelefone" :propItens="telefonesCadastradosCliente">
                 <template v-slot:formAdd>
                   <telefone></telefone>
                 </template>
               </crud-table>
             </v-card>
 
-            <v-card>
+            <v-card flat>
               <!-- aqui será inserido os endereços que este cliente possui cadastrado -->
-              <crud-table titulo="Endereço" :headers="cabecalhoEndereco" :propItens="[{}]"></crud-table>
+              <crud-table titulo="Endereço" :headers="cabecalhoEndereco" :propItens="enderecosCadastradosCliente">
+                <template v-slot:formAdd>
+                  <endereco></endereco>
+                </template>
+              </crud-table>
             </v-card>
           </v-form>
         </v-card-text>
@@ -71,7 +75,6 @@
 </template>
 <script>
 
-// import FormCliente from "./FormCliente.vue";
 import CrudTable from "../utils/CrudTable.vue";
 import FormEnderecoVue from "../endereco/FormEnderecoPopup.vue";
 import FormTelefoneVue from "../telefone/FormTelefonePopup.vue";
@@ -84,9 +87,17 @@ export default {
   created() {
     this.cabecalhoEndereco = HENDERECO;
     this.cabecalhoTelefone = HTELEFONE;
-
+    this.cliente.telefones.push(this.$store.getters['cliente/getTelefonesCliente'])
     // obter valores cadastrados deste cliente
     // se for cliente novo(não posssui id), então não busca nada
+  },
+  computed: {
+    telefonesCadastradosCliente () {
+      return this.$store.getters['cliente/getTelefonesCliente']
+    },
+    enderecosCadastradosCliente () {
+      return this.$store.getters['cliente/getEnderecosCliente']
+    }
   },
   components: {
     "crud-table": CrudTable,
