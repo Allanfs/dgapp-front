@@ -36,6 +36,12 @@ const actions = {
 
     })
 
+  },
+
+  buscarCliente (state, valor) {
+    if (valor.tipo === 'cpf')  clienteDao.buscarPorCpf(valor.dado)
+    if (valor.tipo === 'telefone')  clienteDao.buscarPorTelefone(valor.dado)
+
   }
 
 };

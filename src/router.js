@@ -11,6 +11,7 @@ import AddTamanho from "./components/tamanho/AddTamanho.vue";
 import ListarTamanho from "./components/tamanho/ListarTamanho.vue";
 
 import AddProduto from "./components/produto/AddProduto.vue";
+import ConsultarCliente from "./components/cliente/ConsultarCliente.vue";
 import AddCliente from "./components/cliente/AddCliente.vue";
 import AddSabor from "./components/sabor/AddSabor.vue";
 
@@ -96,6 +97,11 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/About.vue")
+    },
+    {
+      path: "/consultar/cliente",
+      name: "search",
+      component: ConsultarCliente
     }
   ]
 });
