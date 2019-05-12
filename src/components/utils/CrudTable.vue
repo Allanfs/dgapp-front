@@ -8,15 +8,20 @@
 
       <!-- popup/modal -->
       <slot name="formAdd">
-        <form-endereco></form-endereco>
+        <!-- <form-endereco></form-endereco> -->
       </slot>
     </v-toolbar>
 
     <!-- aqui é informado os cabeçalhos que a tabela possuirá -->
     <v-data-table :headers="headers" :items="propItens" class="elevation-1">
+
       <!-- aqui exibe apenas os dados -->
       <template #items="props">
-        <td v-for="campo in props.item" :key="campo">{{ campo }}</td>
+        <td v-for="kbc in headers" >
+          {{props.item[kbc.value]}}
+
+        </td>
+
         <td class="justify-left layout">
           <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
           <v-icon small @click="deleteItem(props.item)">delete</v-icon>
@@ -25,7 +30,7 @@
 
       <!-- caso não exista nenhum dado na tabela, isso será exibido: -->
       <template #no-data>
-        <v-alert :value="true" color="info" icon="warning">Nenhum Endereço Cadastrado</v-alert>
+        <v-alert :value="true" color="info" icon="warning">Nenhum dado cadastrado</v-alert>
       </template>
     </v-data-table>
   </div>
