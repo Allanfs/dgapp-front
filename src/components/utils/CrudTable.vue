@@ -22,9 +22,9 @@
 
         </td>
 
-        <td class="justify-left layout">
-          <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
-          <v-icon small @click="deleteItem(props.item)">delete</v-icon>
+        <td class="justify-left layout" v-show="editavel || deletavel">
+          <v-icon small class="mr-2" @click="editItem(props.item)" v-show="editavel">edit</v-icon>
+          <v-icon small @click="deleteItem(props.item)" v-show="deletavel">delete</v-icon>
         </td>
       </template>
 
@@ -53,6 +53,14 @@ export default {
     propItens: {
       type: Array,
       required: true
+    },
+    deletavel: {
+      type: Boolean,
+      required: false
+    },
+    editavel: {
+      type: Boolean,
+      required: false
     }
   },
   components: {
