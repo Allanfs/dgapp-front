@@ -1,4 +1,7 @@
+import {DIALOG} from './mutations'
+
 const state = {
+    dialogo: false,
     enderecos: [
         {
             logradouro: "Avenida Dois",
@@ -22,10 +25,15 @@ const state = {
     ]
 }
 const getters = {
-    allEnderecos: state => state.enderecos
+    allEnderecos: state => state.enderecos,
+    getDialogoState: state => state.dialogo
 }
 const actions = {}
-const mutations = {}
+const mutations = {
+    [DIALOG](state) {
+        state.dialogo = !state.dialogo
+    }
+}
 
 export default {
     state,

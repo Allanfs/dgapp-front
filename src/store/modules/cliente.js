@@ -44,9 +44,9 @@ const actions = {
 
   },
 
-  buscarCliente (state, valor) {
-    if (valor.tipo === 'cpf')  clienteDao.buscarPorCpf(valor.dado)
-    if (valor.tipo === 'telefone')  clienteDao.buscarPorTelefone(valor.dado)
+  buscarCliente (state, { dado, tipo }) {
+    if (tipo === 'cpf')  clienteDao.buscarPorCpf(dado)
+    if (tipo === 'telefone')  clienteDao.buscarPorTelefone(dado)
 
   }
 

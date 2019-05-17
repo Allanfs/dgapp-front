@@ -49,7 +49,7 @@
 
             <v-card flat>
               <!-- aqui será inserido os telefones que este cliente possui cadastrado -->
-              <crud-table titulo="Telefone" :headers="cabecalhoTelefone" :propItens="telefonesCadastradosCliente">
+              <crud-table componente="telefone" titulo="Telefone" :headers="cabecalhoTelefone" :propItens="telefonesCadastradosCliente" editavel deletavel>
                 <template v-slot:formAdd>
                   <telefone></telefone>
                 </template>
@@ -58,7 +58,7 @@
 
             <v-card flat>
               <!-- aqui será inserido os endereços que este cliente possui cadastrado -->
-              <crud-table titulo="Endereço" :headers="cabecalhoEndereco" :propItens="enderecosCadastradosCliente">
+              <crud-table componente="endereco" titulo="Endereço" :headers="cabecalhoEndereco" :propItens="enderecosCadastradosCliente">
                 <template v-slot:formAdd>
                   <endereco></endereco>
                 </template>

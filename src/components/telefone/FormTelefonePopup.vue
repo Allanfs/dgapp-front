@@ -39,14 +39,14 @@
   </v-dialog>
 </template>
 <script>
-import { EDITAR_ITEM } from "@/store/modules/mutations";
+import { EDITAR_ITEM, DIALOG } from "@/store/modules/mutations";
 
 export default {
   name: "form-telefone-popup",
 
   data() {
     return {
-      dialogo: false,
+      // dialogo: false,
       telefone: {
         ddd: "83",
         numero: "",
@@ -58,6 +58,7 @@ export default {
   methods: {
     save() {
       this.dialogo=false;
+      // this.$store.commit('setEstadoDialogo');
       this.$store.commit('cliente/incluirTelefone', this.telefone)
       this.telefone = {
         ddd: "83",
@@ -69,6 +70,14 @@ export default {
     }
   },
   computed: {
+    dialogo:{
+      get() {
+        return this.$store.getters['telefone/getDialogoState'];
+      },
+      set() {
+       this.$store.commit(`telefone/${DIALOG}`);
+      }
+    },
     camposObrigatorios() {
       if (this.telefone.numero === "") {
         return true;

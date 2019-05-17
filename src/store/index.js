@@ -8,6 +8,8 @@ import tamanho from './modules/tamanho.js'
 import produto from './modules/produto.js'
 import cliente from './modules/cliente.js'
 import categoria from './modules/categoria.js'
+import telefone from './modules/telefones.js'
+import endereco from './modules/enderecos.js'
 
 import modalDataTable from './modules/utils/modalDataTable'
 import globalMutations from './globalMutations'
@@ -60,6 +62,20 @@ export default new Vuex.Store({
             actions: categoria.actions,
             getters: categoria.getters,
             mutations: categoria.mutations
+        },
+        telefone: {
+            namespaced: true,
+            state: telefone.state,
+            actions: telefone.actions,
+            getters: telefone.getters,
+            mutations: telefone.mutations
+        },
+        endereco: {
+            namespaced: true,
+            state: endereco.state,
+            actions: endereco.actions,
+            getters: endereco.getters,
+            mutations: endereco.mutations
         },
         modalDataTable,
         globalMutations

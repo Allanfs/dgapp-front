@@ -42,13 +42,13 @@
   </v-dialog>
 </template>
 <script>
-import { EDITAR_ITEM } from "@/store/modules/mutations";
+import { EDITAR_ITEM, DIALOG } from "@/store/modules/mutations";
 
 export default {
   name: "form-endereco",
   data() {
     return {
-      dialogo: false,
+      // dialogo: false,
       endereco: {
         logradouro: "",
         bairro: "Centro",
@@ -57,6 +57,7 @@ export default {
       }
     };
   },
+  
   methods: {
     save() {
       // verificar se o id do endereco está settado
@@ -74,6 +75,14 @@ export default {
     }
   },
   computed: {
+    dialogo:{
+      get() {
+        return this.$store.getters['endereco/getDialogoState'];
+      },
+      set() {
+       this.$store.commit(`endereco/${DIALOG}`);
+      }
+    },
     camposObrigatorios() {
       if (this.endereco.logradouro === "") {
         return true;

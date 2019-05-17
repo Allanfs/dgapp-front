@@ -38,10 +38,14 @@
 
 <script>
 import FormEnderecoPopupVue from "../endereco/FormEnderecoPopup.vue";
-import { EDITAR_ITEM } from "@/store/modules/mutations";
+import { EDITAR_ITEM, DIALOG } from "@/store/modules/mutations";
 export default {
   name: "crud-table",
   props: {
+    componente: {
+      type: String,
+      required: true
+    },
     titulo: {
       type: String,
       required: true
@@ -112,7 +116,7 @@ export default {
       /*
             exibo o dialogo
             */
-      this.$store.commit(`toggle${this.titulo}`);
+      this.$store.commit(`${this.componente}/${DIALOG}`);
     },
 
     deleteItem(item) {

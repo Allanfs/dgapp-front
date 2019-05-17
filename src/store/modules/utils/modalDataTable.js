@@ -8,11 +8,13 @@ import {TOGGLE_TELEFONE, TOGGLE_ENDERECO, EDITAR_ITEM} from '@/store/modules/mut
 const state = {
     enderecoAberto: false,
     telefoneAberto: false,
+    estado_dialogo: false,
     item: {}
 }
 const getters = {
     isEnderecoAberto: state => state.enderecoAberto,
     isTelefoneAberto: state => state.telefoneAberto,
+    getEstadoDialogo: state => state.estado_dialogo,
     getItem: state => state.item
 }
 const actions = {}
@@ -25,6 +27,9 @@ const mutations = {
     },
     [TOGGLE_TELEFONE]: (state) => {
         state.telefoneAberto = !state.telefoneAberto
+    },
+    setEstadoDialogo: (state) => {
+        state.estado_dialogo = !state.estado_dialogo
     },
     /**
      * Salva um objeto no state
