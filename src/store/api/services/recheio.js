@@ -19,7 +19,14 @@ export default {
     buscarPorNome: (nome) => {
         return http.get(`${buscaPorNome}/${nome}`)
     },
+    buscarPorId: (id) => {
+        return http.get(`${servico}/${id}`)
+    },
     salvar: (recheio) => {
-        return http.post(servico, recheio)
+        if( recheio.id ) {
+            return http.put(`${servico}/${recheio.id}`, recheio)
+        }else{
+            return http.post(servico, recheio)
+        }
     }
 }

@@ -3,8 +3,9 @@ import { ALERTAR } from './mutations'
 
 const state = {
   recheioEditar: {
-    nome: "Teste 1",
-    especial: true,
+    id: 34,
+    nome: "Teste de alteraçaão",
+    especial: false,
     disponivel: false
   }
   
