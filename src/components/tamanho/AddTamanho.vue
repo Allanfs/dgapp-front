@@ -2,7 +2,7 @@
   <v-card disabled>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Tamanho</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Tamanho</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -39,15 +39,35 @@
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 
 export default {
+  name: "add-tamanho",
+  created() {
+    let tamanhoEditar = this.$store.getters['tamanho/getTamanhoEditar']
+    if( tamanhoEditar !== null) {
+      this.tamanho = tamanhoEditar
+      this.edicao = true
+    }
+  },
   data() {
     return {
+      edicao: false,
       tamanho: {}
     };
   },
+  computed: {
+    titulo () {
+      return this.edicao ? 'Editar' : 'Cadastrar'
+    }
+  },
   methods: {
     save() {
-      this.$store.dispatch("tamanho/salvar", this.tamanho);
-      this.tamanho = {};
+      if(this.edicao){
+        this.$store.dispatch("tamanho/salvar", this.tamanho);
+        this.$store.commit("tamanho/limparEdicao")
+        this.edicao = false
+      }else{
+        this.$store.dispatch("tamanho/salvar", this.tamanho);
+      }
+        this.tamanho = {};
     }
   }
 };

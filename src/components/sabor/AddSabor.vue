@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Sabor</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Sabor</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -17,11 +17,7 @@
           </v-flex>
         </v-layout>
 
-        <DataTableSelecionavel
-          :headers="headers"
-          :recheio="dado"
-          v-model="sabor.recheios"
-        ></DataTableSelecionavel>
+        <DataTableSelecionavel :headers="headers" :recheio="dado" v-model="sabor.recheios"></DataTableSelecionavel>
 
         <v-card>
           <v-card-title>
@@ -58,12 +54,13 @@ import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
   name: "add-sabor",
-  props: ['param'],
+  props: ["param"],
   components: {
     DataTableSelecionavel
   },
   data() {
     return {
+      edicao: false,
       headers: HSABOR,
       dado: [],
       sabor: {
@@ -81,31 +78,48 @@ export default {
     // tem uma sintaxe que faz isso muito bem, não lembro qual
     // this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
     // console.log(this.param)
-    this.$store.getters["recheio/recheiosCadastrados"]().then( (response) => {
-      this.dado = response.data
-    }).catch( error => {
-      console.log(error.error)
-    })
-    this.$store.getters["tamanho/tamanhosCadastrados"]().then( response => {
-      this.sabor.tamanhos = response.data
-    })
+    this.$store.getters["recheio/recheiosCadastrados"]()
+      .then(response => {
+        this.dado = response.data;
+      })
+      .catch(error => {
+        console.log(error.error);
+      });
+    this.$store.getters["tamanho/tamanhosCadastrados"]().then(response => {
+      this.sabor.tamanhos = response.data;
+    });
 
     // obtendo o parametro presente na rota
     // console.log(this.$route.params["id"]);
     // consultar o dado na API
+
+    let saborEditar = this.$store.getters['sabor/getSaborEditar']
+    if( saborEditar !== null) {
+      this.sabor = saborEditar
+      this.edicao = true
+    }
   },
   computed: {
     todosRecheios() {
-      return this.$store.getters["recheio/allRecheios"];
+      return []; //this.$store.getters["recheio/allRecheios"];
     },
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
+    },
+    titulo() {
+      return this.edicao ? "Editar" : "Cadastrar";
     }
   },
   methods: {
     save() {
-      this.$store.dispatch("sabor/salvar", this.sabor);
-      this.sabor = {};
+      if (this.edicao) {
+        this.$store.dispatch("sabor/salvar", this.sabor);
+        this.$store.commit("sabor/limparEdicao");
+        this.edicao = false;
+      } else {
+        this.$store.dispatch("sabor/salvar", this.sabor);
+      }
+        this.sabor = {};
     }
   }
 };

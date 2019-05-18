@@ -6,6 +6,7 @@ import { ALERTAR } from './mutations'
  * Guarda a informação entre estados
  */
 const state = {
+  produtoEditar: null
 };
 
 /**
@@ -13,6 +14,7 @@ const state = {
  * Análogo a um método getter
  */
 const getters = {
+  getProdutoEditar: (state) => state.produtoEditar
 };
 
 /**
@@ -46,7 +48,11 @@ const actions = {
  * O que de fato modifica o estado.
  * Análogo a um método setter
  */
-const mutations = {}
+const mutations = {
+  limparEdicao (state) {
+    state.produtoEditar = null
+  }
+}
 
 export default {
   state,

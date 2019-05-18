@@ -52,8 +52,7 @@ export default {
 
       if(this.edicao){
         // está editando o item
-        // fazer chamada ao metodo de edição do backed
-        // provavelmente PUT
+        this.$store.dispatch("recheio/salvar", this.recheio);
         this.$store.commit("recheio/limparEdicao")
         this.edicao = false
       }else{
