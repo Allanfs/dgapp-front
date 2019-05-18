@@ -85,9 +85,16 @@ export default new Router({
       ]
     },
     {
-      path: "/",
-      name: "home",
-      component: Home
+      path: "/editar",
+      name: "Editar",
+      component: Cadastro,
+      children: [
+        {
+          path: "recheio/:id",
+          name: "recheio",
+          component: AddRecheio
+        }
+      ]      
     },
     {
       path: "/about",

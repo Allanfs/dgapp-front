@@ -2,7 +2,7 @@
   <v-card disabled>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Recheio</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Recheio</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -25,8 +25,16 @@ import { REMOVER_ALERTA } from "@/store/modules/mutations";
 
 export default {
   name: "add-recheio",
+  created() {
+    let recheioEditar = this.$store.getters['recheio/getRecheioEditar']
+    if( recheioEditar !== null) {
+      this.recheio = recheioEditar
+      this.edicao = true
+    }
+  },
   data() {
     return {
+      edicao: false,
       recheio: {
         nome: "",
         especial: false,
@@ -34,9 +42,25 @@ export default {
       }
     };
   },
+  computed: {
+    titulo () {
+      return this.edicao ? 'Editar' : 'Cadastrar'
+    }
+  },
   methods: {
     save() {
-      this.$store.dispatch("recheio/salvar", this.recheio);
+
+      if(this.edicao){
+        // está editando o item
+        // fazer chamada ao metodo de edição do backed
+        // provavelmente PUT
+        this.$store.commit("recheio/limparEdicao")
+        this.edicao = false
+      }else{
+        // está cadastrando um novo item
+        this.$store.dispatch("recheio/salvar", this.recheio);
+      }
+      
       this.recheio = {
         nome: "",
         especial: false,

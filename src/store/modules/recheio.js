@@ -2,72 +2,16 @@ import recheioDao from "../../store/api/services/recheio.js";
 import { ALERTAR } from './mutations'
 
 const state = {
-  recheios: [
-    {
-      nome: 'Molho',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Mussarela',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Presunto',
-      especial: false,
-      disponivel: false,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Frango',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Camarão',
-      especial: true,
-      disponivel: false,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Peito de Peru',
-      especial: true,
-      disponivel: true,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Peperonni',
-      especial: true,
-      disponivel: true,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Chocolate Cremoso',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    },
-    {
-      nome: 'Chocolate Branco',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    },
-    {
-      nome: 'Coco ralado',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    }
-  ]
+  recheioEditar: {
+    nome: "Teste 1",
+    especial: true,
+    disponivel: false
+  }
+  
 }
 
 const getters = {
-  allRecheios: (state) => state.recheios,
+  getRecheioEditar: (state) => state.recheioEditar,
   recheiosCadastrados: function (state) {
     return recheioDao.listar
   }
@@ -93,11 +37,22 @@ const actions = {
 
     });
 
+  },
+  buscar(state, valor) {
+    recheioDao.buscarPorId(valor).then( reponse => {
+      console.log("Sucesso",response)
+    }).catch( error => {
+      console.log("Erro",error)
+    })
   }
 
 }
 
-const mutations = {}
+const mutations = {
+  limparEdicao (state) {
+    state.recheioEditar = null
+  }
+}
 
 export default {
   state,
