@@ -26,6 +26,7 @@
 import recheioDao from "@/store/api/services/recheio.js";
 
 import CrudTable from "../utils/CrudTable.vue";
+import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 import { HRECHEIO } from "../utils/cabecalhosTabelas.js";
 export default {
   name: "lista-recheio",
@@ -35,11 +36,11 @@ export default {
   },
   created() {
     this.cabecalho = HRECHEIO;
-    this.$store.dispatch('recheio/listar')
+    this.$store.dispatch(`recheio/${RECHEIOVR.actions.listar}`)
   },
   computed: {
     listaRecheios() {
-      return this.$store.getters['recheio/getListaRecheios']
+      return this.$store.getters[`recheio/${RECHEIOVR.getters.listaRecheios}`]
     }
   },
   components: {

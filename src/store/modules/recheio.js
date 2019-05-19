@@ -1,7 +1,11 @@
 import recheioDao from "../../store/api/services/recheio.js";
 import { ALERTAR } from './mutations'
+import { RECHEIOVR } from '../vuexroutes/recheio.vr.js'
+
+
 
 const state = {
+  dialog: false,
   recheioEditar: {
     id: 34,
     nome: "Teste na EDIÇÃO",
@@ -13,16 +17,14 @@ const state = {
 }
 
 const getters = {
-  getRecheioEditar: (state) => state.recheioEditar,
-  recheiosCadastrados: function (state) {
-    return recheioDao.listar
-  },
-  getListaRecheios: (state) => state.listaRecheios
+  [RECHEIOVR.getters.itemEditavel]: (state) => state.recheioEditar,
+  [RECHEIOVR.getters.listaRecheios]: (state) => state.listaRecheios,
+  [RECHEIOVR.getters.dialog]: (state) => state.dialog
 }
 
 const actions = {
 
-  salvar(state, valor) {
+  [RECHEIOVR.actions.salvar](state, valor) {
 
     recheioDao.salvar(valor).then(response => {
 
@@ -41,23 +43,24 @@ const actions = {
     });
 
   },
-  buscar(state, valor) {
+  [RECHEIOVR.actions.buscar](state, valor) {
     recheioDao.buscarPorId(valor).then(reponse => {
       console.log("Sucesso", response)
     }).catch(error => {
       console.log("Erro", error)
     })
   },
-  listar({ commit }) {
+  [RECHEIOVR.actions.listar]({ commit }) {
     recheioDao.listar()
-      .then(({ data }) => commit('setRecheios', data))
+      .then(({ data }) => commit(RECHEIOVR.mutations.setRecheios, data))
   }
 
 }
 
 const mutations = {
-  limparEdicao: (state) => state.recheioEditar = null,
-  setRecheios: (state, valores) => state.listaRecheios = valores
+  [RECHEIOVR.mutations.limparItemEditavel]: (state) => state.recheioEditar = null,
+  [RECHEIOVR.mutations.setRecheios]: (state, valores) => state.listaRecheios = valores,
+  [RECHEIOVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog
 
 }
 
