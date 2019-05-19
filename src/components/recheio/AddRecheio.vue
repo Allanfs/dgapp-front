@@ -53,12 +53,12 @@ export default {
 
       if(this.edicao){
         // está editando o item
-        this.$store.dispatch("recheio/salvar", this.recheio);
+        this.$store.dispatch(`recheio/${RECHEIOVR.actions.salvar}`, this.recheio);
         this.$store.commit(`recheio/${RECHEIOVR.mutations.limparItemEditavel}`)
         this.edicao = false
       }else{
         // está cadastrando um novo item
-        this.$store.dispatch("recheio/salvar", this.recheio);
+        this.$store.dispatch(`recheio/${RECHEIOVR.actions.salvar}`, this.recheio);
       }
       
       this.recheio = {

@@ -21,5 +21,8 @@ export default {
     },
     salvar: (tamanho) => {
         return http.post(servico, tamanho)
+    },
+    excluir: (tamanho) => {
+        return http.delete(servico, tamanho)
     }
 }

@@ -20,7 +20,7 @@ const getters = {
   [TAMANHOVR.getters.itemEditavel]: (state) => state.tamanhoEditar,
   [TAMANHOVR.getters.listaTamanhos]: (state) => state.listaTamanhos,
   [TAMANHOVR.getters.dialog]: (state) => state.dialog
-
+  
 };
 /**
  * Métodos usados para realizar
@@ -48,6 +48,14 @@ const actions = {
   },
   [TAMANHOVR.actions.listar] ( {commit} ) {
     tamanhoDao.listar().then( ({data}) => commit(TAMANHOVR.mutations.setTamanhos, data))
+  },
+  [TAMANHOVR.actions.excluir] (state, valor) {
+    tamanhoDao.excluir(valor).then( ({data}) => {
+      state.commit(
+        ALERTAR,    // a mutation que será executada
+        "Item excluído com sucesso",
+        { root: true })   // se a mutations é a root ou não
+    }).catch( ({response}) => console.log( response))
   }
 
 };
@@ -58,7 +66,9 @@ const actions = {
  */
 const mutations = {
   [TAMANHOVR.mutations.limparItemEditavel]: (state) => state.tamanhoEditar = null,
-  [TAMANHOVR.mutations.setTamanhos]: (state, valor) => state.listaTamanhos = valor
+  [TAMANHOVR.mutations.setTamanhos]: (state, valor) => state.listaTamanhos = valor,
+  [TAMANHOVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog,
+  [TAMANHOVR.mutations.setItemEditavel]: (state, valor) => state.tamanhoEditar = valor
 }
 
 export default {

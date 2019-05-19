@@ -50,9 +50,8 @@ const actions = {
  * Análogo a um método setter
  */
 const mutations = {
-  [SABORVR.mutations.limparItemEditavel] (state) {
-    state.saborEditar = null
-  }
+  [SABORVR.mutations.limparItemEditavel]: (state) => state.saborEditar = null,
+  [SABORVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog
 }
 
 export default {
