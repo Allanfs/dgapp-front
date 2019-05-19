@@ -1,5 +1,5 @@
 import saborDao from "../api/services/sabor.js";
-
+import { SABORVR } from "../vuexroutes/sabor.vr.js";
 import { ALERTAR } from './mutations'
 
 /**
@@ -14,8 +14,8 @@ const state = {
  * Análogo a um método getter
  */
 const getters = {
-  getSaborEditar: (state) => state.saborEditar,
-  saboresCadastrados: state => saborDao.listar
+  [SABORVR.getters.itemEditavel]: (state) => state.saborEditar,
+  [SABORVR.getters.listaSabores]: state => saborDao.listar
 };
 
 /**
@@ -23,7 +23,7 @@ const getters = {
  * requisições externas.
  */
 const actions = {
-  salvar (state, valor) {
+  [SABORVR.actions.salvar] (state, valor) {
 
     saborDao.salvar(valor).then( response => {
 
@@ -50,7 +50,7 @@ const actions = {
  * Análogo a um método setter
  */
 const mutations = {
-  limparEdicao (state) {
+  [SABORVR.mutations.limparItemEditavel] (state) {
     state.saborEditar = null
   }
 }

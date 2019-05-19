@@ -52,6 +52,7 @@ import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
+import { SABORVR } from "@/store/vuexroutes/sabor.vr.js";
 
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
@@ -87,11 +88,7 @@ export default {
     
     this.sabor.tamanhos = this.$store.getters[`tamanho/${TAMANHOVR.getters.listaTamanhos}`]
 
-    // obtendo o parametro presente na rota
-    // console.log(this.$route.params["id"]);
-    // consultar o dado na API
-
-    let saborEditar = this.$store.getters['sabor/getSaborEditar']
+    let saborEditar = this.$store.getters[`sabor/${SABORVR.getters.itemEditavel}`]
     if( saborEditar !== null) {
       this.sabor = saborEditar
       this.edicao = true
@@ -111,11 +108,11 @@ export default {
   methods: {
     save() {
       if (this.edicao) {
-        this.$store.dispatch("sabor/salvar", this.sabor);
-        this.$store.commit("sabor/limparEdicao");
+        this.$store.dispatch(`sabor/${SABORVR.actions.salvar}`, this.sabor);
+        this.$store.commit(`sabor/${SABORVR.mutations.limparItemEditavel}`);
         this.edicao = false;
       } else {
-        this.$store.dispatch("sabor/salvar", this.sabor);
+        this.$store.dispatch(`sabor/${SABORVR.actions.salvar}`, this.sabor);
       }
         this.sabor = {};
     }

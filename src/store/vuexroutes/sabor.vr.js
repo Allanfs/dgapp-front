@@ -6,7 +6,7 @@ export const SABORVR = {
   getters: {
     dialog: 'getDialogState',
     itemEditavel: 'saborEditar',
-    listaTamanhos: 'getListaSabores'
+    listaSabores: 'getListaSabores'
   },
   mutations: {
     toggleDialog: 'tamanhoToggleDialog',
