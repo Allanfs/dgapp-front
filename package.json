@@ -30,7 +30,8 @@
     "vue-cli-plugin-vuetify": "^0.4.5",
     "vue-jest": "^3.0.4",
     "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.0.5"
+    "vuetify-loader": "^1.0.5",
+    "webpack-dev-server": "^3.4.1"
   },
   "eslintConfig": {
     "root": true,
