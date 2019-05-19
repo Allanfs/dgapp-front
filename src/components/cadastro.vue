@@ -19,6 +19,7 @@
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 export default {
+  name: 'cadastro-view',
   computed: {
     parametroId() {
       return this.$route.params["id"]

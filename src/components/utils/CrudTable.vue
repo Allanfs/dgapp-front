@@ -89,14 +89,7 @@ export default {
       val || this.close();
     }
   },
-
-  created() {
-    this.initialize();
-  },
-
   methods: {
-    initialize() {},
-
     editItem(item) {
       /*
             identificar qual o index que este item possui 

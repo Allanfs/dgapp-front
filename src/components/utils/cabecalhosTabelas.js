@@ -55,23 +55,20 @@ export const HRECHEIO = [
     {
         text: 'Nome',
         align: 'left',
-        sortable: false,
-        value: '',
-        width: "10%"
+        sortable: true,
+        value: 'nome'
     },
     {
         text: 'Especial',
         align: 'left',
-        sortable: false,
-        value: '',
-        width: "10%"
+        sortable: true,
+        value: 'especial'
     },
     {
-        text: 'Ativo',
+        text: 'Disponível',
         align: 'left',
-        sortable: false,
-        value: '',
-        width: "10%"
+        sortable: true,
+        value: 'disponivel'
     },
 ]
 

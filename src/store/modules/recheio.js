@@ -4,18 +4,20 @@ import { ALERTAR } from './mutations'
 const state = {
   recheioEditar: {
     id: 34,
-    nome: "Teste de alteraçaão",
+    nome: "Teste na EDIÇÃO",
     especial: false,
     disponivel: false
-  }
-  
+  },
+  listaRecheios: []
+
 }
 
 const getters = {
   getRecheioEditar: (state) => state.recheioEditar,
   recheiosCadastrados: function (state) {
     return recheioDao.listar
-  }
+  },
+  getListaRecheios: (state) => state.listaRecheios
 }
 
 const actions = {
@@ -23,13 +25,13 @@ const actions = {
   salvar(state, valor) {
 
     recheioDao.salvar(valor).then(response => {
-     
+
       state.commit(
         ALERTAR,    // a mutation que será executada
         null,
         { root: true })   // se a mutations é a root ou não
-      
-    }).catch( error => {
+
+    }).catch(error => {
 
       state.commit(
         ALERTAR,    // a mutation que será executada
@@ -40,19 +42,23 @@ const actions = {
 
   },
   buscar(state, valor) {
-    recheioDao.buscarPorId(valor).then( reponse => {
-      console.log("Sucesso",response)
-    }).catch( error => {
-      console.log("Erro",error)
+    recheioDao.buscarPorId(valor).then(reponse => {
+      console.log("Sucesso", response)
+    }).catch(error => {
+      console.log("Erro", error)
     })
+  },
+  listar({ commit }) {
+    recheioDao.listar()
+      .then(({ data }) => commit('setRecheios', data))
   }
 
 }
 
 const mutations = {
-  limparEdicao (state) {
-    state.recheioEditar = null
-  }
+  limparEdicao: (state) => state.recheioEditar = null,
+  setRecheios: (state, valores) => state.listaRecheios = valores
+
 }
 
 export default {
