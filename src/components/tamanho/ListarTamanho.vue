@@ -14,7 +14,12 @@
             :propItens="listaTamanhos"
             editavel
             deletavel
-          ></crud-table>
+          >
+            <template v-slot:formAdd>
+              <v-dialog  v-if="dialogo" v-model="dialogo" max-width="60%">
+                <tamanho @cancelar="cancelar"></tamanho>
+              </v-dialog>
+            </template>
           </crud-table>
         </v-card-text>
       </v-card>
@@ -24,6 +29,7 @@
 
 <script>
 import CrudTable from "../utils/CrudTable.vue";
+// import AddTamanho from "@/components/tamanho/AddTamanho.vue"
 import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
 import { HTAMANHO } from "../utils/cabecalhosTabelas.js";
 
@@ -36,13 +42,27 @@ export default {
     this.cabecalho = HTAMANHO
     this.$store.dispatch(`tamanho/${TAMANHOVR.actions.listar}`)
   },
+  methods: {
+    cancelar () {
+      this.$store.commit(`tamanho/${TAMANHOVR.mutations.toggleDialog}`)
+    }
+  },
   computed: {
     listaTamanhos() {
       return this.$store.getters[`tamanho/${TAMANHOVR.getters.listaTamanhos}`]
+    },
+    dialogo: {
+      get() {
+        return this.$store.getters[`tamanho/${TAMANHOVR.getters.dialog}`]
+      },
+      set() {
+        this.$store.commit(`tamanho/${TAMANHOVR.mutations.toggleDialog}`)
+      }
     }
   },
   components: {
     "crud-table": CrudTable,
+    "tamanho": () => import("@/components/tamanho/AddTamanho.vue")
   }
 };
 </script>

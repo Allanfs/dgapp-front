@@ -31,7 +31,7 @@
 
     <v-card-actions class="pb-3 pl-3">
       <v-btn class="success" block @click="save">Salvar</v-btn>
-      <v-btn class="error" block>Cancelar</v-btn>
+      <v-btn class="error" block @click="$emit('cancelar')">Cancelar</v-btn>
     </v-card-actions>
   </v-card>
 </template>

@@ -1,7 +1,8 @@
 export const TAMANHOVR = {
   actions: {
     salvar: 'salvar',
-    listar: 'listar'
+    listar: 'listar',
+    excluir: 'excluir'
   },
   getters: {
     dialog: 'getDialogState',
@@ -9,8 +10,9 @@ export const TAMANHOVR = {
     listaTamanhos: 'getListaTamanhos'
   },
   mutations: {
-    toggleDialog: 'tamanhoToggleDialog',
+    toggleDialog: 'toggleDialog',
     limparItemEditavel: 'limpaItemEditavel',
-    setTamanhos: 'setTamanhos'
+    setTamanhos: 'setTamanhos',
+    setItemEditavel: 'setItemEditavel'
   }
 }

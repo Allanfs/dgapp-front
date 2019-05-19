@@ -106,16 +106,19 @@ export default {
             salva o item no state
         */
       this.$store.commit(EDITAR_ITEM, item);
+
+      this.$store.commit(`${this.componente}/setItemEditavel`, item)
       /*
             exibo o dialogo
             */
-      this.$store.commit(`${this.componente}/${DIALOG}`);
+      this.$store.commit(`${this.componente}/toggleDialog`);
     },
 
     deleteItem(item) {
       const index = this.propItens.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.propItens.splice(index, 1);
+        this.$store.dispatch(`${this.componente}/excluir`, item)
     },
 
     close() {
