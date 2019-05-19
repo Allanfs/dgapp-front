@@ -27,7 +27,7 @@ import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 export default {
   name: "add-recheio",
   created() {
-    let recheioEditar = this.$store.getters[`recheio/${RECHEIOVR.getters.itemEditavel}`]
+    let recheioEditar = this.$store.getters[RECHEIOVR.getGetter('itemEditavel')]
     if( recheioEditar !== null) {
       this.recheio = recheioEditar
       this.edicao = true
@@ -53,12 +53,12 @@ export default {
 
       if(this.edicao){
         // está editando o item
-        this.$store.dispatch(`recheio/${RECHEIOVR.actions.salvar}`, this.recheio);
-        this.$store.commit(`recheio/${RECHEIOVR.mutations.limparItemEditavel}`)
+        this.$store.dispatch(RECHEIOVR.getAction('salvar'), this.recheio);
+        this.$store.commit(RECHEIOVR.getAction('limparItemEditavel'))
         this.edicao = false
       }else{
         // está cadastrando um novo item
-        this.$store.dispatch(`recheio/${RECHEIOVR.actions.salvar}`, this.recheio);
+        this.$store.dispatch(RECHEIOVR.getAction('salvar'), this.recheio);
       }
       
       this.recheio = {

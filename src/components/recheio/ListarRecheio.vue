@@ -42,23 +42,23 @@ export default {
   },
   created() {
     this.cabecalho = HRECHEIO;
-    this.$store.dispatch(`recheio/${RECHEIOVR.actions.listar}`)
+    this.$store.dispatch(RECHEIOVR.getAction('listar'))
   },
   methods: {
     cancelar () {
-      this.$store.commit(`recheio/${RECHEIOVR.mutations.toggleDialog}`)
+      this.$store.commit(RECHEIOVR.getMutation('toggleDialog'))
     }
   },
   computed: {
     listaRecheios() {
-      return this.$store.getters[`recheio/${RECHEIOVR.getters.listaRecheios}`]
+      return this.$store.getters[RECHEIOVR.getGetter('listaRecheios')]
     },
     dialogo: {
       get() {
-        return this.$store.getters[`recheio/${RECHEIOVR.getters.dialog}`]
+        return this.$store.getters[RECHEIOVR.getGetter('dialog')]
       },
       set() {
-        this.$store.commit(`recheio/${RECHEIOVR.mutations.toggleDialog}`)
+        this.$store.commit(RECHEIOVR.getMutation('toggleDialog'))
       }
     }
   },

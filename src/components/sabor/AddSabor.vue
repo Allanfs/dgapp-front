@@ -76,19 +76,12 @@ export default {
     };
   },
   created() {
-    // obter apenas os nomes dos tamanhos.
-    // os preços apenas o Sabor irá settar
-    // tem uma sintaxe que faz isso muito bem, não lembro qual
-    // this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
-    // console.log(this.param)
-
-    // this.$store.getters["recheio/recheiosCadastrados"]()
+  
+    this.dado = this.$store.getters[RECHEIOVR.getGetter('listaRecheios')]
     
-    this.dado = this.$store.getters[`recheio/${RECHEIOVR.getters.listaRecheios}`]
-    
-    this.sabor.tamanhos = this.$store.getters[`tamanho/${TAMANHOVR.getters.listaTamanhos}`]
+    this.sabor.tamanhos = this.$store.getters[TAMANHOVR.getGetter('listaTamanhos')]
 
-    let saborEditar = this.$store.getters[`sabor/${SABORVR.getters.itemEditavel}`]
+    let saborEditar = this.$store.getters[SABORVR.getGetter('itemEditavel')]
     if( saborEditar !== null) {
       this.sabor = saborEditar
       this.edicao = true
@@ -108,11 +101,12 @@ export default {
   methods: {
     save() {
       if (this.edicao) {
-        this.$store.dispatch(`sabor/${SABORVR.actions.salvar}`, this.sabor);
-        this.$store.commit(`sabor/${SABORVR.mutations.limparItemEditavel}`);
+
+        this.$store.dispatch(SABORVR.getAction('salvar'), this.sabor);
+        this.$store.commit(SABORVR.getMutation('limparItemEditavel'));
         this.edicao = false;
       } else {
-        this.$store.dispatch(`sabor/${SABORVR.actions.salvar}`, this.sabor);
+        this.$store.dispatch(SABORVR.getAction('salvar'), this.sabor);
       }
         this.sabor = {};
     }
