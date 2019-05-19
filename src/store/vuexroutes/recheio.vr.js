@@ -14,6 +14,7 @@ export const RECHEIOVR = {
   mutations: {
     toggleDialog: 'toggleDialog',
     limparItemEditavel: 'limpaItemEditavel',
-    setRecheios: 'setRecheios'
+    setRecheios: 'setRecheios',
+    setItemEditavel: 'setItemEditavel'
   }
 }

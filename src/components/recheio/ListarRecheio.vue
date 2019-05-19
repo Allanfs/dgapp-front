@@ -14,7 +14,13 @@
             :propItens="listaRecheios"
             editavel
             deletavel
-          ></crud-table>
+          >
+            <template v-slot:formAdd>
+              <v-dialog v-if="dialogo" v-model="dialogo" max-width="60%">
+                <recheio @cancelar="cancelar"></recheio>
+              </v-dialog>
+            </template>
+          </crud-table>
         </v-card-text>
       </v-card>
     </v-container>
@@ -38,13 +44,27 @@ export default {
     this.cabecalho = HRECHEIO;
     this.$store.dispatch(`recheio/${RECHEIOVR.actions.listar}`)
   },
+  methods: {
+    cancelar () {
+      this.$store.commit(`recheio/${RECHEIOVR.mutations.toggleDialog}`)
+    }
+  },
   computed: {
     listaRecheios() {
       return this.$store.getters[`recheio/${RECHEIOVR.getters.listaRecheios}`]
+    },
+    dialogo: {
+      get() {
+        return this.$store.getters[`recheio/${RECHEIOVR.getters.dialog}`]
+      },
+      set() {
+        this.$store.commit(`recheio/${RECHEIOVR.mutations.toggleDialog}`)
+      }
     }
   },
   components: {
-    "crud-table": CrudTable
+    "crud-table": CrudTable,
+    "recheio": () => import("@/components/recheio/AddRecheio.vue")
   }
 };
 </script>

@@ -6,12 +6,7 @@ import { RECHEIOVR } from '../vuexroutes/recheio.vr.js'
 
 const state = {
   dialog: false,
-  recheioEditar: {
-    id: 34,
-    nome: "Teste na EDIÇÃO",
-    especial: false,
-    disponivel: false
-  },
+  recheioEditar: null,
   listaRecheios: []
 
 }
@@ -60,7 +55,8 @@ const actions = {
 const mutations = {
   [RECHEIOVR.mutations.limparItemEditavel]: (state) => state.recheioEditar = null,
   [RECHEIOVR.mutations.setRecheios]: (state, valores) => state.listaRecheios = valores,
-  [RECHEIOVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog
+  [RECHEIOVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog,
+  [RECHEIOVR.mutations.setItemEditavel]: (state, valor) => state.recheioEditar = valor
 
 }
 
