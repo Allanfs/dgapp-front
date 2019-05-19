@@ -1,7 +1,8 @@
 export const SABORVR = {
   actions: {
     salvar: 'salvar',
-    listar: 'listar'
+    listar: 'listar',
+    excluir: 'excluir'
   },
   getters: {
     dialog: 'getDialogState',
@@ -9,7 +10,7 @@ export const SABORVR = {
     listaSabores: 'getListaSabores'
   },
   mutations: {
-    toggleDialog: 'tamanhoToggleDialog',
+    toggleDialog: 'toggleDialog',
     limparItemEditavel: 'limpaItemEditavel',
     setSabores: 'setSabores'
   }

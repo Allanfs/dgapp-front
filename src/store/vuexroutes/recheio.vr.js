@@ -2,7 +2,9 @@ export const RECHEIOVR = {
   actions: {
     salvar: 'salvar',
     listar: 'listarTodos',
-    buscar: 'buscarUm'
+    buscar: 'buscarUm',
+    excluir: 'excluir'
+
   },
   getters: {
     dialog: 'getDialogState',
@@ -10,7 +12,7 @@ export const RECHEIOVR = {
     listaRecheios: 'getListaRecheios'
   },
   mutations: {
-    toggleDialog: 'recheioToggleDialog',
+    toggleDialog: 'toggleDialog',
     limparItemEditavel: 'limpaItemEditavel',
     setRecheios: 'setRecheios'
   }
