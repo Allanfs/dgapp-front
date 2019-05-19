@@ -47,7 +47,7 @@ const actions = {
 
   },
   [TAMANHOVR.actions.listar] ( {commit} ) {
-    tamanhoDao.listar().then( res => commit('setTamanhos', res))
+    tamanhoDao.listar().then( ({data}) => commit(TAMANHOVR.mutations.setTamanhos, data))
   }
 
 };

@@ -34,7 +34,7 @@ export default {
   },
   created() {
     this.cabecalho = HTAMANHO
-    this.$store.dispatch(`tamanho/${TAMANHOVR.action.listar}`)
+    this.$store.dispatch(`tamanho/${TAMANHOVR.actions.listar}`)
   },
   computed: {
     listaTamanhos() {

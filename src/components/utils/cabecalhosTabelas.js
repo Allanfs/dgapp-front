@@ -88,3 +88,36 @@ export const HSABOR = [
         width: "10%"
     }
 ]
+
+export const HTAMANHO = [
+    {
+        text: 'Nome',
+        align: 'center',
+        sortable: true,
+        value: 'nome'
+    },
+    {
+        text: 'Centimetros',
+        align: 'center',
+        sortable: true,
+        value: 'centimetros'
+    },
+    {
+        text: 'Fatias',
+        align: 'center',
+        sortable: true,
+        value: 'numeroFatias'
+    },
+    {
+        text: 'Preço',
+        align: 'center',
+        sortable: true,
+        value: 'preco'
+    },
+    {
+        text: 'Disponível',
+        align: 'center',
+        sortable: true,
+        value: 'disponivel'
+    }
+]
