@@ -51,6 +51,7 @@
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
+import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
 
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
@@ -84,9 +85,7 @@ export default {
     
     this.dado = this.$store.getters[`recheio/${RECHEIOVR.getters.listaRecheios}`]
     
-    this.$store.getters["tamanho/tamanhosCadastrados"]().then(response => {
-      this.sabor.tamanhos = response.data;
-    });
+    this.sabor.tamanhos = this.$store.getters[`tamanho/${TAMANHOVR.getters.listaTamanhos}`]
 
     // obtendo o parametro presente na rota
     // console.log(this.$route.params["id"]);

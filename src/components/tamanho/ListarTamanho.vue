@@ -7,10 +7,14 @@
         </v-card-title>
 
         <v-card-text>
-          <crud-table titulo="Recheio" :headers="cabecalho" :propItens="[{}]">
-            <template v-slot:formAdd>
-              <telefone></telefone>
-            </template>
+           <crud-table
+            :headers="cabecalho"
+            titulo="Tamanhos"
+            componente="tamanho"
+            :propItens="listaTamanhos"
+            editavel
+            deletavel
+          ></crud-table>
           </crud-table>
         </v-card-text>
       </v-card>
@@ -20,7 +24,9 @@
 
 <script>
 import CrudTable from "../utils/CrudTable.vue";
+import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
 import { HTAMANHO } from "../utils/cabecalhosTabelas.js";
+
 export default {
   name: "lista-tamanho",
   data() {
@@ -28,6 +34,12 @@ export default {
   },
   created() {
     this.cabecalho = HTAMANHO
+    this.$store.dispatch(`tamanho/${TAMANHOVR.action.listar}`)
+  },
+  computed: {
+    listaTamanhos() {
+      return this.$store.getters[`tamanho/${TAMANHOVR.getters.listaTamanhos}`]
+    }
   },
   components: {
     "crud-table": CrudTable,

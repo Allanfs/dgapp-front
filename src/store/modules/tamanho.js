@@ -1,4 +1,5 @@
 import tamanhoDao from "../api/services/tamanho.js";
+import { TAMANHOVR } from '../vuexroutes/tamanho.vr'
 
 import { ALERTAR } from './mutations'
 
@@ -6,7 +7,9 @@ import { ALERTAR } from './mutations'
  * Guarda a informação entre estados
  */
 const state = {
-  tamanhoEditar: null
+  tamanhoEditar: null,
+  listaTamanhos: [],
+  dialog: false
 };
 
 /**
@@ -14,21 +17,17 @@ const state = {
  * Análogo a um método getter
  */
 const getters = {
-  getTamanhoEditar: (state) => state.tamanhoEditar,
-  tamanhosCadastrados: function (state) {
-    return tamanhoDao.listar
-  }
-};
+  [TAMANHOVR.getters.itemEditavel]: (state) => state.tamanhoEditar,
+  [TAMANHOVR.getters.listaTamanhos]: (state) => state.listaTamanhos,
+  [TAMANHOVR.getters.dialog]: (state) => state.dialog
 
-function ehVazio (valor) {
-  return (!valor || valor.trim() === "")
-}
+};
 /**
  * Métodos usados para realizar
  * requisições externas.
  */
 const actions = {
-  salvar (state, valor) {
+  [TAMANHOVR.actions.salvar] (state, valor) {
 
     tamanhoDao.salvar(valor).then( response => {
 
@@ -46,6 +45,9 @@ const actions = {
 
     })
 
+  },
+  [TAMANHOVR.actions.listar] ( {commit} ) {
+    tamanhoDao.listar().then( res => commit('setTamanhos', res))
   }
 
 };
@@ -55,9 +57,8 @@ const actions = {
  * Análogo a um método setter
  */
 const mutations = {
-  limparEdicao (state) {
-    state.tamanhoEditar = null
-  }
+  [TAMANHOVR.mutations.limparItemEditavel]: (state) => state.tamanhoEditar = null,
+  [TAMANHOVR.mutations.setTamanhos]: (state, valor) => state.listaTamanhos = valor
 }
 
 export default {

@@ -37,11 +37,12 @@
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
 
 export default {
   name: "add-tamanho",
   created() {
-    let tamanhoEditar = this.$store.getters['tamanho/getTamanhoEditar']
+    let tamanhoEditar = this.$store.getters[`tamanho/${TAMANHOVR.getters.itemEditavel}`]
     if( tamanhoEditar !== null) {
       this.tamanho = tamanhoEditar
       this.edicao = true
@@ -61,11 +62,11 @@ export default {
   methods: {
     save() {
       if(this.edicao){
-        this.$store.dispatch("tamanho/salvar", this.tamanho);
-        this.$store.commit("tamanho/limparEdicao")
+        this.$store.dispatch(`tamanho/${TAMANHOVR.actions.salvar}`, this.tamanho);
+        this.$store.commit(`tamanho/${TAMANHOVR.mutations.limparItemEditavel}`)
         this.edicao = false
       }else{
-        this.$store.dispatch("tamanho/salvar", this.tamanho);
+        this.$store.dispatch(`tamanho/${TAMANHOVR.actions.salvar}`, this.tamanho);
       }
         this.tamanho = {};
     }
