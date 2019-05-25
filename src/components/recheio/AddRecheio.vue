@@ -23,6 +23,7 @@
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
+import titulo from "@/mixins/tituloFormulario"
 
 export default {
   name: "add-recheio",
@@ -43,11 +44,7 @@ export default {
       }
     };
   },
-  computed: {
-    titulo () {
-      return this.edicao ? 'Editar' : 'Cadastrar'
-    }
-  },
+  computed: {},
   methods: {
     save() {
 
@@ -67,7 +64,8 @@ export default {
         disponivel: true
       };
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

@@ -46,6 +46,7 @@
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import titulo from "@/mixins/tituloFormulario"
 
 const modelo = {
   nome: "",
@@ -75,11 +76,7 @@ export default {
       categorias: []
     };
   },
-  computed: {
-    titulo () {
-      return this.edicao ? 'Editar' : 'Cadastrar'
-    }
-  },
+  computed: {},
   methods: {
     save() {
 
@@ -92,7 +89,8 @@ export default {
       }
         this.produto = modelo;
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

@@ -38,6 +38,7 @@
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { TAMANHOVR } from "../../store/vuexroutes/tamanho.vr.js";
+import titulo from "@/mixins/tituloFormulario"
 
 export default {
   name: "add-tamanho",
@@ -54,11 +55,7 @@ export default {
       tamanho: {}
     };
   },
-  computed: {
-    titulo () {
-      return this.edicao ? 'Editar' : 'Cadastrar'
-    }
-  },
+  computed: {},
   methods: {
     save() {
       if(this.edicao){
@@ -70,7 +67,8 @@ export default {
       }
         this.tamanho = {};
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

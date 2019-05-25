@@ -53,6 +53,7 @@ import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
 import { SABORVR } from "@/store/vuexroutes/sabor.vr.js";
+import titulo from "@/mixins/tituloFormulario"
 
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
@@ -93,9 +94,6 @@ export default {
     },
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
-    },
-    titulo() {
-      return this.edicao ? "Editar" : "Cadastrar";
     }
   },
   methods: {
@@ -110,7 +108,8 @@ export default {
       }
         this.sabor = {};
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 
