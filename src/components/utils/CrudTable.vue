@@ -19,7 +19,6 @@
       <template #items="props">
         <td v-for="kbc in headers" >
           {{props.item[kbc.value]}}
-
         </td>
 
         <td class="justify-left layout" v-show="editavel || deletavel">

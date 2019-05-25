@@ -6,7 +6,7 @@ import AddCliente from "@/components/cliente/AddCliente.vue";
 import AddSabor from "@/components/sabor/AddSabor.vue";
 import AddCategoria from "@/components/categoria/AddCategoria.vue";
 
-import Cadastro from "@/components/cadastro.vue"
+import Cadastro from "@/components/TheCadastroView.vue"
 
 
 export default {

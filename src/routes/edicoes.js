@@ -1,5 +1,5 @@
 import AddRecheio from "@/components/recheio/AddRecheio.vue";
-import Cadastro from "@/components/cadastro.vue"
+import Cadastro from "@/components/TheCadastroView.vue"
 
 export default {
   path: "/editar",

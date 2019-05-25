@@ -1,6 +1,6 @@
 import ListarRecheio from "@/components/recheio/ListarRecheio.vue";
 import ListarTamanho from "@/components/tamanho/ListarTamanho.vue";
-import Cadastro from "@/components/cadastro.vue"
+import Cadastro from "@/components/TheCadastroView.vue"
 
 
 export default {

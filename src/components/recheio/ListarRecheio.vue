@@ -13,8 +13,7 @@
             componente="recheio"
             :propItens="listaRecheios"
             editavel
-            deletavel
-          >
+            deletavel>
             <template v-slot:formAdd>
               <v-dialog v-if="dialogo" v-model="dialogo" max-width="60%">
                 <recheio @cancelar="cancelar"></recheio>
