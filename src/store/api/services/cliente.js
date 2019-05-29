@@ -28,7 +28,10 @@ export default {
     buscarPorTelefone: (telefone) => {
         return http.get(`${buscaPorTelefone}/${telefone}`)
     },
-    salvar: (cliente) => {
-        return http.post(servico, cliente)
+    salvar: (obj) => {
+        return http.post(servico, obj)
+    },
+    excluir: (obj) => {
+        return http.delete(`${servico}/${obj.id}`, obj)
     }
 }

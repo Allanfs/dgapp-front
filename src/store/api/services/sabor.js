@@ -19,7 +19,10 @@ export default {
     buscarPorNome: (nome) => {
         return http.get(`${buscaPorNome}/${nome}`)
     },
-    salvar: (sabor) => {
-        return http.post(servico, sabor)
+    salvar: (obj) => {
+        return http.post(servico, obj)
+    },
+    excluir: (obj) => {
+        return http.delete(`${servico}/${obj.id}`, obj)
     }
 }

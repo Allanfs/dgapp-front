@@ -22,11 +22,14 @@ export default {
     buscarPorId: (id) => {
         return http.get(`${servico}/${id}`)
     },
-    salvar: (recheio) => {
-        if( recheio.id ) {
-            return http.put(`${servico}/${recheio.id}`, recheio)
+    salvar: (obj) => {
+        if( obj.id ) {
+            return http.put(`${servico}/${obj.id}`, obj)
         }else{
-            return http.post(servico, recheio)
+            return http.post(servico, obj)
         }
+    },
+    excluir: (obj) => {
+        return http.delete(`${servico}/${obj.id}`, obj)
     }
 }

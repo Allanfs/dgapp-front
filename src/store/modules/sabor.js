@@ -41,6 +41,17 @@ const actions = {
 
     })
 
+  },
+  [SABORVR.actions.excluir] (state, valor) {
+    saborDao.excluir(valor).then( ({response: data}) => {
+      console.log(data)
+      state.commit(
+        ALERTAR,    // a mutation que será executada
+        "Item excluído com sucesso",
+        { root: true })   // se a mutations é a root ou não
+    }).catch( ( {response: { data: { status, message, path} } } ) => {
+      console.log( `Exclusão. Status: '${status} - ${message}' | Path: '${path}'`)
+    })
   }
 
 };
