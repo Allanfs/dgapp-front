@@ -56,12 +56,16 @@
 
 <script>
 import AddCliente from '@/components/cliente/AddCliente.vue'
+import titulo from "@/mixins/tituloFormulario"
+
 export default {
+  name: 'add-pedido',
   components: {
     'add-cliente': AddCliente
   },
   data () {
     return {
+      edicao: false,
       el: 0
     }
   },
@@ -72,7 +76,8 @@ export default {
     voltar() {
       this.el--
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

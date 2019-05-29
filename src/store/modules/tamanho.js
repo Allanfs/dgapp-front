@@ -1,4 +1,5 @@
 import tamanhoDao from "../api/services/tamanho.js";
+import { TAMANHOVR } from '../vuexroutes/tamanho.vr'
 
 import { ALERTAR } from './mutations'
 
@@ -6,38 +7,9 @@ import { ALERTAR } from './mutations'
  * Guarda a informação entre estados
  */
 const state = {
-  tamanhos: [
-    {
-      nome: "Pequena",
-      preco: "10",
-      centimetros: 10,
-      disponivel: true
-    },
-    {
-      nome: "Média",
-      preco: "10",
-      centimetros: 15,
-      disponivel: true
-    },
-    {
-      nome: "Grande",
-      preco: "20",
-      centimetros: 20,
-      disponivel: true
-    },
-    {
-      nome: "Gigante",
-      preco: "25",
-      centimetros: 25,
-      disponivel: true
-    },
-    {
-      nome: "Extra-Gigante",
-      preco: "30",
-      centimetros: 30,
-      disponivel: false
-    }
-  ]
+  tamanhoEditar: null,
+  listaTamanhos: [],
+  dialog: false
 };
 
 /**
@@ -45,21 +17,17 @@ const state = {
  * Análogo a um método getter
  */
 const getters = {
-  allTamanhos: (state) => state.tamanhos,
-  tamanhosCadastrados: function (state) {
-    return tamanhoDao.listar
-  }
+  [TAMANHOVR.getters.itemEditavel]: (state) => state.tamanhoEditar,
+  [TAMANHOVR.getters.listaTamanhos]: (state) => state.listaTamanhos,
+  [TAMANHOVR.getters.dialog]: (state) => state.dialog
+  
 };
-
-function ehVazio (valor) {
-  return (!valor || valor.trim() === "")
-}
 /**
  * Métodos usados para realizar
  * requisições externas.
  */
 const actions = {
-  salvar (state, valor) {
+  [TAMANHOVR.actions.salvar] (state, valor) {
 
     tamanhoDao.salvar(valor).then( response => {
 
@@ -77,6 +45,17 @@ const actions = {
 
     })
 
+  },
+  [TAMANHOVR.actions.listar] ( {commit} ) {
+    tamanhoDao.listar().then( ({data}) => commit(TAMANHOVR.mutations.setTamanhos, data))
+  },
+  [TAMANHOVR.actions.excluir] (state, valor) {
+    tamanhoDao.excluir(valor).then( ({data}) => {
+      state.commit(
+        ALERTAR,    // a mutation que será executada
+        "Item excluído com sucesso",
+        { root: true })   // se a mutations é a root ou não
+    }).catch( ({response}) => console.log( response))
   }
 
 };
@@ -85,7 +64,12 @@ const actions = {
  * O que de fato modifica o estado.
  * Análogo a um método setter
  */
-const mutations = {}
+const mutations = {
+  [TAMANHOVR.mutations.limparItemEditavel]: (state) => state.tamanhoEditar = null,
+  [TAMANHOVR.mutations.setTamanhos]: (state, valor) => state.listaTamanhos = valor,
+  [TAMANHOVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog,
+  [TAMANHOVR.mutations.setItemEditavel]: (state, valor) => state.tamanhoEditar = valor
+}
 
 export default {
   state,

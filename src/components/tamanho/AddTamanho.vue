@@ -2,7 +2,7 @@
   <v-card disabled>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Tamanho</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Tamanho</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -31,25 +31,44 @@
 
     <v-card-actions class="pb-3 pl-3">
       <v-btn class="success" block @click="save">Salvar</v-btn>
-      <v-btn class="error" block>Cancelar</v-btn>
+      <v-btn class="error" block @click="$emit('cancelar')">Cancelar</v-btn>
     </v-card-actions>
   </v-card>
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import { TAMANHOVR } from "../../store/vuexroutes/tamanho.vr.js";
+import titulo from "@/mixins/tituloFormulario"
 
 export default {
+  name: "add-tamanho",
+  created() {
+    let tamanhoEditar = this.$store.getters[TAMANHOVR.getGetter('itemEditavel')]
+    if( tamanhoEditar !== null) {
+      this.tamanho = tamanhoEditar
+      this.edicao = true
+    }
+  },
   data() {
     return {
+      edicao: false,
       tamanho: {}
     };
   },
+  computed: {},
   methods: {
     save() {
-      this.$store.dispatch("tamanho/salvar", this.tamanho);
-      this.tamanho = {};
+      if(this.edicao){
+        this.$store.dispatch(TAMANHOVR.getAction('salvar'), this.tamanho);
+        this.$store.commit(TAMANHOVR.getMutation('limparItemEditavel'))
+        this.edicao = false
+      }else{
+        this.$store.dispatch(TAMANHOVR.getAction('salvar'), this.tamanho);
+      }
+        this.tamanho = {};
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

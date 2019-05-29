@@ -27,7 +27,7 @@ const mutations = {
       state.alerta = { 
         type: 'success', 
         visivel: true, 
-        mensagem: 'Salvo com sucesso' 
+        mensagem: 'Item salvo com sucesso' 
       }
 
     }else{

@@ -51,6 +51,7 @@
 <script>
 import { lista } from './navbarItens.js'
 export default {
+  name: 'the-navbar',
   data() {
     return {
       itens: lista,

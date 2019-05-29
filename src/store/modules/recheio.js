@@ -1,90 +1,34 @@
 import recheioDao from "../../store/api/services/recheio.js";
 import { ALERTAR } from './mutations'
+import { RECHEIOVR } from '../vuexroutes/recheio.vr.js'
+
+
 
 const state = {
-  recheios: [
-    {
-      nome: 'Molho',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Mussarela',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Presunto',
-      especial: false,
-      disponivel: false,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Frango',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Camarão',
-      especial: true,
-      disponivel: false,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Peito de Peru',
-      especial: true,
-      disponivel: true,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Peperonni',
-      especial: true,
-      disponivel: true,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Chocolate Cremoso',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    },
-    {
-      nome: 'Chocolate Branco',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    },
-    {
-      nome: 'Coco ralado',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    }
-  ]
+  dialog: false,
+  recheioEditar: null,
+  listaRecheios: []
+
 }
 
 const getters = {
-  allRecheios: (state) => state.recheios,
-  recheiosCadastrados: function (state) {
-    return recheioDao.listar
-  }
+  [RECHEIOVR.getters.itemEditavel]: (state) => state.recheioEditar,
+  [RECHEIOVR.getters.listaRecheios]: (state) => state.listaRecheios,
+  [RECHEIOVR.getters.dialog]: (state) => state.dialog
 }
 
 const actions = {
 
-  salvar(state, valor) {
+  [RECHEIOVR.actions.salvar](state, valor) {
 
     recheioDao.salvar(valor).then(response => {
-     
+
       state.commit(
         ALERTAR,    // a mutation que será executada
         null,
         { root: true })   // se a mutations é a root ou não
-      
-    }).catch( error => {
+
+    }).catch(error => {
 
       state.commit(
         ALERTAR,    // a mutation que será executada
@@ -93,11 +37,28 @@ const actions = {
 
     });
 
+  },
+  [RECHEIOVR.actions.buscar](state, valor) {
+    recheioDao.buscarPorId(valor).then(reponse => {
+      console.log("Sucesso", response)
+    }).catch(error => {
+      console.log("Erro", error)
+    })
+  },
+  [RECHEIOVR.actions.listar]({ commit }) {
+    recheioDao.listar()
+      .then(({ data }) => commit(RECHEIOVR.mutations.setRecheios, data))
   }
 
 }
 
-const mutations = {}
+const mutations = {
+  [RECHEIOVR.mutations.limparItemEditavel]: (state) => state.recheioEditar = null,
+  [RECHEIOVR.mutations.setRecheios]: (state, valores) => state.listaRecheios = valores,
+  [RECHEIOVR.mutations.toggleDialog]: (state) => state.dialog = !state.dialog,
+  [RECHEIOVR.mutations.setItemEditavel]: (state, valor) => state.recheioEditar = valor
+
+}
 
 export default {
   state,

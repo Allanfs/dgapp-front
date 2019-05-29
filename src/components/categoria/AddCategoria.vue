@@ -2,7 +2,7 @@
   <v-card disabled>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Categoria</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Categoria</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -18,12 +18,16 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import titulo from "@/mixins/tituloFormulario"
 
 export default {
+  name: 'add-categoria',
   data() {
     return {
+      edicao: false,
       categoria: {}
     };
   },
@@ -32,7 +36,8 @@ export default {
       this.$store.dispatch("categoria/salvar", this.categoria);
       this.categoria = {};
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

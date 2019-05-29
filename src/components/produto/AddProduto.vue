@@ -2,7 +2,7 @@
   <v-card disabled>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Produto</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Produto</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -46,6 +46,7 @@
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import titulo from "@/mixins/tituloFormulario"
 
 const modelo = {
   nome: "",
@@ -61,19 +62,35 @@ export default {
     this.$store.getters['categoria/categoriasCadastradas']().then( (response) => {
       this.categorias = response.data
     })
+
+    let produtoEditar = this.$store.getters['produto/getProdutoEditar']
+    if( produtoEditar !== null) {
+      this.produto = produtoEditar
+      this.edicao = true
+    }
   },
   data() {
     return {
+      edicao: false,
       produto: modelo,
       categorias: []
     };
   },
+  computed: {},
   methods: {
     save() {
-      this.$store.dispatch("produto/salvar", this.produto);
-      this.produto = modelo;
+
+      if(this.edicao){
+        this.$store.dispatch("produto/salvar", this.produto);
+        this.$store.commit("produto/limparEdicao")
+        this.edicao = false
+      }else{
+        this.$store.dispatch("produto/salvar", this.produto);
+      }
+        this.produto = modelo;
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 

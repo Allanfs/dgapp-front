@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>
       <v-toolbar color="primary" dark flat>
-        <v-toolbar-title>Cadastrar Sabor</v-toolbar-title>
+        <v-toolbar-title>{{titulo}} Sabor</v-toolbar-title>
       </v-toolbar>
     </v-card-title>
 
@@ -17,11 +17,7 @@
           </v-flex>
         </v-layout>
 
-        <DataTableSelecionavel
-          :headers="headers"
-          :recheio="dado"
-          v-model="sabor.recheios"
-        ></DataTableSelecionavel>
+        <DataTableSelecionavel :headers="headers" :recheio="dado" v-model="sabor.recheios"></DataTableSelecionavel>
 
         <v-card>
           <v-card-title>
@@ -53,17 +49,22 @@
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
+import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
+import { SABORVR } from "@/store/vuexroutes/sabor.vr.js";
+import titulo from "@/mixins/tituloFormulario"
 
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
   name: "add-sabor",
-  props: ['param'],
+  props: ["param"],
   components: {
     DataTableSelecionavel
   },
   data() {
     return {
+      edicao: false,
       headers: HSABOR,
       dado: [],
       sabor: {
@@ -76,27 +77,20 @@ export default {
     };
   },
   created() {
-    // obter apenas os nomes dos tamanhos.
-    // os preços apenas o Sabor irá settar
-    // tem uma sintaxe que faz isso muito bem, não lembro qual
-    // this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
-    // console.log(this.param)
-    this.$store.getters["recheio/recheiosCadastrados"]().then( (response) => {
-      this.dado = response.data
-    }).catch( error => {
-      console.log(error.error)
-    })
-    this.$store.getters["tamanho/tamanhosCadastrados"]().then( response => {
-      this.sabor.tamanhos = response.data
-    })
+  
+    this.dado = this.$store.getters[RECHEIOVR.getGetter('listaRecheios')]
+    
+    this.sabor.tamanhos = this.$store.getters[TAMANHOVR.getGetter('listaTamanhos')]
 
-    // obtendo o parametro presente na rota
-    // console.log(this.$route.params["id"]);
-    // consultar o dado na API
+    let saborEditar = this.$store.getters[SABORVR.getGetter('itemEditavel')]
+    if( saborEditar !== null) {
+      this.sabor = saborEditar
+      this.edicao = true
+    }
   },
   computed: {
     todosRecheios() {
-      return this.$store.getters["recheio/allRecheios"];
+      return []; //this.$store.getters["recheio/allRecheios"];
     },
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
@@ -104,10 +98,18 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch("sabor/salvar", this.sabor);
-      this.sabor = {};
+      if (this.edicao) {
+
+        this.$store.dispatch(SABORVR.getAction('salvar'), this.sabor);
+        this.$store.commit(SABORVR.getMutation('limparItemEditavel'));
+        this.edicao = false;
+      } else {
+        this.$store.dispatch(SABORVR.getAction('salvar'), this.sabor);
+      }
+        this.sabor = {};
     }
-  }
+  },
+  mixins: [titulo]
 };
 </script>
 
