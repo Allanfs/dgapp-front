@@ -1,5 +1,5 @@
 {
-	// colocar em ~/.config/CODE/User/snippets
+	// colocar em ~/.config/Code/User/snippets
 	"Vuex module template": {
 		"prefix": "vmod",
 		"body": ["const state = {}",
