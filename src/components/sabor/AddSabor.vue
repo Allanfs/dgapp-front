@@ -26,12 +26,12 @@
             </div>
           </v-card-title>
           <v-card-text>
-            <v-layout row wrap v-for="tamanho in sabor.tamanhos" :key="tamanho.nome">
+            <v-layout row wrap v-for="precoTamanho in sabor.precosTamanhos" :key="precoTamanho.id">
               <v-flex xs12 md2>
-                <v-text-field v-model="tamanho.nome" label="Tamanho" disabled></v-text-field>
+                <v-text-field v-model="precoTamanho.id.tamanho.nome" label="Tamanho " disabled></v-text-field>
               </v-flex>
               <v-flex xs12 md1>
-                <v-text-field type="number" label="Valor" v-model="tamanho.preco"></v-text-field>
+                <v-text-field type="number" label="Valor" v-model="precoTamanho.preco"></v-text-field>
               </v-flex>
             </v-layout>
             <v-divider></v-divider>
@@ -53,7 +53,7 @@ import { RECHEIOVR } from "@/store/vuexroutes/recheio.vr.js";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
 import { TAMANHOVR } from "@/store/vuexroutes/tamanho.vr.js";
 import { SABORVR } from "@/store/vuexroutes/sabor.vr.js";
-import titulo from "@/mixins/tituloFormulario"
+import titulo from "@/mixins/tituloFormulario";
 
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
 export default {
@@ -70,22 +70,35 @@ export default {
       sabor: {
         nome: "",
         preco: "",
-        especial: true,
+        especial: false,
         recheios: [],
-        tamanhos: []
+        precosTamanhos: []
       }
     };
   },
-  created() {
-  
-    this.dado = this.$store.getters[RECHEIOVR.getGetter('listaRecheios')]
-    
-    this.sabor.tamanhos = this.$store.getters[TAMANHOVR.getGetter('listaTamanhos')]
+  beforeMount() {
+    // carregar(RECHEIOVR)
+    this.dado = this.$store.getters[RECHEIOVR.getGetter("listaRecheios")];
 
-    let saborEditar = this.$store.getters[SABORVR.getGetter('itemEditavel')]
-    if( saborEditar !== null) {
-      this.sabor = saborEditar
-      this.edicao = true
+    let listaTamanhos = this.$store.getters[
+      TAMANHOVR.getGetter("listaTamanhos")
+    ];
+    // this.sabor.precosTamanhos
+
+    listaTamanhos.forEach(fTam => {
+      this.sabor.precosTamanhos.push({
+        id: {
+          tamanho: fTam
+        },
+        preco: fTam.preco
+      });
+    });
+  },
+  created() {
+    let saborEditar = this.$store.getters[SABORVR.getGetter("itemEditavel")];
+    if (saborEditar !== null) {
+      this.sabor = saborEditar;
+      this.edicao = true;
     }
   },
   computed: {
@@ -99,14 +112,16 @@ export default {
   methods: {
     save() {
       if (this.edicao) {
-
-        this.$store.dispatch(SABORVR.getAction('salvar'), this.sabor);
-        this.$store.commit(SABORVR.getMutation('limparItemEditavel'));
+        this.$store.dispatch(SABORVR.getAction("salvar"), this.sabor);
+        this.$store.commit(SABORVR.getMutation("limparItemEditavel"));
         this.edicao = false;
       } else {
-        this.$store.dispatch(SABORVR.getAction('salvar'), this.sabor);
+        this.$store.dispatch(SABORVR.getAction("salvar"), this.sabor);
       }
-        this.sabor = {};
+
+      this.sabor = {};
+      this.dado = this.$store.getters[RECHEIOVR.getGetter("listaRecheios")];
+      this.sabor.precosTamanhos.forEach
     }
   },
   mixins: [titulo]
