@@ -1,25 +1,5 @@
-import { http } from '../config.js'
+import Dao from './DAO.js';
 
-const servico = 'tamanho'
+const servico = 'tamanhos'
 
-const buscaPorNome = `${servico}/nome`
-
-export default {
-
-    /**
-     * Lista todos os tamanhos cadastrados
-     */
-    listar: () => {
-        return http.get(servico)
-    },
-    
-    /**
-     * Busca um tamanho pelo nome cadastrado
-     */
-    buscarPorNome: (nome) => {
-        return http.get(`${buscaPorNome}/${nome}`)
-    },
-    salvar: (tamanho) => {
-        return http.post(servico, tamanho)
-    }
-}
+export default new Dao(servico);
