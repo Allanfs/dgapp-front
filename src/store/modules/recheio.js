@@ -1,75 +1,20 @@
 import recheioDao from "../../store/api/services/recheio.js";
-import { ALERTAR } from './mutations'
 
 const state = {
-  recheios: [
-    {
-      nome: 'Molho',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Mussarela',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Presunto',
-      especial: false,
-      disponivel: false,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Frango',
-      especial: false,
-      disponivel: true,
-      categoria: 'Básico'
-    },
-    {
-      nome: 'Camarão',
-      especial: true,
-      disponivel: false,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Peito de Peru',
-      especial: true,
-      disponivel: true,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Peperonni',
-      especial: true,
-      disponivel: true,
-      categoria: 'Especial'
-    },
-    {
-      nome: 'Chocolate Cremoso',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    },
-    {
-      nome: 'Chocolate Branco',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    },
-    {
-      nome: 'Coco ralado',
-      especial: false,
-      disponivel: true,
-      categoria: 'Doce'
-    }
-  ]
+  recheios: null
 }
 
 const getters = {
   allRecheios: (state) => state.recheios,
   recheiosCadastrados: function (state) {
-    return recheioDao.listar
+    if(state.recheios === null){
+      recheioDao.listarTodos().then(({data}) => {
+        state.recheios = data;
+      }).catch( error => {
+        console.log(error);
+      });
+    }
+    return state.recheios;
   }
 }
 
@@ -77,27 +22,17 @@ const actions = {
 
   salvar(state, valor) {
 
-    recheioDao.salvar(valor).then(response => {
-     
-      state.commit(
-        ALERTAR,    // a mutation que será executada
-        null,
-        { root: true })   // se a mutations é a root ou não
-      
-    }).catch( error => {
-
-      state.commit(
-        ALERTAR,    // a mutation que será executada
-        { type: 'error', visivel: true, mensagem: 'Ocorreu um erro' },   // o valor que é passado para a mutations
-        { root: true })   // se a mutations é a root ou não
-
-    });
+    return recheioDao.cadastrar(valor);
 
   }
 
 }
 
-const mutations = {}
+const mutations = {
+  recheios(state, payload){
+    state.recheios = payload;
+  }
+}
 
 export default {
   state,

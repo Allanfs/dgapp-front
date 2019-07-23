@@ -13,5 +13,3 @@ export const TOGGLE_TELEFONE = "toggleTelefone";
 export const DIALOG = "dialog";
 
 export const EDITAR_ITEM     = "editItem";
-
-

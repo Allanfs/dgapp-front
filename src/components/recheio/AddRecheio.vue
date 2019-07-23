@@ -8,7 +8,7 @@
 
     <v-card-text>
       <v-form class="px-3">
-        <v-text-field v-model="recheio.nome" label="Nome"></v-text-field>
+        <v-text-field v-model="recheio.nome" label="Nome" :errorMessages="nomeValidator"></v-text-field>
         <v-checkbox v-model="recheio.especial" label="Especial"></v-checkbox>
         <v-checkbox v-model="recheio.disponivel" label="Disponível"></v-checkbox>
       </v-form>
@@ -22,26 +22,73 @@
 </template>
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
+import { ALERTAR } from "@/store/modules/mutations.js";
+import { required, minLength } from "vuelidate/lib/validators";
 
 export default {
   name: "add-recheio",
-  data() {
-    return {
-      recheio: {
-        nome: "",
-        especial: false,
-        disponivel: true
+  data: () => ({
+    clicouSalvar: false,
+    recheio: {
+      nome: "",
+      especial: false,
+      disponivel: true
+    }
+  }),
+  validations: {
+    recheio: {
+      nome: {
+        required,
+        minLength: minLength(2)
       }
-    };
+    }
+  },
+  computed: {
+    nomeValidator() {
+      if (this.clicouSalvar && this.$v.recheio.nome.$invalid) {
+        const errors = [];
+        if (!this.$v.recheio.nome.required) {
+          errors.push("Nome do recheio é obrigatório");
+        }
+        if (!this.$v.recheio.nome.minLength) {
+          errors.push(
+            `Nome deve possuir pelo menos ${this.$v.recheio.nome.$params.minLength.min} caracteres`
+          );
+        }
+        return errors;
+      } else {
+        return null;
+      }
+    }
   },
   methods: {
     save() {
-      this.$store.dispatch("recheio/salvar", this.recheio);
-      this.recheio = {
-        nome: "",
-        especial: false,
-        disponivel: true
-      };
+      this.clicouSalvar = true;
+      if (!this.$v.$invalid) {
+        this.$store
+          .dispatch("recheio/salvar", this.recheio)
+          .then(response => {
+            this.clicouSalvar = false;
+            this.$store.commit(
+              ALERTAR, // a mutation que será executada
+              null,
+              { root: true }  // se a mutations é a root ou não
+            ); 
+
+            this.recheio = {
+              nome: "",
+              especial: false,
+              disponivel: true
+            };
+          })
+          .catch(error => {
+            this.$store.commit(
+              ALERTAR, // a mutation que será executada
+              { type: "error", visivel: true, mensagem: "Ocorreu um erro" }, // o valor que é passado para a mutations
+              { root: true }  // se a mutations é a root ou não
+            );
+          });
+      }
     }
   }
 };
