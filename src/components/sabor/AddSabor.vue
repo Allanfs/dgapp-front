@@ -10,38 +10,15 @@
       <v-form class="px-3">
         <v-layout>
           <v-flex>
-            <v-text-field v-model="sabor.nome" label="Nome"></v-text-field>
+            <v-text-field v-model="sabor.nome" label="Nome" :errorMessages="nomeValidator"></v-text-field>
           </v-flex>
           <v-flex>
             <v-checkbox v-model="sabor.especial" label="Especial"></v-checkbox>
           </v-flex>
         </v-layout>
 
-        <DataTableSelecionavel
-          :headers="headers"
-          :recheio="dado"
-          v-model="sabor.recheios"
-        ></DataTableSelecionavel>
-
-        <v-card>
-          <v-card-title>
-            <div>
-              <h3 class="headline mb-0">Preços</h3>
-            </div>
-          </v-card-title>
-          <v-card-text>
-            <v-layout row wrap v-for="tamanho in sabor.tamanhos" :key="tamanho.nome">
-              <v-flex xs12 md2>
-                <v-text-field v-model="tamanho.nome" label="Tamanho" disabled></v-text-field>
-              </v-flex>
-              <v-flex xs12 md1>
-                <v-text-field type="number" label="Valor" v-model="tamanho.preco"></v-text-field>
-              </v-flex>
-            </v-layout>
-            <v-divider></v-divider>
-            <!-- </v-container> -->
-          </v-card-text>
-        </v-card>
+        <selecionar-recheios v-model="sabor.recheios"/>
+        <precificar-tamanhos @input="setPrecoTamanho"/>
       </v-form>
     </v-card-text>
 
@@ -54,58 +31,83 @@
 <script>
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { HSABOR } from "@/components/utils/cabecalhosTabelas.js";
+import { required, minLength } from "vuelidate/lib/validators";
 
 import DataTableSelecionavel from "@/components/utils/DataTableSelecionavel.vue";
+import SelecionarRecheios from "./SelecionarRecheios.vue";
+import PrecificarTamanhos from "./PrecificarTamanhos.vue";
+
 export default {
   name: "add-sabor",
-  props: ['param'],
+  props: ["param"],
   components: {
-    DataTableSelecionavel
+    DataTableSelecionavel,
+    "selecionar-recheios": SelecionarRecheios,
+    "precificar-tamanhos": PrecificarTamanhos
   },
-  data() {
-    return {
-      headers: HSABOR,
-      dado: [],
-      sabor: {
-        nome: "",
-        preco: "",
-        especial: true,
-        recheios: [],
-        tamanhos: []
+  validations: {
+    sabor: {
+      nome: {
+        required,
+        minLength: minLength(5)
       }
-    };
+      
+    }
   },
-  created() {
-    // obter apenas os nomes dos tamanhos.
-    // os preços apenas o Sabor irá settar
-    // tem uma sintaxe que faz isso muito bem, não lembro qual
-    // this.sabor.tamanhos = this.$store.getters["tamanho/allTamanhos"];
-    // console.log(this.param)
-    this.$store.getters["recheio/recheiosCadastrados"]().then( (response) => {
-      this.dado = response.data
-    }).catch( error => {
-      console.log(error.error)
-    })
-    this.$store.getters["tamanho/tamanhosCadastrados"]().then( response => {
-      this.sabor.tamanhos = response.data
-    })
-
-    // obtendo o parametro presente na rota
-    // console.log(this.$route.params["id"]);
-    // consultar o dado na API
-  },
+  data: () => ({
+    clicouSalvar: false,
+    headers: HSABOR,
+    dado: [], // contem todos os recheios
+    sabor: {
+      nome: "",
+      precos: [],
+      especial: true,
+      recheios: [],
+      tamanhos: []
+    }
+  }),
   computed: {
     todosRecheios() {
       return this.$store.getters["recheio/allRecheios"];
     },
     categorias() {
       return [...new Set(this.todosRecheios.map(x => x.categoria))];
+    },
+    nomeValidator() {
+      if (this.clicouSalvar && this.$v.sabor.nome.$invalid) {
+        const errors = [];
+        if (!this.$v.sabor.nome.required) {
+          errors.push("Nome do sabor é obrigatório");
+        }
+        if (!this.$v.sabor.nome.minLength) {
+          errors.push(
+            `Nome deve possuir pelo menos ${this.$v.sabor.nome.$params.minLength.min} caracteres`
+          );
+        }
+        return errors;
+      } else {
+        return null;
+      }
     }
   },
   methods: {
     save() {
-      this.$store.dispatch("sabor/salvar", this.sabor);
-      this.sabor = {};
+      this.clicouSalvar = true;
+      if (!this.$v.$invalid) {
+        this.sabor.tamanhos.forEach(({id, preco, nome}) => {
+          this.sabor.precos.push({
+            preco: tamanho.preco,
+            tamanho: { id: tamanho.id, nome: tamanho.nome }
+          })
+        })
+        this.clicouSalvar = false;
+        console.log(this.sabor);
+        this.$store.dispatch("sabor/salvar", this.sabor).then(r=>console.log('sucesso'));
+      }
+      // this.sabor = {};
+    },
+    setPrecoTamanho(preco) {
+      this.sabor.precos.push(preco);
     }
   }
 };

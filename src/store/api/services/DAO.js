@@ -55,5 +55,9 @@ export default function Dao(recurso) {
   this.contarCadastros = function () {
     return http.get(`${this._url}/contar`);
   }
+
+  this.buscarUm = function ({parametro, valor}){
+    return http.get(`${this.url}/?${parametro}=${valor}`)
+  }
   
 }

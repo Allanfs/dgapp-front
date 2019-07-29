@@ -9,6 +9,7 @@ const getters = {
   recheiosCadastrados: function (state) {
     if(state.recheios === null){
       recheioDao.listarTodos().then(({data}) => {
+        console.warn("Settando 'recheios' diretamente");
         state.recheios = data;
       }).catch( error => {
         console.log(error);

@@ -26,7 +26,7 @@ const getters = {
 const actions = {
   salvar (state, valor) {
 
-    clienteDao.salvar(valor).then( response => {
+    clienteDao.cadastrar(valor).then( response => {
 
       state.commit(
         ALERTAR,    // a mutation que será executada
@@ -34,7 +34,7 @@ const actions = {
         { root: true })   // se a mutations é a root ou não
 
     }).catch( error => {
-
+      console.error(error)
       state.commit(
         ALERTAR,    // a mutation que será executada
         { type: 'error', visivel: true, mensagem: 'Ocorreu um erro' },   // o valor que é passado para a mutations

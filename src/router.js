@@ -15,6 +15,8 @@ import ConsultarCliente from "./components/cliente/ConsultarCliente.vue";
 import AddCliente from "./components/cliente/AddCliente.vue";
 import AddSabor from "./components/sabor/AddSabor.vue";
 
+import ListaSabores from "./components/pedido/ListaSabores.vue"
+
 import AddCategoria from "./components/categoria/AddCategoria.vue";
 
 
@@ -102,6 +104,11 @@ export default new Router({
       path: "/consultar/cliente",
       name: "search",
       component: ConsultarCliente
+    },
+    {
+      path: "/pedido/produtos",
+      name: "prods",
+      component: ListaSabores
     }
   ]
 });
