@@ -3,13 +3,6 @@ import Vue from 'vue'
 
 // imports do projeto
 import recheio from './modules/recheio.js'
-import sabor from './modules/sabor.js'
-import tamanho from './modules/tamanho.js'
-import produto from './modules/produto.js'
-import cliente from './modules/cliente.js'
-import categoria from './modules/categoria.js'
-import telefone from './modules/telefones.js'
-import endereco from './modules/enderecos.js'
 
 import modalDataTable from './modules/utils/modalDataTable'
 import globalMutations from './globalMutations'
@@ -27,55 +20,6 @@ export default new Vuex.Store({
             actions: recheio.actions,       // -> dispatch('recheio/salvar')
             getters: recheio.getters,       // -> getters['recheio/...']
             mutations: recheio.mutations    // -> commit('recheio/...')
-        },
-        sabor: {
-            namespaced: true,
-            state: sabor.state,
-            actions: sabor.actions,
-            getters: sabor.getters,
-            mutations: sabor.mutations
-        },
-        tamanho: {
-            namespaced: true,
-            state: tamanho.state,
-            actions: tamanho.actions,
-            getters: tamanho.getters,
-            mutations: tamanho.mutations
-        },
-        produto: {
-            namespaced: true,
-            state: produto.state,
-            actions: produto.actions,
-            getters: produto.getters,
-            mutations: produto.mutations
-        },
-        cliente: {
-            namespaced: true,
-            state: cliente.state,
-            actions: cliente.actions,
-            getters: cliente.getters,
-            mutations: cliente.mutations
-        },
-        categoria: {
-            namespaced: true,
-            state: categoria.state,
-            actions: categoria.actions,
-            getters: categoria.getters,
-            mutations: categoria.mutations
-        },
-        telefone: {
-            namespaced: true,
-            state: telefone.state,
-            actions: telefone.actions,
-            getters: telefone.getters,
-            mutations: telefone.mutations
-        },
-        endereco: {
-            namespaced: true,
-            state: endereco.state,
-            actions: endereco.actions,
-            getters: endereco.getters,
-            mutations: endereco.mutations
         },
         modalDataTable,
         globalMutations
