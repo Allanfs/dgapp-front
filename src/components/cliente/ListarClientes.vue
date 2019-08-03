@@ -2,7 +2,11 @@
   <div>
     <v-layout justify-center>
           <v-dialog v-model="modal.exibe" max-width="800px">
-            <adicionar-cliente :titulo="modal.titulo" :cliente="modal.dado" ignorarSalvamento></adicionar-cliente>
+            <adicionar-cliente :titulo="modal.titulo" :cliente="modal.dado" ignorarSalvamento>
+              <template #acoes>
+                <v-btn class="success" block>Criar pedido para&nbsp;<span class="yellow--text">{{modal.dado.nome.split(" ")[0]}}</span></v-btn>
+              </template>
+            </adicionar-cliente>
           </v-dialog>
         </v-layout>
     <v-data-table :items="clientes" :headers="headers">
