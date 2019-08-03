@@ -80,9 +80,6 @@
   </v-card>
 </template>
 <script>
-import CrudTable from "../utils/CrudTable.vue";
-import FormEnderecoVue from "../endereco/FormEnderecoPopup.vue";
-import FormTelefoneVue from "../telefone/FormTelefonePopup.vue";
 
 import { REMOVER_ALERTA } from "@/store/modules/mutations";
 import { HENDERECO, HTELEFONE } from "../utils/cabecalhosTabelas.js";
@@ -91,11 +88,6 @@ export default {
   name: "add-cliente",
   props: {
     titulo: String
-  },
-  components: {
-    "crud-table": CrudTable,
-    endereco: FormEnderecoVue,
-    telefone: FormTelefoneVue
   },
   computed: {
     tituloFormulario() {
