@@ -5,7 +5,7 @@
       <v-radio-group v-model="tamanho">
         <v-list-tile v-for="tamanho in tamanhos" :key="tamanho.id">
           <v-list-tile-action>
-            <v-radio :value="tamanho" @input="$emit('input', tamanho)"></v-radio>
+            <v-radio :value="tamanho" @change="$emit('input', tamanho)"></v-radio>
             <!-- selecionar o checkbox deve ser unico -->
           </v-list-tile-action>
           <v-list-tile-content>

@@ -1,6 +1,6 @@
 <template>
   <v-list two-line subheader>
-    <v-subheader :class="sabores.length > 0 ? 'green' : 'white'">Sabores</v-subheader>
+    <v-subheader :class="cor">Sabores</v-subheader>
     <v-list-group>
         <v-list-tile v-for="sabor in saboresDisponiveis" :key="sabor.id">
           <v-list-tile-action>
@@ -33,6 +33,16 @@ export default {
       if (this.quantidadeMax)
         return `${this.sabores.length}/${this.quantidadeMax}`;
       else return this.sabores.length;
+    },
+    cor() {
+        console.log('Quantidade maxima de sabores:', this.quantidadeMax);
+      if ( this.quantidadeMax > 0 && this.sabores.length > this.quantidadeMax ) {
+        return 'yellow';
+      } else if (this.sabores.length > 0) {
+        return 'green';
+      } else {
+        return 'white';
+      }
     }
   },
   data: () => ({
