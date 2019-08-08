@@ -15,10 +15,12 @@ import ConsultarCliente from "./components/cliente/ConsultarCliente.vue";
 import AddCliente from "./components/cliente/AddCliente.vue";
 import AddSabor from "./components/sabor/AddSabor.vue";
 
-import ListaSabores from "./components/pedido/ListaSabores.vue"
+import ListarClientes from './components/cliente/ListarClientes.vue';
+import ListaSabores from "./components/pedido/ListaSabores.vue";
+import Incrementador from "./components/pedido/Incrementador.vue";
 
 import AddCategoria from "./components/categoria/AddCategoria.vue";
-
+import ThePedidoVue from "./components/pedido/ThePedido.vue";
 
 import Cadastro from "@/components/cadastro.vue"
 Vue.use(Router);
@@ -109,6 +111,21 @@ export default new Router({
       path: "/pedido/produtos",
       name: "prods",
       component: ListaSabores
+    },
+    {
+      path: "/pedido/novo",
+      name: "novopedido",
+      component: ThePedidoVue
+    },
+    {
+      path: "/pedido/incrementador",
+      name: "incrementador",
+      component: Incrementador
+    },
+    {
+      path: "/cliente/listar",
+      name: "lista-clientes",
+      component: ListarClientes
     }
   ]
 });

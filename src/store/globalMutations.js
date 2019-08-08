@@ -10,11 +10,13 @@ const state = {
     type: "",
     mensagem: "",
     visivel: false
-  }
+  },
+  cliente: {}
 };
 
 const getters = {
-  getAlerta: state => state.alerta
+  getAlerta: state => state.alerta,
+  getCliente: state => state.cliente
 };
 
 const actions = {};
@@ -43,6 +45,9 @@ const mutations = {
       mensagem: "",
       visivel: false
     };
+  },
+  guardarCliente(state, payload) {
+    state.cliente = payload
   }
 };
 

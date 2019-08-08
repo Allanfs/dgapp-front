@@ -1,25 +1,19 @@
 <template>
-  <v-layout>
-    <v-flex >
-    <v-checkbox label="Exibir recheios" v-model="exibirRecheio"></v-checkbox>
-      <v-card>
-        <v-container v-bind="{ [`grid-list-md`]: true }" fluid>
-          <v-layout wrap>
-            <v-flex
-              v-for="n in saboresDisponiveis"
-              :key="n.id"
-              xs4
-            >
-              <v-card flat tile>
-                <v-checkbox v-model="sabores" :label="n.nome" :value="n" :disabled="!n.ehDisponivel"/>
-                <span v-if="exibirRecheio">{{subtitulo(n)}}</span>
-              </v-card>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-list two-line subheader>
+    <v-subheader :class="sabores.length > 0 ? 'green' : 'white'">Sabores</v-subheader>
+    <v-list-group>
+        <v-list-tile v-for="sabor in saboresDisponiveis" :key="sabor.id">
+          <v-list-tile-action>
+            <v-checkbox :value="sabor" v-model="sabores" @change="$emit('input', sabores)"></v-checkbox>
+            <!-- selecionar o checkbox deve ser unico -->
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{sabor.nome}}</v-list-tile-title>
+            <v-list-tile-sub-title v-text="subtitulo(sabor)"></v-list-tile-sub-title>
+          </v-list-tile-content>
+        </v-list-tile>
+    </v-list-group>
+  </v-list>
 </template>
 
 
@@ -43,10 +37,6 @@ export default {
   },
   data: () => ({
     exibirRecheio: true,
-    rowsPerPageItems: [10, 20, 40, 80],
-    pagination: {
-      rowsPerPage: 10
-    },
     sabores: [],
     saboresDisponiveis: []
   }),

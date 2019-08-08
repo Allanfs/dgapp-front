@@ -1,11 +1,11 @@
 <template>
   <v-list two-line subheader>
-    <v-subheader>Tamanhos</v-subheader>
+    <v-subheader :class="tamanho ? 'green' : 'white'">Tamanhos</v-subheader>
     <v-list-group>
       <v-radio-group v-model="tamanho">
         <v-list-tile v-for="tamanho in tamanhos" :key="tamanho.id">
           <v-list-tile-action>
-            <v-radio :value="tamanho"></v-radio>
+            <v-radio :value="tamanho" @input="$emit('input', tamanho)"></v-radio>
             <!-- selecionar o checkbox deve ser unico -->
           </v-list-tile-action>
           <v-list-tile-content>
