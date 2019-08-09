@@ -35,7 +35,6 @@ export default {
       else return this.sabores.length;
     },
     cor() {
-        console.log('Quantidade maxima de sabores:', this.quantidadeMax);
       if ( this.quantidadeMax > 0 && this.sabores.length > this.quantidadeMax ) {
         return 'yellow';
       } else if (this.sabores.length > 0) {
