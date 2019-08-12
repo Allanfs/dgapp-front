@@ -38,6 +38,7 @@
 <script>
 import ListaSabores from "./ListaSabores.vue";
 import ListaTamanhos from "./ListaTamanhos.vue";
+import pedidoDao from "../../store/api/services/pedido.js"
 
 export default {
   name: "The-Pedido",
@@ -59,9 +60,22 @@ export default {
     cliente: { nome: "Allan" },
     tamanho: {},
     sabores: []
-  })
+  }),
+  mounted() {
+    // verifica se existe um cliente setado por outra página;
+    let clienteBuscado = this.$store.getter.getCliente();
+    if (clienteBuscado) {
+      this.cliente = clienteBuscado;
+    } else {
+      // deve haver um cliente
+    }
+  },
+  methods: {
+    salvar() {
+      
+      this.pedidoDao.cadastrar({cliente});
+      // this.$store.commit('guardarCliente', {}); // esvazia o cliente no vuex, para não ser usado indevidamente.
+    }
+  }
 };
 </script>
-
-<style>
-</style>
