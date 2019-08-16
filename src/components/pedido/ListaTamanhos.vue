@@ -3,14 +3,14 @@
     <v-subheader :class="tamanho ? 'green' : 'white'">Tamanhos</v-subheader>
     <v-list-group>
       <v-radio-group v-model="tamanho">
-        <v-list-tile v-for="tamanho in tamanhos" :key="tamanho.id">
+        <v-list-tile v-for="tamanhoIt in tamanhos" :key="tamanhoIt.id">
           <v-list-tile-action>
-            <v-radio :value="tamanho" @change="$emit('input', tamanho)"></v-radio>
+            <v-radio :value="tamanhoIt" @change="$emit('input', tamanhoIt)"></v-radio>
             <!-- selecionar o checkbox deve ser unico -->
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{tamanho.nome}}</v-list-tile-title>
-            <v-list-tile-sub-title v-text="subtituloTamanho(tamanho)"></v-list-tile-sub-title>
+            <v-list-tile-title>{{tamanhoIt.nome}}</v-list-tile-title>
+            <v-list-tile-sub-title v-text="subtituloTamanho(tamanhoIt)"></v-list-tile-sub-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-radio-group>
@@ -23,8 +23,8 @@ import tamanhoDao from "../../store/api/services/tamanho.js";
 export default {
   name: "lista-tamanhos",
   data: () => ({
-    tamanho: null,
-    tamanhos: []
+    tamanhos: [],
+    tamanho: {}
   }),
   mounted() {
     // obter tamanhos cadastrados.

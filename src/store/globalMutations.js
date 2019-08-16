@@ -11,12 +11,20 @@ const state = {
     mensagem: "",
     visivel: false
   },
-  cliente: {}
+  cliente: {},
+  sabores: [],
+  tamanho: {},
+  itensPedido: []
 };
 
 const getters = {
   getAlerta: state => state.alerta,
-  getCliente: state => state.cliente
+  getCliente: state => state.cliente,
+  getSabores: state => state.sabores,
+  getTamanho(state) {
+    return state.tamanho
+  },
+  getItensPedido: state => state.itensPedido
 };
 
 const actions = {};
@@ -48,6 +56,15 @@ const mutations = {
   },
   guardarCliente(state, payload) {
     state.cliente = payload
+  },
+  guardarSabores(state, payload) {
+    state.sabores = payload
+  },
+  guardarTamanho(state, payload) {
+    state.tamanho = payload
+  },
+  guardarItemPedido(state, payload) {
+    state.itensPedido.push(payload);
   }
 };
 
