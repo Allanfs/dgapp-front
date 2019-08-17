@@ -75,17 +75,12 @@ export default {
         sabores.push({sabor: saborSelecionado, itemPedido: null})
         
       }
-      
-      let itemPedido = new ItemPedido(
-        null,
-        this.produto,
-        1,
-        this.getTamanho,
-        sabores,
-        null
-      );
-
-      this.$store.commit("guardarItemPedido", itemPedido);
+      this.$store.commit('guardarItemPedido', {
+        tamanho: this.tamanho,
+        quantidade: 1,
+        produto: this.produto,
+        sabores: sabores
+      })
 
       this.saboresSelecionados = [];
       this.$store.commit("guardarTamanho", {});

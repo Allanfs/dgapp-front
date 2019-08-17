@@ -1,13 +1,18 @@
 <template>
   <v-data-table :header="cabecalhos" :items="itens" single-select="false">
     <template #items="props">
-      <td>
+      <td v-if="props.item.produto.pizza">
         Pizza {{props.item.tamanho.nome}} -
         <span
-          v-for="sabor in props.item.sabores" :key="sabor.id"
+          v-for="sabor in props.item.sabores"
+          :key="sabor.id"
         >{{sabor.sabor.nome}},</span>
       </td>
-
+      <td v-else>
+        {{props.item.produto.nome}}
+      </td>
+      <td>{{props.item.quantidade}}</td>
+      <td>{{props.item.preco}}</td>
       <td class="justify-left layout">
         <v-icon small class="mr-2" @click="deleteItem(props.item)">delete_forever</v-icon>
       </td>
@@ -41,12 +46,12 @@ export default {
   data: () => ({
     cabecalhos: [
       {
-        text: "Preço",
-        value: "preco"
+        text: "Produto",
+        value: "produto"
       },
       {
-        text: "Tamanho",
-        value: "pizza.tamanho.nome"
+        text: "Qtd.",
+        value: "quantidade"
       }
     ]
   }),

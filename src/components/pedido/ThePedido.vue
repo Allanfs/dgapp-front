@@ -7,22 +7,27 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <v-container>
+
+    <v-container fluid>
       <v-layout>
-        <v-flex md6>
+        <v-flex md5>
           <v-card>
-            <v-container>
+            <v-container >
               <v-layout wrap grid-list-md>
                 <v-flex>
                   <lista-tamanhos v-model="tamanho" />
                 </v-flex>
               </v-layout>
+              <v-laytout>
+                 <v-flex>
+                  <lista-produtos />
+                </v-flex>
+              </v-laytout>
             </v-container>
           </v-card>
         </v-flex>
-        <v-spacer></v-spacer>
         <v-flex md5>
-          <v-card style="position:fixed" min-width="50%">
+          <v-card  min-width="50%">
             <v-card-title>
               <v-container fluid>
                 <v-layout row>
@@ -60,6 +65,7 @@
 
 <script>
 import ListaSabores from "./ListaSabores.vue";
+import ListaProdutos from "./ListaProdutos.vue";
 import ListaTamanhos from "./ListaTamanhos.vue";
 import pedidoDao from "../../store/api/services/pedido.js";
 import ModalAddPizzaVue from "./ModalAddPizza.vue";
@@ -70,6 +76,7 @@ export default {
   name: "The-Pedido",
   components: {
     "lista-sabores": ListaSabores,
+    "lista-produtos": ListaProdutos,
     "lista-tamanhos": ListaTamanhos,
     "modal-add-pizza": ModalAddPizzaVue,
     "lista-item-pedido": ListaItemPedido

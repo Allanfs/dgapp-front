@@ -1,4 +1,5 @@
 import { ALERTAR, REMOVER_ALERTA } from '@/store/modules/mutations.js'
+import {ItemPedido} from "@/components/pedido/Modelos.js"
 
 /*
  * Aqui são inseridas todos os componentes vuex globais
@@ -65,6 +66,13 @@ const mutations = {
   },
   guardarItemPedido(state, payload) {
     state.itensPedido.push(payload);
+  },
+  adicionarItemPedido(state, produto) {
+    console.log(produto)
+
+    let novoItem = new ItemPedido(null, produto, 1, null, null, null)
+    this.commit('guardarItemPedido',novoItem)
+    
   }
 };
 
