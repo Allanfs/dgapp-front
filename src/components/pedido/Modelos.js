@@ -19,13 +19,13 @@ export class Pedido {
     this.estado = "FECHADO";
     this.cliente = cliente;
     this.endereco = endereco
-    this.horaAbertura = null;
-    this.horaFechameno = null;
+    this.hora_abertura = null;
+    this.hora_fechameno = null;
     this.itens = itens;
-    this.motivoCancelamento = null;
-    this.numeroPedido = null;
+    this.motivo_cancelamento = null;
+    this.numero_pedido = null;
     this.total = 0;
-    this.valorPago = 0;
+    this.valor_pago = 0;
     this.pagamento = null;
 
   }
@@ -54,11 +54,13 @@ export class ProdutoPizza {
 }
 
 export class ItemPedido {
-  constructor() {
-    this.observacao = null,
-      this.pizza = new ProdutoPizza(),
-      this.produto = null,
-      this.quantidade = 0
+  constructor(pedido, produto, quantidade, tamanho, sabores, observacao) {
+    this.tamanho = tamanho,
+    this.pedido = pedido,
+    this.sabores = sabores,
+    this.produto = produto,
+    this.quantidade = quantidade
+    this.observacao = observacao
   }
 
   calcularPreco() {

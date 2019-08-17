@@ -2,10 +2,10 @@
   <v-data-table :header="cabecalhos" :items="itens" single-select="false">
     <template #items="props">
       <td>
-        Pizza {{props.item.pizza.tamanho.nome}} -
+        Pizza {{props.item.tamanho.nome}} -
         <span
-          v-for="sabor in props.item.pizza.sabores" :key="sabor.id"
-        >{{sabor.nome}},</span>
+          v-for="sabor in props.item.sabores" :key="sabor.id"
+        >{{sabor.sabor.nome}},</span>
       </td>
 
       <td class="justify-left layout">

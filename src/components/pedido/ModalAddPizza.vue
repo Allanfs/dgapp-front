@@ -2,7 +2,7 @@
   <v-layout justify-center>
     <v-dialog v-model="dialog" scrollable max-width="600px">
       <template v-slot:activator="{ on }">
-        <v-btn color="primary"  v-on="on" :disabled="ativo" >Selecionar Sabores</v-btn>
+        <v-btn color="primary" v-on="on" :disabled="ativo">Selecionar Sabores</v-btn>
       </template>
       <v-card>
         <v-card-title>
@@ -13,7 +13,12 @@
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <div v-for="sabor in sabores" :key="sabor.id">
-            <v-checkbox hide-details :label="sabor.nome" :value="sabor" v-model="saboresSelecionados"></v-checkbox>
+            <v-checkbox
+              hide-details
+              :label="sabor.nome"
+              :value="sabor"
+              v-model="saboresSelecionados"
+            ></v-checkbox>
           </div>
         </v-card-text>
         <v-divider></v-divider>
@@ -27,48 +32,63 @@
 </template>
 
 <script>
-import SaborDao from "../../store/api/services/sabor.js"
-import {mapGetters} from 'vuex';
-import {ItemPedido} from "./Modelos.js";
+import SaborDao from "../../store/api/services/sabor.js";
+import { mapGetters } from "vuex";
+import { ItemPedido } from "./Modelos.js";
 
 export default {
   name: "modal-add-pizza",
   data: () => ({
+    produto: {
+      id: "35990c12-c08f-11e9-9cb5-2a2ae2dbcce4",
+      nome: "Pizza",
+      preco: 0,
+      pizza: true
+    },
     sabores: [],
     tamanho: {},
     saboresSelecionados: [],
     dialog: false
   }),
   computed: {
-    ...mapGetters(['getTamanho']),
+    ...mapGetters(["getTamanho"]),
     ativo() {
-      return this.getTamanho.id === undefined
+      return this.getTamanho.id === undefined;
     }
   },
   created() {
     this.sabores = this.$store.getters.getSabores;
     if (this.sabores.length === 0) {
-      SaborDao.listarTodos().then( ({data}) => {
+      SaborDao.listarTodos().then(({ data }) => {
         this.sabores = data;
-        this.$store.commit('guardarSabores', data);
-      })
+        this.$store.commit("guardarSabores", data);
+      });
     }
-    
   },
   methods: {
     adicionar() {
       this.dialog = false;
-      let itemPedido = new ItemPedido;
-      itemPedido.pizza.pizza = true;
-      itemPedido.pizza.tamanho = this.getTamanho;
-      itemPedido.pizza.sabores = this.saboresSelecionados;
-      itemPedido.calcularPreco();
+      let sabores = []
 
-      itemPedido.quantidade = 1;
-      this.$store.commit('guardarItemPedido', itemPedido);
+      for (let index = 0; index < this.saboresSelecionados.length; index++) {
+        const saborSelecionado = this.saboresSelecionados[index];
+        sabores.push({sabor: saborSelecionado, itemPedido: null})
+        
+      }
+      
+      let itemPedido = new ItemPedido(
+        null,
+        this.produto,
+        1,
+        this.getTamanho,
+        sabores,
+        null
+      );
 
-      this.saboresSelecionados = []
-      this.$store.commit('guardarTamanho', {})
+      this.$store.commit("guardarItemPedido", itemPedido);
+
+      this.saboresSelecionados = [];
+      this.$store.commit("guardarTamanho", {});
     },
     cancelar() {
       this.dialog = false;

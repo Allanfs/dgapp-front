@@ -1,5 +1,5 @@
 import Dao from './DAO.js';
 
-const servico = 'recheio'
+const servico = 'recheios'
 
 export default new Dao(servico);
