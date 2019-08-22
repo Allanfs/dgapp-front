@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-btn flat v-show="contador > 0" @click="decrementar">-</v-btn>
+    <v-btn flat :disabled="contador <= 0" @click="decrementar" small>-</v-btn>
     <span>{{contador}}</span>
-    <v-btn flat @click="incrementar">+</v-btn>
+    <v-btn flat :disabled="contador == limite" @click="incrementar" small>+</v-btn>
   </div>
 </template>
 
@@ -10,10 +10,11 @@
 export default {
   name: "incrementador",
   props: {
-    limite: Number
+    limite: Number,
+    contador: Number
   },
   data: () => ({
-    contador: 0
+    // contador: 1
   }),
   methods: {
     incrementar() {
@@ -24,9 +25,12 @@ export default {
           return;
         }
       }
+      this.$emit('input', this.contador)
     },
     decrementar() {
       this.contador--;
+      this.$emit('input', this.contador)
+
     }
   }
 };

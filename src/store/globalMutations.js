@@ -15,7 +15,9 @@ const state = {
   cliente: {},
   sabores: [],
   tamanho: {},
-  itensPedido: []
+  itensPedido: [],
+  produto: {},
+  dialogAddProduto: false
 };
 
 const getters = {
@@ -25,7 +27,9 @@ const getters = {
   getTamanho(state) {
     return state.tamanho
   },
-  getItensPedido: state => state.itensPedido
+  getItensPedido: state => state.itensPedido,
+  getProduto: state => state.produto,
+  dialogAddProduto: state => state.dialogAddProduto
 };
 
 const actions = {};
@@ -67,12 +71,23 @@ const mutations = {
   guardarItemPedido(state, payload) {
     state.itensPedido.push(payload);
   },
-  adicionarItemPedido(state, produto) {
+  adicionarItemPedido(state, {produto, quantidade} ) {
     console.log(produto)
-
-    let novoItem = new ItemPedido(null, produto, 1, null, null, null)
+    let novoItem;
+    if (quantidade) {
+      novoItem = new ItemPedido(null, produto, quantidade, null, null, null)
+    } else {
+      novoItem = new ItemPedido(null, produto, 1, null, null, null)
+    }
+    
     this.commit('guardarItemPedido',novoItem)
     
+  },
+  guardarProduto(state, produto){
+    state.produto = produto
+  },
+  settarDialogAdicionarProduto(state, bool){
+    state.dialogAddProduto = bool
   }
 };
 

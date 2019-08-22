@@ -21,6 +21,7 @@ import Incrementador from "./components/pedido/Incrementador.vue";
 
 import AddCategoria from "./components/categoria/AddCategoria.vue";
 import ThePedidoVue from "./components/pedido/ThePedido.vue";
+import AdicionarProdutoVue from "./components/pedido/AdicionarProduto.vue"
 
 import Cadastro from "@/components/cadastro.vue"
 Vue.use(Router);
@@ -116,6 +117,11 @@ export default new Router({
       path: "/pedido/novo",
       name: "novopedido",
       component: ThePedidoVue
+    },
+    {
+      path: "/pedido/adicionarproduto",
+      name: "produto",
+      component: AdicionarProdutoVue
     },
     {
       path: "/pedido/incrementador",

@@ -5,12 +5,12 @@
       <v-radio-group v-model="produto">
         <v-list-tile v-for="produtoIt in produtos" :key="produtoIt.id">
           <v-list-tile-action>
-            <v-radio :value="produtoIt" @change="$emit('input', produtoIt)"></v-radio>
+            <!-- <v-radio :valu e="produtoIt" @change="$emit('input', produtoIt)"></v-radio> -->
+            <v-btn @click="adicionar(produtoIt)">Adicionar</v-btn>
             <!-- selecionar o checkbox deve ser unico -->
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{produtoIt.nome}}</v-list-tile-title>
-            <v-btn @click="adicionar(produtoIt)">Adicionar</v-btn>
           </v-list-tile-content>
         </v-list-tile>
       </v-radio-group>
@@ -32,7 +32,9 @@ export default {
   },
   methods: {
     adicionar(produto) {
-      this.$store.commit('adicionarItemPedido', produto)
+
+      this.$store.commit('settarDialogAdicionarProduto', true)
+      this.$store.commit('guardarProduto', produto)
     }
   }
 };

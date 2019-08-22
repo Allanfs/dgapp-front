@@ -60,6 +60,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+    <adicionar-produto/>
   </div>
 </template>
 
@@ -71,6 +72,7 @@ import pedidoDao from "../../store/api/services/pedido.js";
 import ModalAddPizzaVue from "./ModalAddPizza.vue";
 import ListaItemPedido from "./ListaItemPedido.vue";
 import { Pedido } from './Modelos';
+import AdicionarProdutoVue from './AdicionarProduto.vue';
 
 export default {
   name: "The-Pedido",
@@ -79,7 +81,8 @@ export default {
     "lista-produtos": ListaProdutos,
     "lista-tamanhos": ListaTamanhos,
     "modal-add-pizza": ModalAddPizzaVue,
-    "lista-item-pedido": ListaItemPedido
+    "lista-item-pedido": ListaItemPedido,
+    "adicionar-produto": AdicionarProdutoVue
   },
   computed: {
     nomesSabores() {

@@ -61,6 +61,7 @@ export class ItemPedido {
     this.produto = produto,
     this.quantidade = quantidade
     this.observacao = observacao
+    this.valor = produto.preco * quantidade
   }
 
   calcularPreco() {
