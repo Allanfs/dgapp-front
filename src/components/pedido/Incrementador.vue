@@ -14,7 +14,6 @@ export default {
     contador: Number
   },
   data: () => ({
-    // contador: 1
   }),
   methods: {
     incrementar() {

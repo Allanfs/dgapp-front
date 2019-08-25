@@ -81,11 +81,11 @@ export class ItemPedido {
 }
 
 export class Produto {
-  constructor() {
-    this.id = null;
-    this.nome = null;
-    this.pizza = false;
-    this.preco = 0;
+  constructor(id, nome,pizza,preco) {
+    this.id = id;
+    this.nome = nome;
+    this.pizza = pizza;
+    this.preco = preco;
   }
 }
 
