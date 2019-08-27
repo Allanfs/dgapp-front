@@ -62,6 +62,10 @@ export class ItemPedido {
     this.quantidade = quantidade
     this.observacao = observacao
     this.valor = produto.preco * quantidade
+
+    if (produto.pizza) {
+      // aquela operaão para settar o sabor
+    }
   }
 
   calcularPreco() {

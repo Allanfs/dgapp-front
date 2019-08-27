@@ -1,17 +1,19 @@
 <template>
   <v-list two-line subheader>
-    <v-subheader :class="cor">Sabores</v-subheader>
     <v-list-group>
-        <v-list-tile v-for="sabor in saboresDisponiveis" :key="sabor.id">
-          <v-list-tile-action>
-            <v-checkbox :value="sabor" v-model="sabores" @change="$emit('input', sabores)"></v-checkbox>
-            <!-- selecionar o checkbox deve ser unico -->
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{sabor.nome}}</v-list-tile-title>
-            <v-list-tile-sub-title v-text="subtitulo(sabor)"></v-list-tile-sub-title>
-          </v-list-tile-content>
-        </v-list-tile>
+      <template v-slot:activator>
+        <v-subheader>Sabores</v-subheader>
+      </template>
+      <v-list-tile v-for="sabor in saboresDisponiveis" :key="sabor.id">
+        <v-list-tile-action>
+          <v-checkbox :value="sabor" v-model="sabores" @change="$emit('input', sabores)"></v-checkbox>
+          <!-- selecionar o checkbox deve ser unico -->
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>{{sabor.nome}}</v-list-tile-title>
+          <v-list-tile-sub-title v-text="subtitulo(sabor)"></v-list-tile-sub-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list-group>
   </v-list>
 </template>
@@ -33,15 +35,6 @@ export default {
       if (this.quantidadeMax)
         return `${this.sabores.length}/${this.quantidadeMax}`;
       else return this.sabores.length;
-    },
-    cor() {
-      if ( this.quantidadeMax > 0 && this.sabores.length > this.quantidadeMax ) {
-        return 'yellow';
-      } else if (this.sabores.length > 0) {
-        return 'green';
-      } else {
-        return 'white';
-      }
     }
   },
   data: () => ({

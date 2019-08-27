@@ -1,7 +1,9 @@
 <template>
   <v-list two-line subheader>
-    <v-subheader :class="tamanho ? 'green' : 'white'">Tamanhos</v-subheader>
     <v-list-group>
+      <template v-slot:activator>
+        <v-subheader>Tamanhos</v-subheader>
+      </template>
       <v-radio-group v-model="tamanho">
         <v-list-tile v-for="tamanhoIt in tamanhos" :key="tamanhoIt.id">
           <v-list-tile-action>

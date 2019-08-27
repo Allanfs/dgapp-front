@@ -17,7 +17,10 @@ const state = {
   tamanho: {},
   itensPedido: [],
   produto: {},
-  dialogAddProduto: false
+  dialogAddProduto: false,
+  dialogAddProduto: false,
+  dialogAddPizza: false,
+  dialogSelecionarItem: false
 };
 
 const getters = {
@@ -29,7 +32,10 @@ const getters = {
   },
   getItensPedido: state => state.itensPedido,
   getProduto: state => state.produto,
-  dialogAddProduto: state => state.dialogAddProduto
+  dialogAddProduto: state => state.dialogAddProduto,
+  dialogAddProduto: state => state.dialogAddProduto,
+  dialogAddPizza: state => state.dialogAddPizza,
+  dialogSelecionarItem: state=> state.dialogSelecionarItem
 };
 
 const actions = {};
@@ -88,6 +94,15 @@ const mutations = {
   },
   settarDialogAdicionarProduto(state, bool){
     state.dialogAddProduto = bool
+  },
+  dialogAddProduto(state, bool) {
+    state.dialogAddProduto = bool
+  },
+  dialogAddPizza(state, bool) {
+    state.dialogAddPizza = bool
+  },
+  dialogSelecionarItem(state, bool){
+    state.dialogSelecionarItem = bool
   }
 };
 
