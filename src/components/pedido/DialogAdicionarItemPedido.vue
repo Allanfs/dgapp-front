@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialogSelecionarItem" width="500">
+    <v-dialog v-model="dialogSelecionarItem" width="400">
       <template v-slot:activator="{ on }">
         <v-btn color="green" dark v-on="on">
           <v-icon left>add</v-icon>Adicionar
@@ -16,8 +16,7 @@
             fullscreen
             hide-overlay
             transition="dialog-bottom-transition"
-            scrollable
-          >
+            scrollable>
             <template v-slot:activator="{ on }">
               <v-btn block @click="listarPara('Pizza')" color="primary" v-on="on">Pizza</v-btn>
             </template>
@@ -37,22 +36,28 @@
           </v-dialog>
         </v-card-text>
         <v-card-text>
-          <v-dialog
+           <v-dialog
             v-model="dialogAddProduto"
             fullscreen
             hide-overlay
             transition="dialog-bottom-transition"
-            scrollable
-          >
+            scrollable>
             <template v-slot:activator="{ on }">
               <v-btn block @click="listarPara('Produto')" color="primary" v-on="on">Produto</v-btn>
             </template>
             <v-card>
+              <v-toolbar color="primary">
+                <v-toolbar-title>Adicionar Produto</v-toolbar-title>
+                <v-spacer />
+                <v-toolbar-items>
+                  <v-btn dark flat>Adicionar</v-btn>
+                </v-toolbar-items>
+              </v-toolbar>
               <v-card-text>
-                <listar-produtos />
+                <listar-produtos></listar-produtos>
               </v-card-text>
             </v-card>
-          </v-dialog>
+          </v-dialog> 
         </v-card-text>
 
         <v-divider></v-divider>
@@ -147,17 +152,16 @@ export default {
     listarPara(tipo) {
       switch (tipo) {
         case "Produto":
-        case "produto":
-          this.$store.commit("dialogAddProduto", true);
-          this.dialogSelecionarItem = false;
-
+          this.dialogAddProduto = true;
+          // this.dialogSelecionarItem = false; // por algum motivo se este comando for feito, não funciona corretamente
           break;
+
         case "Pizza":
         case "pizza":
           this.$store.commit("dialogAddPizza", true);
-          this.dialogSelecionarItem = false;
-
+          // this.dialogSelecionarItem = false;
           break;
+
         default:
           break;
       }

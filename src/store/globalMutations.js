@@ -18,7 +18,6 @@ const state = {
   itensPedido: [],
   produto: {},
   dialogAddProduto: false,
-  dialogAddProduto: false,
   dialogAddPizza: false,
   dialogSelecionarItem: false
 };
@@ -32,7 +31,6 @@ const getters = {
   },
   getItensPedido: state => state.itensPedido,
   getProduto: state => state.produto,
-  dialogAddProduto: state => state.dialogAddProduto,
   dialogAddProduto: state => state.dialogAddProduto,
   dialogAddPizza: state => state.dialogAddPizza,
   dialogSelecionarItem: state=> state.dialogSelecionarItem
@@ -78,7 +76,6 @@ const mutations = {
     state.itensPedido.push(payload);
   },
   adicionarItemPedido(state, {produto, quantidade} ) {
-    console.log(produto)
     let novoItem;
     if (quantidade) {
       novoItem = new ItemPedido(null, produto, quantidade, null, null, null)

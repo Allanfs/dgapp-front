@@ -1,8 +1,9 @@
 <template>
   <v-list two-line subheader>
-    <v-subheader :class="produto ? 'green' : 'white'">Produtos</v-subheader>
     <v-list-group>
-      <v-radio-group v-model="produto">
+      <template v-slot:activator>
+        <v-subheader>Produtos</v-subheader>
+      </template>
         <v-list-tile v-for="produtoIt in produtos" :key="produtoIt.id">
           <v-list-tile-action>
             <!-- <v-radio :valu e="produtoIt" @change="$emit('input', produtoIt)"></v-radio> -->
@@ -13,7 +14,6 @@
             <v-list-tile-title>{{produtoIt.nome}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-      </v-radio-group>
     </v-list-group>
   </v-list>
 </template>
@@ -32,9 +32,7 @@ export default {
   },
   methods: {
     adicionar(produto) {
-
-      this.$store.commit('settarDialogAdicionarProduto', true)
-      this.$store.commit('guardarProduto', produto)
+      this.$store.commit('adicionarItemPedido', {produto}) // guardando aqui já vai para a listagem de itens
     }
   }
 };
