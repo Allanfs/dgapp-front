@@ -61,28 +61,69 @@ export class ItemPedido {
     this.produto = produto,
     this.quantidade = quantidade
     this.observacao = observacao
-    this.valor = produto.preco * quantidade
 
     if (produto.pizza) {
-      // aquela operaão para settar o sabor
+      if (sabores != null ) {
+
+        let saboresDaPizza = sabores
+        let precosDosSaboreNoTamanho = {};
+        for (const umSaborDaPizza of saboresDaPizza) {
+
+          for (const precoDoSaborNaPizza of umSaborDaPizza.precos) {
+            if(precoDoSaborNaPizza.tamanho.id === this.tamanho.id){
+              precosDosSaboreNoTamanho[umSaborDaPizza.nome] = (precoDoSaborNaPizza.preco)
+            }
+          }
+
+          // }
+        }
+        
+        // let maiorPreco;
+        // for (const preco in precosDosSaboreNoTamanho) {
+        //   if (precosDosSaboreNoTamanho.hasOwnProperty(preco)) {
+        //     const element = precosDosSaboreNoTamanho[preco];
+        //   console.log(element)
+        //   if (element > maiorPreco) {
+        //         maiorPreco = element;
+        //       }
+        //     }
+            
+        //   }
+          let precoAnterior = -1
+          Object.values(precosDosSaboreNoTamanho).forEach( preco => {
+            console.log("preco percorrido:", preco)
+            if (precoAnterior === -1) {
+              precoAnterior = preco
+            } else {
+              if (preco > precoAnterior) {
+                console.log("preco aplicado:", preco)
+                precoAnterior = preco
+              }
+            }
+          })
+          this.valor = precoAnterior * quantidade
+        }
+      }
+
+
     }
   }
 
-  calcularPreco() {
+function calcularPreco() {
 
-    this.preco = this.pizza.tamanho.precoPadrao
+  this.preco = this.pizza.tamanho.precoPadrao
 
-    // calcula preço pelo valor do sabor mais caro
-    // this.pizza.sabores.find( sabor => {
-    //   console.log(sabor)
-    //   sabor.precos.sort( (precoA, precoB) => {
-    //     console.log("precos",precoA, precoB)
-    //     return precoA.preco < precoB.preco
-    //   })
-    // })
+  // calcula preço pelo valor do sabor mais caro
+  // this.pizza.sabores.find( sabor => {
+  //   console.log(sabor)
+  //   sabor.precos.sort( (precoA, precoB) => {
+  //     console.log("precos",precoA, precoB)
+  //     return precoA.preco < precoB.preco
+  //   })
+  // })
 
-  }
 }
+
 
 export class Produto {
   constructor(id, nome,pizza,preco) {

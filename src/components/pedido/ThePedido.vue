@@ -43,9 +43,10 @@
             </v-tooltip>
             <td v-else>{{item.produto.nome}}</td>
             <!-- <td>{{ item.quantidade }}</td> -->
-            <td class="text-xs-center">{{ item.produto.preco }}</td>
+            <td class="text-xs-center" v-if="!item.produto.pizza">{{ item.produto.preco }}</td>
+            <td class="text-xs-center" v-else>{{ item.valor }}</td>
             <td class="text-xs-center">{{ item.quantidade }}</td>
-            <td class="text-xs-center">{{ item.quantidade * item.produto.preco}}</td>
+            <td class="text-xs-center">{{ calcularValor(item.quantidade,item)}}</td>
             <td class="text-xs-center">
               <v-icon small class="mr-2">edit</v-icon>
               <v-icon small>delete</v-icon>
@@ -187,7 +188,7 @@ export default {
         null
       )
     ],
-    valorTotal: (35.5).toFixed(2),
+    // valorTotal: (35.5).toFixed(2),
     formaPagamento: {
       valorPago: (50.1).toFixed(2),
       troco: 0,
@@ -196,6 +197,14 @@ export default {
     }
   }),
   computed: {
+    valorTotal() {
+      let valor = 0
+      this.itensPedido.forEach( item => {
+        valor += item.valor
+      })
+      
+      return valor.toFixed(2)
+    },
     valorTroco() {
       return (this.formaPagamento.valorPago - this.valorTotal).toFixed(2);
     },
@@ -239,6 +248,13 @@ export default {
     // }
   },
   methods: {
+    calcularValor(quantidade, item){
+      if(item.produto.pizza){
+        return quantidade * item.valor
+      }else {
+        return quantidade * item.produto.preco
+      }
+    },
     nomesSaboresTooltip(sabores) {
       console.log(sabores)
       let nomes = "";
