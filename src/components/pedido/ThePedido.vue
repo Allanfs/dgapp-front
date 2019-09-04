@@ -28,31 +28,7 @@
         <dialog-add-item-pedido id="adicionar-item-pedido" />
       </v-card-title>
       <v-card-text id="card-itens-itens">
-        <v-data-table :headers="headers" :items="itensPedido" class="elevation-1" hide-actions>
-          <!-- <template v-slot:no-data>
-            <v-btn color="primary" outline >Nenhum Item Adicionado</v-btn>
-          </template>-->
-          <template v-slot:items="{item}">
-            <v-tooltip bottom v-if="item.produto.pizza">
-              <template v-slot:activator="{ on }">
-                <div v-on="on">
-                  <td>{{ item.produto.nome }}</td>
-                </div>
-              </template>
-              <h3>{{nomesSaboresTooltip(item.sabores)}}</h3>
-            </v-tooltip>
-            <td v-else>{{item.produto.nome}}</td>
-            <!-- <td>{{ item.quantidade }}</td> -->
-            <td class="text-xs-center" v-if="!item.produto.pizza">{{ item.produto.preco }}</td>
-            <td class="text-xs-center" v-else>{{ item.valor }}</td>
-            <td class="text-xs-center">{{ item.quantidade }}</td>
-            <td class="text-xs-center">{{ calcularValor(item.quantidade,item)}}</td>
-            <td class="text-xs-center">
-              <v-icon small class="mr-2">edit</v-icon>
-              <v-icon small>delete</v-icon>
-            </td>
-          </template>
-        </v-data-table>
+        <itens-pedido v-bind:itens="itensPedido"/>
       </v-card-text>
       <v-card-text>
         <v-layout row>
@@ -111,30 +87,18 @@
 </template>
 
 <script>
-import ListaSabores from "./ListaSabores.vue";
-import ListaProdutos from "./ListaProdutos.vue";
-import ListaTamanhos from "./ListaTamanhos.vue";
 import pedidoDao from "../../store/api/services/pedido.js";
-import ModalAddPizzaVue from "./ModalAddPizza.vue";
-import ListaItemPedido from "./ListaItemPedido.vue";
 import { Pedido, ItemPedido, Produto } from "./Modelos";
-import { HeaderItemPedido } from "./headers.js";
-import AdicionarProdutoVue from "./AdicionarProduto.vue";
 import DialogAdicionarItemPedidoVue from "./DialogAdicionarItemPedido.vue";
+import ListaItemPedidoVue from './ListaItemPedido.vue';
 
 export default {
   name: "The-Pedido",
   components: {
-    "lista-sabores": ListaSabores,
-    "lista-produtos": ListaProdutos,
-    "lista-tamanhos": ListaTamanhos,
-    "modal-add-pizza": ModalAddPizzaVue,
-    "lista-item-pedido": ListaItemPedido,
-    "adicionar-produto": AdicionarProdutoVue,
+    "itens-pedido": ListaItemPedidoVue,
     "dialog-add-item-pedido": DialogAdicionarItemPedidoVue
   },
   data: () => ({
-    headers: HeaderItemPedido,
     cliente: {
       id: "b0e833f0-8d06-11e9-bc42-526af7764f64",
       telefone: [
@@ -200,7 +164,8 @@ export default {
     valorTotal() {
       let valor = 0
       this.itensPedido.forEach( item => {
-        valor += item.valor
+        console.log(item, typeof(item))
+        valor += parseFloat(item.valor * item.quantidade)
       })
       
       return valor.toFixed(2)
@@ -248,22 +213,6 @@ export default {
     // }
   },
   methods: {
-    calcularValor(quantidade, item){
-      if(item.produto.pizza){
-        return quantidade * item.valor
-      }else {
-        return quantidade * item.produto.preco
-      }
-    },
-    nomesSaboresTooltip(sabores) {
-      console.log(sabores)
-      let nomes = "";
-      sabores.forEach(function(sabor) {
-        nomes += sabor.nome;
-        nomes += ", ";
-      });
-      return nomes.substr(0, nomes.length - 2);
-    },
     salvar() {
       let pedido = new Pedido(
         this.cliente,

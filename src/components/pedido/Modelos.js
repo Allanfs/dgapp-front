@@ -62,6 +62,8 @@ export class ItemPedido {
     this.quantidade = quantidade
     this.observacao = observacao
 
+    this.produto.preco = this.produto.preco.toFixed(2)
+    
     if (produto.pizza) {
       if (sabores != null ) {
 
@@ -75,20 +77,8 @@ export class ItemPedido {
             }
           }
 
-          // }
         }
         
-        // let maiorPreco;
-        // for (const preco in precosDosSaboreNoTamanho) {
-        //   if (precosDosSaboreNoTamanho.hasOwnProperty(preco)) {
-        //     const element = precosDosSaboreNoTamanho[preco];
-        //   console.log(element)
-        //   if (element > maiorPreco) {
-        //         maiorPreco = element;
-        //       }
-        //     }
-            
-        //   }
           let precoAnterior = -1
           Object.values(precosDosSaboreNoTamanho).forEach( preco => {
             console.log("preco percorrido:", preco)
@@ -101,10 +91,11 @@ export class ItemPedido {
               }
             }
           })
-          this.valor = precoAnterior * quantidade
+          this.valor = (precoAnterior * quantidade).toFixed(2)
         }
-      }
-
+    } else {
+      this.valor = parseFloat(produto.preco * this.quantidade)
+    }
 
     }
   }

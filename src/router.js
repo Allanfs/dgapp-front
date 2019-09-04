@@ -21,10 +21,18 @@ import Incrementador from "./components/pedido/Incrementador.vue";
 
 import AddCategoria from "./components/categoria/AddCategoria.vue";
 import ThePedidoVue from "./components/pedido/ThePedido.vue";
-import AdicionarProdutoVue from "./components/pedido/AdicionarProduto.vue"
 
 import Cadastro from "@/components/cadastro.vue"
 Vue.use(Router);
+
+class rota {
+  constructor(path, name, component, children){
+    this.path = path
+    this.name = name
+    this.component = component
+    this.children = children
+  }
+}
 
 export default new Router({
   mode: "history",
@@ -113,16 +121,7 @@ export default new Router({
       name: "prods",
       component: ListaSabores
     },
-    {
-      path: "/pedido/novo",
-      name: "novopedido",
-      component: ThePedidoVue
-    },
-    {
-      path: "/pedido/adicionarproduto",
-      name: "produto",
-      component: AdicionarProdutoVue
-    },
+    new rota("/pedido/novo","novopedido",ThePedidoVue),
     {
       path: "/pedido/incrementador",
       name: "incrementador",
