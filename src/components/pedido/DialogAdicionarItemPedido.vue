@@ -176,10 +176,14 @@ export default {
         sabores.push(saborSelecionado);
       }
 
-      this.$store.commit(
-        "guardarItemPedido",
-        new ItemPedido(null, this.produtoPizza, 1, this.tamanho, sabores, null)
-      );
+      this.$store.commit('guardarItemPedido',
+        {
+          produto: this.produtoPizza,
+          quantidade: 1,
+          tamanho: this.tamanho,
+          sabores: sabores
+          }
+      )
 
       this.saboresSelecionados = [];
       this.$store.commit("guardarTamanho", null);

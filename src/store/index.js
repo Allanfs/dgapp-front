@@ -6,6 +6,7 @@ import recheio from './modules/recheio.js'
 
 import modalDataTable from './modules/utils/modalDataTable'
 import globalMutations from './globalMutations'
+import itemPedidoMutation from './itemPedidoMutations'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
             getters: recheio.getters,       // -> getters['recheio/...']
             mutations: recheio.mutations    // -> commit('recheio/...')
         },
+        itemPedido: itemPedidoMutation,
         modalDataTable,
         globalMutations
     },

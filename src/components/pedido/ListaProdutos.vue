@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     adicionar(produto) {
-      this.$store.commit('adicionarItemPedido', {produto}) // guardando aqui já vai para a listagem de itens
+      this.$store.commit('guardarItemPedido', {produto}) // guardando aqui já vai para a listagem de itens
     }
   }
 };

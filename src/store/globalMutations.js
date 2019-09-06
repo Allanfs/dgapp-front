@@ -12,14 +12,49 @@ const state = {
     mensagem: "",
     visivel: false
   },
-  cliente: {},
+  cliente: {
+    id: null,
+    telefone: [
+      {
+        id: null,
+        ddd: 0,
+        numero: null,
+        whatsapp: false,
+        observacao: null
+      }
+    ],
+    endereco: [
+      {
+        id: null,
+        rua: null,
+        bairro: null,
+        complemento: null,
+        numero: 0
+      },
+      {
+        id: null,
+        rua: null,
+        bairro: null,
+        complemento: null,
+        numero: 0
+      }
+    ],
+    nome: null,
+    dataNascimento: null,
+    cpf: null,
+    instagram: null,
+    facebook: null,
+    email: null,
+    dataCadastro: null
+  },
   sabores: [],
   tamanho: {},
   itensPedido: [],
   produto: {},
   dialogAddProduto: false,
   dialogAddPizza: false,
-  dialogSelecionarItem: false
+  dialogSelecionarItem: false,
+  dialogSelecionarCliente: false
 };
 
 const getters = {
@@ -29,11 +64,11 @@ const getters = {
   getTamanho(state) {
     return state.tamanho
   },
-  getItensPedido: state => state.itensPedido,
   getProduto: state => state.produto,
   dialogAddProduto: state => state.dialogAddProduto,
   dialogAddPizza: state => state.dialogAddPizza,
-  dialogSelecionarItem: state=> state.dialogSelecionarItem
+  dialogSelecionarItem: state=> state.dialogSelecionarItem,
+  dialogSelecionarCliente: state=> state.dialogSelecionarCliente
 };
 
 const actions = {};
@@ -100,6 +135,9 @@ const mutations = {
   },
   dialogSelecionarItem(state, bool){
     state.dialogSelecionarItem = bool
+  },
+  dialogSelecionarCliente(state, bool){
+    state.dialogSelecionarCliente = bool
   }
 };
 

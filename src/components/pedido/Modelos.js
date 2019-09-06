@@ -62,7 +62,7 @@ export class ItemPedido {
     this.quantidade = quantidade
     this.observacao = observacao
 
-    this.produto.preco = this.produto.preco.toFixed(2)
+    this.produto.preco = parseFloat(this.produto.preco).toFixed(2)
     
     if (produto.pizza) {
       if (sabores != null ) {

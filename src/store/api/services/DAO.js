@@ -57,7 +57,7 @@ export default function Dao(recurso) {
   }
 
   this.buscarUm = function ({parametro, valor}){
-    return http.get(`${this.url}/?${parametro}=${valor}`)
+    return http.get(`${this._url}/?${parametro}=${valor}`)
   }
   
 }

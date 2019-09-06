@@ -12,6 +12,7 @@
     <v-card id="card-cliente">
       <v-card-title>
         <h3>Cliente</h3>
+        <dialog-buscar-cliente id="buscar-cliente" />
       </v-card-title>
       <v-card-text>
         <v-layout wrap grid-list-md>
@@ -67,7 +68,7 @@
       </v-card-text>
       <v-card-actions>
         <v-layout row>
-          <v-btn color="primary">
+          <v-btn color="primary" @click="salvar">
             Cadastrar
             <v-icon right dark>done</v-icon>
           </v-btn>
@@ -87,53 +88,20 @@
 </template>
 
 <script>
-import pedidoDao from "../../store/api/services/pedido.js";
 import { Pedido, ItemPedido, Produto } from "./Modelos";
 import DialogAdicionarItemPedidoVue from "./DialogAdicionarItemPedido.vue";
 import ListaItemPedidoVue from './ListaItemPedido.vue';
+import DialogBuscarClienteVue from './DialogBuscarCliente.vue';
+import facade from "../../facade"
 
 export default {
   name: "The-Pedido",
   components: {
     "itens-pedido": ListaItemPedidoVue,
-    "dialog-add-item-pedido": DialogAdicionarItemPedidoVue
+    "dialog-add-item-pedido": DialogAdicionarItemPedidoVue,
+    "dialog-buscar-cliente": DialogBuscarClienteVue
   },
   data: () => ({
-    cliente: {
-      id: "b0e833f0-8d06-11e9-bc42-526af7764f64",
-      telefone: [
-        {
-          id: "62c479c2-8d0b-11e9-bc42-526af7764f64",
-          ddd: 83,
-          numero: "32356050",
-          whatsapp: false,
-          observacao: "trabalho fds"
-        }
-      ],
-      endereco: [
-        {
-          id: "0916dbac-8d2b-11e9-bc42-526af7764f64",
-          rua: "Rua Maria Eulina",
-          bairro: "Popular",
-          complemento: null,
-          numero: "110"
-        },
-        {
-          id: "0916cc7a-8d2b-11e9-bc42-526af7764f64",
-          rua: "Rua Estudante Júlio Cezar Soares da Silva",
-          bairro: "Valentina de Figueiredo",
-          complemento: null,
-          numero: "287"
-        }
-      ],
-      nome: "Sarah Evelyn Silva",
-      dataNascimento: null,
-      cpf: "23234054703",
-      instagram: "sara_es",
-      facebook: null,
-      email: null,
-      dataCadastro: null
-    },
     itens: [
       new ItemPedido(
         null,
@@ -161,6 +129,9 @@ export default {
     }
   }),
   computed: {
+    cliente(){
+      return this.$store.getters.getCliente
+    },
     valorTotal() {
       let valor = 0
       this.itensPedido.forEach( item => {
@@ -214,13 +185,14 @@ export default {
   },
   methods: {
     salvar() {
+
       let pedido = new Pedido(
         this.cliente,
         this.itensPedido,
         this.cliente.endereco[0]
       );
-      pedidoDao
-        .cadastrar(pedido)
+
+      facade.pedido.cadastrar(pedido)
         .then(({ data }) => {
           console.log(data);
         })

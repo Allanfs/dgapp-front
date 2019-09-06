@@ -45,12 +45,16 @@ export default {
     "buscar-cliente": BuscarClienteCadastrado
   },
   data: () => ({
+    clienteDao,
     dado: "",
     radios: "telefone",
     cliente: null
   }),
 
   computed: {
+    // cliente() {
+    // return this.$store.getters.getCliente
+    // },
     obterLabel() {
       if (this.radios === "cpf") {
         return "Buscar por CPF";
@@ -86,7 +90,7 @@ export default {
           // e exibir um botão para Criar pedido
         })
         .catch(error => {
-          console.log(erorr);
+          console.log(error);
         });
     }
   }
