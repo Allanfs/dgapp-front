@@ -34,5 +34,24 @@ export default {
     setDesconto: (valor) => store.commit('guardarDesconto', valor),
     getFormaPagamento: () => store.getters.getPagamento,
     setFormaPagamento: (valor) => store.commit('guardarPagamento',valor),
+
+    adicionarItemPedido({produto, quantidade, sabores, tamanho}) {
+      let novoItem
+      if(produto.pizza) {
+        novoItem = {
+          produto: produto,
+          quantidade: quantidade,
+          tamanho: tamanho,
+          sabores: sabores
+        }
+      } else {
+        novoItem = {
+          produto: produto,
+          quantidade: quantidade
+          }
+      }
+      
+      this.$store.commit('guardarItemPedido', novoItem)
+    }
   }
 }

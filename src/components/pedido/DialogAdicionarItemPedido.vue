@@ -36,7 +36,7 @@
           </v-dialog>
         </v-card-text>
         <v-card-text>
-           <v-dialog
+          <v-dialog
             v-model="dialogAddProduto"
             fullscreen
             hide-overlay
@@ -76,6 +76,7 @@ import ListaProdutosVue from "./ListaProdutos.vue";
 import ListaTamanhosVue from "./ListaTamanhos.vue";
 import ListaSaboresVue from "./ListaSabores.vue";
 import { ItemPedido } from "./Modelos";
+import facade from "../../facade"
 
 export default {
   name: "dialog-adicionar-item-pedido",
@@ -176,14 +177,12 @@ export default {
         sabores.push(saborSelecionado);
       }
 
-      this.$store.commit('guardarItemPedido',
-        {
-          produto: this.produtoPizza,
-          quantidade: 1,
-          tamanho: this.tamanho,
-          sabores: sabores
-          }
-      )
+      facade.pedido.adicionarItemPedido({
+        produto: this.produtoPizza,
+        quantidade: 1,
+        tamanho: this.tamanho,
+        sabores: sabores
+      })
 
       this.saboresSelecionados = [];
       this.$store.commit("guardarTamanho", null);
