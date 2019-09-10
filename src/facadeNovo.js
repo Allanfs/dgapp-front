@@ -23,16 +23,17 @@ export default {
     }
   },
   pedido: {
-    getNumeroPedido:() => store.getters.getNumero,
-    getEstado: () => store.getters.getEstado,
+    getNumeroPedido:() => store.getters.getNumero(),
+    getEstado: () => store.getters.getEstado(),
     getHoraAbertura: () => store.getHora_abertura,
     getHoraFechamento: () => store.getHora_fechamento,
 
-    getTotal() {return store.getters.getTotal},
-    setTotal: (valor) => store.commit('guardarTotal', valor),
-    getDesconto: () => store.getters.getDesconto,
-    setDesconto: (valor) => store.commit('guardarDesconto', valor),
-    getFormaPagamento: () => store.getters.getPagamento,
-    setFormaPagamento: (valor) => store.commit('guardarPagamento',valor),
+    getTotal: () => store.getters.getTotal(),
+    setTotal: (state, valor) => state.commit('', valor),
+    getDesconto: () => store.getters.getDesconto(),
+    setDesconto: (state, valor) => state.commit('', valor),
+    getFormaPagamento: () => store.getters.getPagamento(),
+    setFormaPagamento: (state, valor) => state.commit('',valor),
+
   }
 }

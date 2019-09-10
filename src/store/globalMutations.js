@@ -59,7 +59,6 @@ const state = {
 
 const getters = {
   getAlerta: state => state.alerta,
-  getCliente: state => state.cliente,
   getSabores: state => state.sabores,
   getTamanho(state) {
     return state.tamanho
@@ -68,7 +67,7 @@ const getters = {
   dialogAddProduto: state => state.dialogAddProduto,
   dialogAddPizza: state => state.dialogAddPizza,
   dialogSelecionarItem: state=> state.dialogSelecionarItem,
-  dialogSelecionarCliente: state=> state.dialogSelecionarCliente
+  dialogSelecionarCliente: state=> state.dialogSelecionarCliente,
 };
 
 const actions = {};

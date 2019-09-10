@@ -32,6 +32,7 @@ import { http } from '../config.js'
 }
 
 export default function Dao(recurso) {
+  this.http = http;
   this.recurso = recurso;
     this._url = `https://domgilittusapi.herokuapp.com/${recurso}`;  
   // neste momento devo usar = para atribuir o valor ao atributo

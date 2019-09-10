@@ -15,8 +15,17 @@ utilizar a propriedade template
 mudará o modo de build do vue
 existem 2: standalon e runtime-only
 */
-new Vue({
+const app = new Vue({
+  el: '#app',
   store,
   router,
-  render: h => h(App)
-}).$mount('#app')
+  render: function (h) {
+    return h(App)
+  } 
+})//.$mount()
+
+Vue.component('adicionar-cliente-novo', {
+  render (createElement) {
+    return createElement('span','ol')
+  }
+}) 
