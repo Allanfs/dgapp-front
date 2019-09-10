@@ -79,7 +79,6 @@
   </v-card>
 </template>
 <script>
-import CrudTable from "../utils/CrudTable.vue";
 import FormEnderecoVue from "../endereco/FormEnderecoPopup.vue";
 import FormTelefoneVue from "../telefone/FormTelefonePopup.vue";
 
@@ -93,7 +92,6 @@ export default {
     titulo: String
   },
   components: {
-    "crud-table": CrudTable,
     endereco: FormEnderecoVue,
     telefone: FormTelefoneVue
   },
@@ -104,41 +102,41 @@ export default {
   },
   data() {
     return {
-      cliente: {
-      id: "b0e833f0-8d06-11e9-bc42-526af7764f64",
-      telefone: [
-        {
-          id: "62c479c2-8d0b-11e9-bc42-526af7764f64",
-          ddd: 83,
-          numero: "32356050",
-          whatsapp: false,
-          observacao: "trabalho fds"
-        }
-      ],
-      endereco: [
-        {
-          id: "0916dbac-8d2b-11e9-bc42-526af7764f64",
-          rua: "Rua Maria Eulina",
-          bairro: "Popular",
-          complemento: null,
-          numero: "110"
-        },
-        {
-          id: "0916cc7a-8d2b-11e9-bc42-526af7764f64",
-          rua: "Rua Estudante Júlio Cezar Soares da Silva",
-          bairro: "Valentina de Figueiredo",
-          complemento: null,
-          numero: "287"
-        }
-      ],
-      nome: "Sarah Evelyn Silva",
-      dataNascimento: null,
-      cpf: "23234054703",
-      instagram: "sara_es",
-      facebook: null,
-      email: null,
-      dataCadastro: null
-    }
+      // cliente: {
+      //   id: "b0e833f0-8d06-11e9-bc42-526af7764f64",
+      //   telefone: [
+      //     {
+      //       id: "62c479c2-8d0b-11e9-bc42-526af7764f64",
+      //       ddd: 83,
+      //       numero: "32356050",
+      //       whatsapp: false,
+      //       observacao: "trabalho fds"
+      //     }
+      //   ],
+      //   endereco: [
+      //     {
+      //       id: "0916dbac-8d2b-11e9-bc42-526af7764f64",
+      //       rua: "Rua Maria Eulina",
+      //       bairro: "Popular",
+      //       complemento: null,
+      //       numero: "110"
+      //     },
+      //     {
+      //       id: "0916cc7a-8d2b-11e9-bc42-526af7764f64",
+      //       rua: "Rua Estudante Júlio Cezar Soares da Silva",
+      //       bairro: "Valentina de Figueiredo",
+      //       complemento: null,
+      //       numero: "287"
+      //     }
+      //   ],
+      //   nome: "Sarah Evelyn Silva",
+      //   dataNascimento: null,
+      //   cpf: "23234054703",
+      //   instagram: "sara_es",
+      //   facebook: null,
+      //   email: null,
+      //   dataCadastro: null
+      // }
     };
   },
   methods: {

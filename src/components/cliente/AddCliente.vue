@@ -41,32 +41,32 @@
         <v-card flat>
           <v-layout row wrap>
               <v-flex xs12 sm2 md1>
-                <v-text-field v-model="cliente.telefone[0].ddd" type="number" label="DDD" required></v-text-field>
+                <v-text-field v-model="cliente.telefone.ddd" type="number" label="DDD" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md3>
-                <v-text-field v-model="cliente.telefone[0].numero" label="Número*" mask="#####-####" required></v-text-field>
+                <v-text-field v-model="cliente.telefone.numero" label="Número*" mask="#####-####" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md4>
-                <v-text-field v-model="cliente.telefone[0].observacao" label="Observação"></v-text-field>
+                <v-text-field v-model="cliente.telefone.observacao" label="Observação"></v-text-field>
               </v-flex>
               <v-flex>
-                <v-checkbox v-model="cliente.telefone[0].whatsapp" label="É Whatsapp"></v-checkbox>
+                <v-checkbox v-model="cliente.telefone.whatsapp" label="É Whatsapp"></v-checkbox>
               </v-flex>
             </v-layout>
         </v-card>
         <v-card flat>
           <v-layout row wrap>
               <v-flex xs12 sm10 md5>
-                <v-text-field v-model="cliente.endereco[0].rua" label="Rua"></v-text-field>
+                <v-text-field v-model="cliente.endereco.rua" label="Rua"></v-text-field>
               </v-flex>
               <v-flex xs12 sm2 md3>
-                <v-text-field v-model="cliente.endereco[0].numero" label="Número"></v-text-field>
+                <v-text-field v-model="cliente.endereco.numero" label="Número"></v-text-field>
               </v-flex>
               <v-flex xs12 sm3 md4>
-                <v-text-field v-model="cliente.endereco[0].bairro" label="Bairro" value></v-text-field>
+                <v-text-field v-model="cliente.endereco.bairro" label="Bairro" value></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md12>
-                <v-text-field v-model="cliente.endereco[0].complemento" label="Complemento"></v-text-field>
+                <v-text-field v-model="cliente.endereco.complemento" label="Complemento"></v-text-field>
               </v-flex>
             </v-layout>
         </v-card>
@@ -93,11 +93,27 @@ export default {
     cliente: {
       type: Object,
       default: () => ({endereco: [], telefone: []})
-    }
+    },
   },
   computed: {
     tituloFormulario() {
       return this.titulo ? this.titulo : 'Cadastrar Cliente';
+    },
+    telefone: {
+      get() {
+
+      },
+      set(novo) {
+
+      }
+    },
+    endereco: {
+      get() {
+
+      },
+      set(novo) {
+
+      }
     }
   },
   data: () => ({}),

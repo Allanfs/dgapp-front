@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialogSelecionarCliente" width="400">
+    <v-dialog v-model="dialogSelecionarCliente" width="600">
       <template v-slot:activator="{ on }">
         <v-btn color="green" dark v-on="on">
           <v-icon left>add</v-icon>Adicionar

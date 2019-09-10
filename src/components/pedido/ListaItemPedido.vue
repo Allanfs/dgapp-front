@@ -1,8 +1,8 @@
 <template>
   <v-data-table :headers="headers" :items="itens" class="elevation-1" hide-actions>
-    <!-- <template v-slot:no-data>
-      <v-btn color="primary" outline >Nenhum Item Adicionado</v-btn>
-    </template>-->
+    <template v-slot:no-data>
+      Nenhum Item Adicionado
+    </template>
     <template v-slot:items="{item}">
       <v-tooltip bottom v-if="item.produto.pizza">
         <template v-slot:activator="{ on }">

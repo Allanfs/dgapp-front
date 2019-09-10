@@ -15,6 +15,7 @@
               :label="obterLabel"
               type="text"
               :mask="obterMascara()"
+              @keydown.enter.prevent='consultar'
               @click:append="consultar"
             ></v-text-field>
           </v-flex>
@@ -22,27 +23,30 @@
       </v-container>
     </v-form>
 
-    <buscar-cliente
-      v-show="clienteEncontrado"
-      :cliente="this.cliente" 
-      titulo="Cliente encontrado"  
-    />
-    <!-- 
-      TODO adicionar prop 'cliente' ao componente
-      TODO adicionar prop 'titulo' ao componente,
-        definir 'Cadastrar Cliente' por padrão
-    -->
-  </div>
+    <div v-if="clienteEncontrado != null">
+          <!-- v-show="clienteEncontrado" -->
+        <buscar-cliente
+          :cliente="this.cliente" 
+          titulo="Cliente encontrado"  
+        />
+    </div>
+    <div v-else>
+      <cadastrar-cliente/>
+    </div>
+</div>
 </template>
 
 <script>
 import clienteDao from "@/store/api/services/cliente.js";
 import BuscarClienteCadastrado from "./BuscarClienteCadastrado.vue";
+import AddClienteVue from '../cliente/AddCliente.vue';
+import facade from '../../facade';
 
 export default {
   name: "consultar-cliente",
   components: {
-    "buscar-cliente": BuscarClienteCadastrado
+    "buscar-cliente": BuscarClienteCadastrado,
+    "cadastrar-cliente": AddClienteVue
   },
   data: () => ({
     clienteDao,
@@ -63,8 +67,13 @@ export default {
         return "Buscar por número de telefone";
       }
     },
-    clienteEncontrado() {
-      return this.cliente !== null;
+    clienteEncontrado: {
+      get() {
+        return facade.cliente.get();
+      },
+      set(novo) {
+        facade.cliente.set(novo);
+      }
     }
   },
 
@@ -78,18 +87,15 @@ export default {
       }
     },
     consultar() {
-      this.clienteDao
-        .buscarUm({
-          parametro: this.radios,
-          valor: this.dado
-        })
-        .then(({ data }) => {
+      this.clienteDao.findBy({tipo: this.radios, dado: this.dado}).then( (r) => {
+        if (r.status === 204 ) {
+          this.clienteEncontrado = r.data
+          return
+        } else {
           this.cliente = data;
-          // sinalizar para exibir dado do cliente
-          // exibir form de cliente com os dados preenchidos
-          // e exibir um botão para Criar pedido
-        })
-        .catch(error => {
+        }
+      }).catch(error => {
+        this.clienteEncontrado = undefined
           console.log(error);
         });
     }
