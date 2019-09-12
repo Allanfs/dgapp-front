@@ -29,7 +29,8 @@
                 </v-toolbar-items>
               </v-toolbar>
               <v-card-text>
-                <tamanhos v-model="tamanho" />
+                <!-- <tamanhos v-model="tamanho" /> -->
+                <tamanhos/>
                 <sabores v-model="saboresSelecionados" />
               </v-card-text>
             </v-card>
@@ -136,12 +137,20 @@ export default {
       set(novoBool) {
         this.$store.commit("dialogAddPizza", novoBool);
       }
+    },
+    tamanho: {
+      get(){
+        return facade.itemPedido.getTamanho()
+      },
+      set(t) {
+        facade.itemPedido.setTamanho(t)
+      }
     }
   },
   data: () => ({
     sabores: [],
     saboresSelecionados: [],
-    tamanho: {},
+    // tamanho: {},
     produtoPizza: {
       id: "35990c12-c08f-11e9-9cb5-2a2ae2dbcce4",
       nome: "Pizza",
@@ -185,7 +194,7 @@ export default {
       })
 
       this.saboresSelecionados = [];
-      this.$store.commit("guardarTamanho", null);
+      this.tamanho = null
     }
   }
 };

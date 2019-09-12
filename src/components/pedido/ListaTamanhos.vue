@@ -22,12 +22,22 @@
 
 <script>
 import tamanhoDao from "../../store/api/services/tamanho.js";
+import facade from '../../facade';
 export default {
   name: "lista-tamanhos",
   data: () => ({
     tamanhos: [],
-    tamanho: {}
   }),
+  computed: {
+    tamanho: {
+      get() {
+        return facade.itemPedido.getTamanho()
+      },
+      set(novo) {
+        facade.itemPedido.setTamanho(novo)
+      }
+    }
+  },
   mounted() {
     // obter tamanhos cadastrados.
     tamanhoDao.listarTodos().then(({ data }) => (this.tamanhos = data));

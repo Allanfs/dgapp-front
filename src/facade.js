@@ -51,7 +51,21 @@ export default {
           }
       }
       
-      this.$store.commit('guardarItemPedido', novoItem)
+      store.commit('guardarItemPedido', novoItem)
+    }
+  },
+  itemPedido: {
+    getTamanho() {
+      return store.getters.getTamanho
+    },
+    setTamanho(t){
+      store.commit('guardarTamanho', t)
+    },
+    getSabores() {
+      return store.getters.getSabores
+    },
+    setSabores(s) {
+      store.commit('guardarSabores', s)
     }
   }
 }

@@ -47,8 +47,6 @@ const state = {
     email: null,
     dataCadastro: null
   },
-  sabores: [],
-  tamanho: {},
   itensPedido: [],
   produto: {},
   dialogAddProduto: false,
@@ -59,10 +57,6 @@ const state = {
 
 const getters = {
   getAlerta: state => state.alerta,
-  getSabores: state => state.sabores,
-  getTamanho(state) {
-    return state.tamanho
-  },
   getProduto: state => state.produto,
   dialogAddProduto: state => state.dialogAddProduto,
   dialogAddPizza: state => state.dialogAddPizza,
@@ -99,12 +93,6 @@ const mutations = {
   },
   guardarCliente(state, payload) {
     state.cliente = payload
-  },
-  guardarSabores(state, payload) {
-    state.sabores = payload
-  },
-  guardarTamanho(state, payload) {
-    state.tamanho = payload
   },
   guardarItemPedido(state, payload) {
     state.itensPedido.push(payload);
