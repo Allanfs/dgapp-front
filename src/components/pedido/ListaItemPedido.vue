@@ -1,7 +1,7 @@
 <template>
   <v-data-table :headers="headers" :items="itens" class="elevation-1" hide-actions>
     <template v-slot:no-data>
-      Nenhum Item Adicionado
+      Nenhum Item Adicionado 
     </template>
     <template v-slot:items="{item}">
       <v-tooltip bottom v-if="item.produto.pizza">
@@ -28,24 +28,19 @@
 <script>
 import { ItemPedido } from "./Modelos.js";
 import { HeaderItemPedido } from "./headers.js";
+import facade from '../../facade';
 
 
 export default {
   name: "lista-item-pedido",
-  props:  {
-    itens:{
-      type: Array,
-      required: true
+  computed: {
+    itens() {
+      return facade.itemPedido.getItens()
     }
   },
   data() {
     return {
-      headers: HeaderItemPedido,
-      itens: [{
-        produto: {},
-        sabores:[]
-      }]
-
+      headers: HeaderItemPedido
     }
   },
   methods: {
@@ -59,9 +54,7 @@ export default {
     removerItem(item) {
       let posicao = this.itens.indexOf(item)
       console.log(posicao)
-
-      this.itens.splice(posicao,1)
-      
+      facade.itemPedido.setItemPedido(this.itens.slice(posicao,1))
     },
     nomesSaboresTooltip(sabores) {
       let nomes = "";

@@ -6,7 +6,7 @@
       </template>
       <v-list-tile v-for="sabor in saboresDisponiveis" :key="sabor.id">
         <v-list-tile-action>
-          <v-checkbox :value="sabor" v-model="sabores" @change="$emit('input', sabores)"></v-checkbox>
+          <v-checkbox :value="sabor" v-model="sabores"></v-checkbox>
           <!-- selecionar o checkbox deve ser unico -->
         </v-list-tile-action>
         <v-list-tile-content>
@@ -21,6 +21,7 @@
 
 <script>
 import saborDao from "../../store/api/services/sabor.js";
+import facade from '../../facade';
 export default {
   name: "lista-sabores",
   props: {
@@ -35,11 +36,18 @@ export default {
       if (this.quantidadeMax)
         return `${this.sabores.length}/${this.quantidadeMax}`;
       else return this.sabores.length;
+    },
+    sabores: {
+      get(){
+        return facade.itemPedido.getSabores()
+      },
+      set(s) {
+        facade.itemPedido.setSabores(s)
+      }
     }
   },
   data: () => ({
     exibirRecheio: true,
-    sabores: [],
     saboresDisponiveis: []
   }),
   mounted() {

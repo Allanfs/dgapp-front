@@ -31,7 +31,8 @@
               <v-card-text>
                 <!-- <tamanhos v-model="tamanho" /> -->
                 <tamanhos/>
-                <sabores v-model="saboresSelecionados" />
+                <sabores/>
+                <!-- <sabores v-model="saboresSelecionados" /> -->
               </v-card-text>
             </v-card>
           </v-dialog>
@@ -106,7 +107,7 @@ export default {
       ) {
         return true;
       }
-      return false;
+        return false;
     },
     dialogSelecionarItem: {
       get() {
@@ -145,12 +146,18 @@ export default {
       set(t) {
         facade.itemPedido.setTamanho(t)
       }
+    },
+    saboresSelecionados: {
+      get() {
+        return facade.itemPedido.getSabores()
+      },
+      set(s){
+        facade.itemPedido.setSabores(s)
+      }
     }
   },
   data: () => ({
     sabores: [],
-    saboresSelecionados: [],
-    // tamanho: {},
     produtoPizza: {
       id: "35990c12-c08f-11e9-9cb5-2a2ae2dbcce4",
       nome: "Pizza",

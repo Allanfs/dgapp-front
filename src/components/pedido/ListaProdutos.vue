@@ -20,6 +20,7 @@
 
 <script>
 import produtoDao from "../../store/api/services/produto.js";
+import { ItemPedido } from './Modelos';
 export default {
   name: "lista-produtos",
   data: () => ({
@@ -32,7 +33,7 @@ export default {
   },
   methods: {
     adicionar(produto) {
-      this.$store.commit('guardarItemPedido', {produto}) // guardando aqui já vai para a listagem de itens
+      this.$store.commit('guardarItemPedido', new ItemPedido(null,produto, 1)) // guardando aqui já vai para a listagem de itens
     }
   }
 };
