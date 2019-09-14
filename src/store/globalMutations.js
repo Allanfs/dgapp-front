@@ -47,7 +47,7 @@ const state = {
     email: null,
     dataCadastro: null
   },
-  itensPedido: [],
+  itensPedidoOld: [],
   produto: {},
   dialogAddProduto: false,
   dialogAddPizza: false,
@@ -94,8 +94,8 @@ const mutations = {
   guardarCliente(state, payload) {
     state.cliente = payload
   },
-  guardarItemPedido(state, payload) {
-    state.itensPedido.push(payload);
+  guardarItemPedidoOld(state, payload) {
+    state.itensPedidoOld.push(payload);
   },
   adicionarItemPedido(state, {produto, quantidade} ) {
     let novoItem;
@@ -105,7 +105,7 @@ const mutations = {
       novoItem = new ItemPedido(null, produto, 1, null, null, null)
     }
     
-    this.commit('guardarItemPedido',novoItem)
+    this.commit('guardarItemPedidoOld',novoItem)
     
   },
   guardarProduto(state, produto){

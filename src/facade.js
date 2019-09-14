@@ -38,17 +38,9 @@ export default {
     adicionarItemPedido({produto, quantidade, sabores, tamanho}) {
       let novoItem
       if(produto.pizza) {
-        novoItem = {
-          produto: produto,
-          quantidade: quantidade,
-          tamanho: tamanho,
-          sabores: sabores
-        }
+        novoItem = new ItemPedido(null, produto, quantidade, tamanho, sabores)
       } else {
-        novoItem = {
-          produto: produto,
-          quantidade: quantidade
-          }
+        novoItem = new ItemPedido(null, produto, quantidade)
       }
       
       store.commit('guardarItemPedido', novoItem)
@@ -66,6 +58,12 @@ export default {
     },
     setSabores(s) {
       store.commit('guardarSabores', s)
+    },
+    getItens(){
+      return store.getters.getItensPedido
+    },
+    setItemPedido(i){
+      store.commit('setItemPedido', i)
     }
   }
 }

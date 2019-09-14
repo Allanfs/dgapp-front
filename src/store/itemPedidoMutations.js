@@ -1,9 +1,9 @@
 import { pedidoService } from "../components/pedido/pedidoservice"
 
 const state = {
-  itensPedido: [],
+  itensPedido: new Array(),
   tamanho: null,
-  sabores: Array()
+  sabores: new Array()
 }
 
 const getters = {
@@ -13,14 +13,14 @@ const getters = {
   // getValorPedido: () => pedidoService.calcularValorTotal() // nao funciona como eu gostaria
 }
 
-const actions = {
-
-}
+const actions = {}
 
 const mutations = {
+  setItemPedido(state, payload) {
+    state.itensPedido = payload
+  },
   guardarItemPedido(state, payload) {
-    pedidoService.adicionarItemNoPedido(payload)
-    state.itensPedido = pedidoService.getItensPedido()
+    state.itensPedido.push(payload)
   },
   removerItemPedido(state, payload) {
     pedidoService.removerItemDoPedido(payload)
