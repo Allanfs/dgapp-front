@@ -29,10 +29,8 @@
                 </v-toolbar-items>
               </v-toolbar>
               <v-card-text>
-                <!-- <tamanhos v-model="tamanho" /> -->
                 <tamanhos/>
                 <sabores/>
-                <!-- <sabores v-model="saboresSelecionados" /> -->
               </v-card-text>
             </v-card>
           </v-dialog>
@@ -97,7 +95,7 @@ export default {
       };
       let quantidadeSaboresSelecionadosEhValido = () => {
         let qtd = this.saboresSelecionados.length;
-        return qtd > 0 && qtd <= this.tamanho.numeroMaximoSabores;
+        return qtd > 0 && qtd <= this.tamanho.numero_max_sabores;
       };
 
       if (

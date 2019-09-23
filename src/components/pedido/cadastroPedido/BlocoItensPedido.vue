@@ -23,13 +23,7 @@ export default {
     itensPedido() {
       return []
     }
-  },
-  data: () => ({})
-
+  }
 
 }
 </script>
-
-<style>
-
-</style>

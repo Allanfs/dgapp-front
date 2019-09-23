@@ -88,7 +88,7 @@ export default {
     },
     consultar() {
       this.clienteDao.findBy({tipo: this.radios, dado: this.dado}).then( (r) => {
-        if (r.status === 204 ) {
+        if (r.status !== 204 ) {
           this.clienteEncontrado = r.data
           return
         } else {

@@ -38,62 +38,19 @@ export default {
     "info-pagamento": InfoPagamentoVue,
   },
   data: () => ({
-    itens: [
-      new ItemPedido(
-        null,
-        new Produto(null, "Pizza", true, 10),
-        3,
-        null,
-        null,
-        null
-      ),
-      new ItemPedido(
-        null,
-        new Produto(null, "Pizza", true, 10),
-        1,
-        null,
-        null,
-        null
-      )
-    ],
-    // valorTotal: (35.5).toFixed(2),
   }),
-  computed: {
-    valorTotal() {
-      let valor = 0
-      this.itensPedido.forEach( item => {
-        valor += parseFloat(item.valor * item.quantidade)
-      })
-      
-      return parseFloat(valor - this.valorDesconto)
-    },
-    valorTroco() {
-      return (this.formaPagamento.valorPago - this.valorTotal).toFixed(2);
-    },
-    nomesSabores() {
-      let nomes = "";
-      this.sabores.forEach(function(sabor) {
-        nomes += sabor.nome;
-        nomes += ", ";
-      });
-      return nomes.substr(0, nomes.length - 2);
-    }
-  },
   methods: {
     salvar() {
 
-      let pedido = new Pedido(
-        this.cliente,
-        this.itensPedido,
-        this.cliente.endereco[0]
-      );
+      let pedido = facade.pedido.getPedido()
+      // console.log(JSON.stringify(pedido));
 
       facade.pedido.cadastrar(pedido)
         .then(({ data }) => {
+          facade.pedido.setPedido(data)
           console.log(data);
         })
         .catch(err => console.log(err));
-      // this.$store.commit('guardarCliente', {}); // esvazia o cliente no vuex, para não ser usado indevidamente.
     },
     adicionarTamanho(tamanho) {
       this.$store.commit("guardarTamanho", tamanho);

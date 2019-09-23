@@ -21,6 +21,8 @@
 
 <script>
 import saborDao from "../../store/api/services/sabor.js";
+import { http } from '../../store/api/config'
+
 import facade from '../../facade';
 export default {
   name: "lista-sabores",
@@ -51,7 +53,9 @@ export default {
     saboresDisponiveis: []
   }),
   mounted() {
-    saborDao.listarTodos().then(({ data }) => (this.saboresDisponiveis = data));
+    let host = `https://domgilittusapi.herokuapp.com/sabores`
+    http.get(host).then(({ data }) => (this.saboresDisponiveis = data))
+    // saborDao.listarTodos().then(({ data }) => (this.saboresDisponiveis = data));
   },
   methods: {
     subtitulo(sabor) {

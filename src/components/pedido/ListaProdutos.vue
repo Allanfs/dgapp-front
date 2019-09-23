@@ -6,9 +6,7 @@
       </template>
         <v-list-tile v-for="produtoIt in produtos" :key="produtoIt.id">
           <v-list-tile-action>
-            <!-- <v-radio :valu e="produtoIt" @change="$emit('input', produtoIt)"></v-radio> -->
             <v-btn @click="adicionar(produtoIt)">Adicionar</v-btn>
-            <!-- selecionar o checkbox deve ser unico -->
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>{{produtoIt.nome}}</v-list-tile-title>
@@ -21,19 +19,25 @@
 <script>
 import produtoDao from "../../store/api/services/produto.js";
 import { ItemPedido } from './Modelos';
+import facade from '../../facade';
 export default {
   name: "lista-produtos",
   data: () => ({
     produtos: [],
     produto: null
   }),
-  mounted() {
+  async mounted() {
     // obter produtos cadastrados.
-    produtoDao.listarTodos().then(({ data }) => (this.produtos = data));
+    await produtoDao.listarTodos().then(({ data }) => (this.produtos = data));
+    this.produtos.forEach(produto => {
+      if(isNaN(produto.preco)){
+        produto.preco = produto.preco.substring(1,produto.preco.length)
+      }
+    })
   },
   methods: {
     adicionar(produto) {
-      this.$store.commit('guardarItemPedido', new ItemPedido(null,produto, 1)) // guardando aqui já vai para a listagem de itens
+      facade.pedido.adicionarItemPedido(new ItemPedido(null,produto, 1))
     }
   }
 };

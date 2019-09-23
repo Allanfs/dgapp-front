@@ -33,13 +33,13 @@ export default {
     },
     telefone() {
         if(this.clienteSettado()){
-          return this.cliente.telefone[0]
+          return this.cliente.telefone
         }
       return {}
     },
     endereco() {
       if(this.clienteSettado()){
-        return this.cliente.endereco[0]
+        return this.cliente.endereco
       }
       return {}
     },

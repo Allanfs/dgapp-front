@@ -43,16 +43,16 @@ export default {
     tamanhoDao.listarTodos().then(({ data }) => (this.tamanhos = data));
   },
   methods: {
-    subtituloTamanho({ numeroFatias, numeroMaximoSabores, precoPadrao }) {
+    subtituloTamanho({ numero_fatias, numero_max_sabores, preco }) {
       return `${this.frazeNoPlural(
-        numeroFatias,
+        numero_fatias,
         "fatia",
         "fatias"
       )} - Até ${this.frazeNoPlural(
-        numeroMaximoSabores,
+        numero_max_sabores,
         "sabor",
         "sabores"
-      )} - A partir de R$ ${precoPadrao}`;
+      )} - A partir de R$ ${preco}`;
     },
     frazeNoPlural(valor, singular, plural) {
       return valor === 1 ? `${valor} ${singular}` : `${valor} ${plural}`;

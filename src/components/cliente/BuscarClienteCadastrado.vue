@@ -41,32 +41,32 @@
         <v-card flat>
           <v-layout row wrap>
               <v-flex xs12 sm2 md1>
-                <v-text-field v-model="cliente.telefone[0].ddd" type="number" label="DDD" required></v-text-field>
+                <v-text-field v-model="cliente.telefone.ddd" type="number" label="DDD" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md3>
-                <v-text-field v-model="cliente.telefone[0].numero" label="Número*" mask="#####-####" required></v-text-field>
+                <v-text-field v-model="cliente.telefone.numero" label="Número*" mask="#####-####" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md4>
-                <v-text-field v-model="cliente.telefone[0].observacao" label="Observação"></v-text-field>
+                <v-text-field v-model="cliente.telefone.observacao" label="Observação"></v-text-field>
               </v-flex>
               <v-flex>
-                <v-checkbox v-model="cliente.telefone[0].whatsapp" label="É Whatsapp"></v-checkbox>
+                <v-checkbox v-model="cliente.telefone.whatsapp" label="É Whatsapp"></v-checkbox>
               </v-flex>
             </v-layout>
         </v-card>
         <v-card flat>
           <v-layout row wrap>
               <v-flex xs12 sm10 md5>
-                <v-text-field v-model="cliente.endereco[0].rua" label="Rua"></v-text-field>
+                <v-text-field v-model="cliente.endereco.rua" label="Rua"></v-text-field>
               </v-flex>
               <v-flex xs12 sm2 md3>
-                <v-text-field v-model="cliente.endereco[0].numero" label="Número"></v-text-field>
+                <v-text-field v-model="cliente.endereco.numero" label="Número"></v-text-field>
               </v-flex>
               <v-flex xs12 sm3 md4>
-                <v-text-field v-model="cliente.endereco[0].bairro" label="Bairro" value></v-text-field>
+                <v-text-field v-model="cliente.endereco.bairro" label="Bairro" value></v-text-field>
               </v-flex>
               <v-flex xs12 sm5 md12>
-                <v-text-field v-model="cliente.endereco[0].complemento" label="Complemento"></v-text-field>
+                <v-text-field v-model="cliente.endereco.complemento" label="Complemento"></v-text-field>
               </v-flex>
             </v-layout>
         </v-card>
@@ -102,41 +102,7 @@ export default {
   },
   data() {
     return {
-      // cliente: {
-      //   id: "b0e833f0-8d06-11e9-bc42-526af7764f64",
-      //   telefone: [
-      //     {
-      //       id: "62c479c2-8d0b-11e9-bc42-526af7764f64",
-      //       ddd: 83,
-      //       numero: "32356050",
-      //       whatsapp: false,
-      //       observacao: "trabalho fds"
-      //     }
-      //   ],
-      //   endereco: [
-      //     {
-      //       id: "0916dbac-8d2b-11e9-bc42-526af7764f64",
-      //       rua: "Rua Maria Eulina",
-      //       bairro: "Popular",
-      //       complemento: null,
-      //       numero: "110"
-      //     },
-      //     {
-      //       id: "0916cc7a-8d2b-11e9-bc42-526af7764f64",
-      //       rua: "Rua Estudante Júlio Cezar Soares da Silva",
-      //       bairro: "Valentina de Figueiredo",
-      //       complemento: null,
-      //       numero: "287"
-      //     }
-      //   ],
-      //   nome: "Sarah Evelyn Silva",
-      //   dataNascimento: null,
-      //   cpf: "23234054703",
-      //   instagram: "sara_es",
-      //   facebook: null,
-      //   email: null,
-      //   dataCadastro: null
-      // }
+      
     };
   },
   methods: {
