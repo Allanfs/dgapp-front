@@ -72,26 +72,26 @@ export class ItemPedido {
         for (const umSaborDaPizza of saboresDaPizza) {
 
           for (const precoDoSaborNaPizza of umSaborDaPizza.precos) {
-            if(precoDoSaborNaPizza.tamanho.id === this.tamanho.id){
+            if(precoDoSaborNaPizza.tamanho.nome === this.tamanho.nome){
               precosDosSaboreNoTamanho[umSaborDaPizza.nome] = (precoDoSaborNaPizza.preco)
             }
           }
 
         }
         
-          let precoAnterior = -1
-          Object.values(precosDosSaboreNoTamanho).forEach( preco => {
-            console.log("preco percorrido:", preco)
-            if (precoAnterior === -1) {
+        let precoAnterior = -1
+        Object.values(precosDosSaboreNoTamanho).forEach( preco => {
+          console.log("preco percorrido:", preco)
+          if (precoAnterior === -1) {
+            precoAnterior = preco
+          } else {
+            if (preco > precoAnterior) {
+              console.log("preco aplicado:", preco)
               precoAnterior = preco
-            } else {
-              if (preco > precoAnterior) {
-                console.log("preco aplicado:", preco)
-                precoAnterior = preco
-              }
             }
-          })
-          this.valor = (precoAnterior * quantidade).toFixed(2)
+          }
+        })
+        this.valor = (precoAnterior * quantidade).toFixed(2)
         }
     } else {
       this.valor = parseFloat(produto.preco * this.quantidade)

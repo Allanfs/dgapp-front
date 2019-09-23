@@ -32,9 +32,12 @@ import { http } from '../config.js'
 }
 
 export default function Dao(recurso) {
+  // this._host = `https://domgilittusapi.herokuapp.com/`
+  this._host = `http://localhost:8081/`
   this.http = http;
   this.recurso = recurso;
-    this._url = `https://domgilittusapi.herokuapp.com/${recurso}`;  
+    // this._url = `https://domgilittusapi.herokuapp.com/${recurso}`;  
+    this._url = `${this._host}${this.recurso}`;  
   // neste momento devo usar = para atribuir o valor ao atributo
   this.cadastrar = function (dado) {
     return http.post(this._url, dado);

@@ -1,4 +1,5 @@
 import { pedidoService } from "../components/pedido/pedidoservice"
+import store from './index'
 
 const state = {
   itensPedido: new Array(),
@@ -21,6 +22,13 @@ const mutations = {
   },
   guardarItemPedido(state, payload) {
     state.itensPedido.push(payload)
+    let itens = store.getters.getItensPedido
+    let total = 0
+    for (let i = 0; i < itens.length; i++) {
+      total += parseFloat(itens[i].valor)
+    }
+    store.commit('guardarTotal', parseFloat(total))
+    
   },
   removerItemPedido(state, payload) {
     pedidoService.removerItemDoPedido(payload)

@@ -23,17 +23,27 @@ export default {
     }
   },
   pedido: {
+    getPedido: () => store.getters.getPedido,
+    setPedido: p => store.commit('guardarPedido', p),
     getNumeroPedido:() => store.getters.getNumero,
     getEstado: () => store.getters.getEstado,
     getHoraAbertura: () => store.getHora_abertura,
     getHoraFechamento: () => store.getHora_fechamento,
 
-    getTotal() {return store.getters.getTotal},
+    getTotal: () => parseFloat(store.getters.getTotal),
     setTotal: (valor) => store.commit('guardarTotal', valor),
-    getDesconto: () => store.getters.getDesconto,
+    getDesconto: () => parseFloat(store.getters.getDesconto),
     setDesconto: (valor) => store.commit('guardarDesconto', valor),
     getFormaPagamento: () => store.getters.getPagamento,
     setFormaPagamento: (valor) => store.commit('guardarPagamento',valor),
+    getTipo: () => store.getters.getTipo,
+    setTipo: (valor) => store.commit('guardarTipo',valor),
+    getValorTroco: () => store.getters.getValorTroco,
+    setValorTroco: (valor) => store.commit('guardarValorTroco',valor),
+    getValorPago: () => store.getters.getValorPago,
+    setValorPago: (valor) => store.commit('guardarValorPago',valor),
+    getBandeira: () => store.getters.getBandeira,
+    setBandeira: (valor) => store.commit('guardarBandeira',valor),
 
     adicionarItemPedido({produto, quantidade, sabores, tamanho}) {
       let novoItem
@@ -42,8 +52,21 @@ export default {
       } else {
         novoItem = new ItemPedido(null, produto, quantidade)
       }
+      let itens = store.getters.getItens
+      itens.push(novoItem)
       
-      store.commit('guardarItemPedido', novoItem)
+      let total = 0
+      for (let i = 0; i < itens.length; i++) {
+        total += parseFloat(itens[i].valor)
+      }
+      store.commit('guardarItens', itens) 
+      store.commit('guardarTotal', parseFloat(total))
+
+      // store.commit('guardarItemPedido', novoItem)
+    },
+
+    cadastrar(pedido) {
+      return store.dispatch('cadastrarPedido', pedido)
     }
   },
   itemPedido: {
@@ -60,10 +83,12 @@ export default {
       store.commit('guardarSabores', s)
     },
     getItens(){
-      return store.getters.getItensPedido
+      return store.getters.getItens
     },
     setItemPedido(i){
-      store.commit('setItemPedido', i)
+      let itens = this.getItens()
+      itens.push(i)
+      store.commit('guardarItens', itens)
     }
   }
 }
