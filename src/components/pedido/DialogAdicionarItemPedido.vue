@@ -157,10 +157,10 @@ export default {
   data: () => ({
     sabores: [],
     produtoPizza: {
-      id: "35990c12-c08f-11e9-9cb5-2a2ae2dbcce4",
-      nome: "Pizza",
-      preco: 0,
-      pizza: true
+      id_produto:	1,
+      nome:	"Pizza",
+      preco:	0.00,
+      pizza:true
     }
   }),
   methods: {

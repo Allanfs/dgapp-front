@@ -10,12 +10,13 @@ const state = {
     numero: 0,
     pagamento: {},
     total: 0,
-    ValorPago: 0,
+    valor_pago: 0,
     valorTroco: 0,
     bandeira: null,
     tipo: null,
     desconto: 0,
-    itens:[]
+    itens:[],
+    cliente: null
   }
 }
 
@@ -28,7 +29,7 @@ const getters = {
   getNumero: state => state.pedido.numero,
   getPagamento: state => state.pedido.pagamento,
   getTotal: state => state.pedido.total,
-  getValorPago: state => state.pedido.ValorPago,
+  getValorPago: state => state.pedido.valor_pago,
   getValorTroco: state => state.pedido.valorTroco,
   getBandeira: state => state.pedido.bandeira,
   getTipo: state => state.pedido.tipo,
@@ -54,7 +55,7 @@ const mutations = {
   guardarPagamento: (state, pagamento) => state.pedido.pagamento = pagamento,
   guardarTotal: (state, total) => state.pedido.total = total,
   guardarDesconto: (state, desconto) => state.pedido.desconto = desconto,
-  guardarValorPago: (state, ValorPago) => state.pedido.ValorPago = ValorPago,
+  guardarValorPago: (state, valor_pago) => state.pedido.valor_pago = valor_pago,
   guardarValorTroco: (state, valorTroco) => state.pedido.valorTroco = valorTroco,
   guardarBandeira: (state, bandeira) => state.pedido.bandeira = bandeira,
   guardarTipo: (state, tipo) => state.pedido.tipo = tipo,

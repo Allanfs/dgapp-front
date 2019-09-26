@@ -11,7 +11,7 @@
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title>{{sabor.nome}}</v-list-tile-title>
-          <v-list-tile-sub-title v-text="subtitulo(sabor)"></v-list-tile-sub-title>
+          <v-list-tile-sub-title>{{subtitulo(sabor.recheios)}}</v-list-tile-sub-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list-group>
@@ -34,14 +34,10 @@ export default {
     quantidadeMax: Number
   },
   computed: {
-    quantidadeRecheios() {
-      if (this.quantidadeMax)
-        return `${this.sabores.length}/${this.quantidadeMax}`;
-      else return this.sabores.length;
-    },
     sabores: {
       get(){
-        return facade.itemPedido.getSabores()
+        let a = facade.itemPedido.getSabores()
+        return a
       },
       set(s) {
         facade.itemPedido.setSabores(s)
@@ -52,23 +48,25 @@ export default {
     exibirRecheio: true,
     saboresDisponiveis: []
   }),
-  mounted() {
-    let host = `https://domgilittusapi.herokuapp.com/sabores`
-    http.get(host).then(({ data }) => (this.saboresDisponiveis = data))
-    // saborDao.listarTodos().then(({ data }) => (this.saboresDisponiveis = data));
+  async mounted() {
+    // let host = `https://domgilittusapi.herokuapp.com/sabores`
+    // http.get(host).then(({ data }) => (this.saboresDisponiveis = data))
+    await saborDao.listarTodos().then(({ data }) => {
+      (this.saboresDisponiveis = data)
+    });
+    
   },
   methods: {
-    subtitulo(sabor) {
-      let listaRecheio = [...sabor.recheios];
+    subtitulo(recheios) {
+      const listaRecheio = recheios;
       let recheiosPedido = "";
-
-      listaRecheio.sort((um, outro) => {
-        return um.posicao > outro.posicao ? 1 : -1;
-      });
+      // listaRecheio.sort((um, outro) => {
+      //   return um.posicao > outro.posicao ? 1 : -1;
+      // });
       // organiza os sabores separando por virgula e pondo um ponto final
       for (let i = 0; i < listaRecheio.length; i++) {
         const recheio = listaRecheio[i];
-        recheiosPedido += recheio.recheio.nome;
+        recheiosPedido += recheio.nome;
 
         i + 1 === listaRecheio.length
           ? (recheiosPedido += ".")

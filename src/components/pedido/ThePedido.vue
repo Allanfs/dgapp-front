@@ -44,6 +44,21 @@ export default {
 
       let pedido = facade.pedido.getPedido()
       // console.log(JSON.stringify(pedido));
+      let tipo = facade.pedido.getTipo()
+      switch (tipo) {
+        case 'Dinheiro':
+          tipo = 1
+          break;
+        case 'Cartão':
+          tipo = 2
+          break;
+      
+        default:
+          tipo = 1
+          break;
+      }
+      pedido.forma_pagamento = tipo;
+
 
       facade.pedido.cadastrar(pedido)
         .then(({ data }) => {
